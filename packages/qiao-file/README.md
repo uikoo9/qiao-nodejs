@@ -65,12 +65,12 @@ const res = await rm(path);
 const res = await mkdir(dirpath);
 ```
 
-### readDir
+### readdir
 
 读取文件夹内容
 
 ```javascript
-const res = await readDir(dirpath);
+const res = await readdir(dirpath);
 ```
 
 ### lsdir
@@ -148,6 +148,10 @@ const res = await isExists(fpath);
 ```
 
 ## version
+
+## 0.1.7.20230404
+1. add ava
+2. readDir --> readdir
 
 ### 0.1.6.20230307
 

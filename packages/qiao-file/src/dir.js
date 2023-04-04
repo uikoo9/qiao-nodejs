@@ -2,7 +2,7 @@
 import path from 'path';
 
 // fs
-import { readdir, ensureDir } from 'fs-extra';
+import { readdir as fsReadDir, ensureDir } from 'fs-extra';
 
 // is
 import { isDir } from './is.js';
@@ -26,9 +26,9 @@ export const mkdir = async (dir) => {
  * @param {*} dirPath
  * @returns
  */
-export const readDir = (dirPath) => {
+export const readdir = (dirPath) => {
   return new Promise((resolve) => {
-    readdir(dirPath, (err, files) => {
+    fsReadDir(dirPath, (err, files) => {
       if (err) return resolve();
 
       return resolve(files);
@@ -55,7 +55,7 @@ export const lsdir = async (dir) => {
 // get folders and files
 async function getFoldersAndFiles(fpath, folders, files) {
   // check
-  const dirs = await readDir(fpath);
+  const dirs = await readdir(fpath);
   if (!dirs) return;
 
   // read
@@ -95,7 +95,7 @@ export const lstree = async (dir, ignores) => {
 // get file tree
 async function getFileTree(fpath, fileTree, ignores) {
   // check
-  const dirs = await readDir(fpath);
+  const dirs = await readdir(fpath);
   if (!dirs) return;
 
   // read

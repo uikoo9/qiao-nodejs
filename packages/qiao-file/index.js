@@ -116,7 +116,7 @@ const mkdir = async (dir) => {
  * @param {*} dirPath
  * @returns
  */
-const readDir = (dirPath) => {
+const readdir = (dirPath) => {
   return new Promise((resolve) => {
     fsExtra.readdir(dirPath, (err, files) => {
       if (err) return resolve();
@@ -145,7 +145,7 @@ const lsdir = async (dir) => {
 // get folders and files
 async function getFoldersAndFiles(fpath, folders, files) {
   // check
-  const dirs = await readDir(fpath);
+  const dirs = await readdir(fpath);
   if (!dirs) return;
 
   // read
@@ -185,7 +185,7 @@ const lstree = async (dir, ignores) => {
 // get file tree
 async function getFileTree(fpath, fileTree, ignores) {
   // check
-  const dirs = await readDir(fpath);
+  const dirs = await readdir(fpath);
   if (!dirs) return;
 
   // read
@@ -317,8 +317,8 @@ exports.lsdir = lsdir;
 exports.lstree = lstree;
 exports.mkdir = mkdir;
 exports.mv = mv;
-exports.readDir = readDir;
 exports.readFile = readFile;
 exports.readFileLineByLine = readFileLineByLine;
+exports.readdir = readdir;
 exports.rm = rm;
 exports.writeFile = writeFile;
