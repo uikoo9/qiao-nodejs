@@ -52,6 +52,10 @@ await db.config(key, null);
 
 ## version
 
+### 0.0.5.20230404
+
+1. add ava
+
 ### 0.0.4.20221118
 
 1. 1.0.0
