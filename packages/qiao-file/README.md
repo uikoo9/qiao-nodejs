@@ -22,10 +22,10 @@ npm i qiao-file
 
 ```javascript
 // cjs
-const { isExists } = require("qiao-file");
+const { isExists } = require('qiao-file');
 
 // mjs
-import { isExists } from "qiao-file";
+import { isExists } from 'qiao-file';
 ```
 
 ## cmd
@@ -89,8 +89,8 @@ const res = await lsdir(dirpath);
 列出文件夹下所有的文件和文件夹信息，以树的方式
 
 ```javascript
-const dirpath = "xx";
-const ignores = ["node_modules", "is-"];
+const dirpath = 'xx';
+const ignores = ['node_modules', 'is-'];
 const res = await lstree(dirpath, ignores);
 ```
 
@@ -127,7 +127,7 @@ readFileLineByLine(filePath, onLine, onClose);
 写文件
 
 ```javascript
-const res = await writeFile(filePath, "sth");
+const res = await writeFile(filePath, 'sth');
 ```
 
 ## is

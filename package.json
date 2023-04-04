@@ -5,6 +5,7 @@
     "prepare": "husky install",
     "build": "lerna run build",
     "test": "lerna run test",
+    "prettier": "prettier --write .",
     "pb": "lerna publish"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
+    "prettier": "^2.8.7",
     "rollup": "^3.20.2"
   }
 }
