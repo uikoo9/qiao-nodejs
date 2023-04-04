@@ -8,9 +8,9 @@
     "build": "lerna run build",
     "prettier": "prettier --write .",
     "eslintfix": "eslint . --ext .js --fix",
-    "lint": "npm run prettier && npm run eslintfix",
     "test": "lerna run test",
-    "postinstall": "npm run clean && npm run init && npm run build && npm run lint && npm run test",
+    "lint": "npm run build && npm run prettier && npm run eslintfix && npm run test",
+    "postinstall": "npm run clean && npm run init && npm run lint",
     "pb": "lerna publish"
   },
   "devDependencies": {
@@ -22,6 +22,7 @@
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "rollup": "^3.20.2"
   }
