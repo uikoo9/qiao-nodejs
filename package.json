@@ -2,5 +2,7 @@
   "name": "qiao-nodejs",
   "private": true,
   "scripts": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  }
 }
