@@ -1,8 +1,11 @@
 {
   "name": "qiao-nodejs",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3"
   }
 }
