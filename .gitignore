@@ -175,3 +175,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 ## -- nodejs --
+
+## -- qiao-nodejs --
+packages/qiao-file/__tests__/1
