@@ -36,7 +36,7 @@
   "dependencies": {
     "cos-nodejs-sdk-v5": "^2.11.19",
     "qiao-cli": "^1.1.1",
-    "qiao-file": "^2.0.3"
+    "qiao-file": "^2.0.8"
   },
   "nx": {
     "namedInputs": {

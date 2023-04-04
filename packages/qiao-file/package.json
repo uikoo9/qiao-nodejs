@@ -27,7 +27,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "fs-extra": "^11.1.0"
+    "fs-extra": "^11.1.1"
   },
   "nx": {
     "namedInputs": {

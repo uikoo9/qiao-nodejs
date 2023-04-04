@@ -11,7 +11,9 @@
     "test": "lerna run test",
     "lint": "npm run build && npm run prettier && npm run eslintfix && npm run test",
     "postinstall": "npm run clean && npm run init && npm run lint",
-    "pb": "lerna publish"
+    "pb": "lerna publish",
+    "check": "ncu && lerna exec ncu --concurrency=1",
+    "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
