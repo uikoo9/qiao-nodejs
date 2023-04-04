@@ -6,6 +6,8 @@
     "build": "lerna run build",
     "test": "lerna run test",
     "prettier": "prettier --write .",
+    "eslintfix": "eslint . --ext .js --fix",
+    "lint": "npm run prettier && npm run eslintfix",
     "pb": "lerna publish"
   },
   "devDependencies": {
@@ -13,6 +15,8 @@
     "@commitlint/config-conventional": "^17.4.4",
     "ava": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
     "prettier": "^2.8.7",
