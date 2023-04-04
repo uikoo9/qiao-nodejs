@@ -177,4 +177,4 @@ dist
 ## -- nodejs --
 
 ## -- qiao-nodejs --
-packages/qiao-file/__tests__/1
+packages/**/__tests__/1

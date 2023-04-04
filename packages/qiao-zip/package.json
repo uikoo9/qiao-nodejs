@@ -25,7 +25,8 @@
     "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "ava"
   },
   "dependencies": {
     "adm-zip": "^0.5.10",

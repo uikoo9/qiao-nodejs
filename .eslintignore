@@ -3,6 +3,7 @@ node_modules
 package-lock.json
 
 # packages
-packages/qiao-file/__tests__/1
+packages/qiao-file/__tests__/
 packages/qiao-file/index.js
 packages/qiao-zip/__tests__
+packages/qiao-zip/index.js
