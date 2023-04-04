@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // q
-const { zip } = require('../../index.js');
+const { zip, unzip } = require('../index.js');
 
 // test
 test('zip file', async (t) => {
@@ -17,9 +17,15 @@ test('zip folder', async (t) => {
   const res = await zip(src, dest);
   t.true(res);
 });
-test('zip folder with subdir', async (t) => {
+test.serial('zip folder with subdir', async (t) => {
   const src = './src';
   const dest = './__tests__/1/zip_src_subdir.zip';
   const res = await zip(src, dest, true);
+  t.true(res);
+});
+test.serial('unzip', async (t) => {
+  const src = './__tests__/1/zip_src_subdir.zip';
+  const dest = './__tests__/1/unzip'
+  const res = await unzip(src, dest, true);
   t.true(res);
 });
