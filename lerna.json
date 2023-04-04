@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true,
+  "packages": ["packages/*"],
+  "version": "independent",
+  "command": {
+    "version": {
+      "allowBranch": "master",
+      "conventionalCommits": true
+    },
+    "publish": {
+      "allowBranch": "master",
+      "message": "chore(release): publish"
+    }
+  }
+}
