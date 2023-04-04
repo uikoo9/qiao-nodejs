@@ -12,6 +12,7 @@
     "lint": "npm run build && npm run prettier && npm run eslintfix && npm run test",
     "postinstall": "npm run clean && npm run init && npm run lint",
     "pb": "lerna publish",
+    "graph": "nx graph",
     "check": "ncu && lerna exec ncu --concurrency=1",
     "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1"
   },
