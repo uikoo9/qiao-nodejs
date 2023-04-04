@@ -26,7 +26,8 @@
     "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "ava"
   },
   "dependencies": {
     "qiao-file": "^2.0.9"

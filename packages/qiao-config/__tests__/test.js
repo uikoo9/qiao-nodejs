@@ -1,20 +1,25 @@
+// ava
+const test = require('ava');
+
 // db
 const db = require('../index.js')();
 
 // config
-test('config', function () {
+test.serial('config / clear and all', async (t) => {
   // clear and all
-  db.clear();
-  const all = db.all();
-  expect(all).toStrictEqual({});
-
+  await db.clear();
+  const all = await db.all();
+  t.deepEqual(all, {});
+});
+test.serial('config / set and get', async (t) => {
   // set and get
-  db.config('test', 'hello');
-  const value = db.config('test');
-  expect(value).toStrictEqual('hello');
-
+  await db.config('test', 'hello');
+  const value = await db.config('test');
+  t.deepEqual(value, 'hello');
+});
+test.serial('config / del', async (t) => {
   // del
-  db.config('test', null);
-  const delValue = db.config('test');
-  expect(delValue).toBeUndefined();
+  await db.config('test', null);
+  const delValue = await db.config('test');
+  t.falsy(delValue);
 });

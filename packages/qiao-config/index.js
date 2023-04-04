@@ -146,48 +146,38 @@ const db = (dbPath) => {
   obj.path = dbPath;
 
   // clear
-  obj.clear = () => {
-    clearDB(obj.path);
+  obj.clear = async () => {
+    await clear(obj.path);
   };
 
   // all
-  obj.all = () => {
-    return listDB(obj.path);
+  obj.all = async () => {
+    return await all(obj.path);
   };
 
   // config
-  obj.config = (key, value) => {
-    return configDB(obj.path, key, value);
+  obj.config = async (key, value) => {
+    return await configDB(obj.path, key, value);
   };
 
   return obj;
 };
 
-// clear db
-function clearDB(filePath) {
-  clear(filePath);
-}
-
-// list db
-function listDB(filePath) {
-  return all(filePath);
-}
-
 // config db
-function configDB(filePath, key, value) {
+async function configDB(filePath, key, value) {
   // remove
   if (value === null) {
-    del(filePath, key);
+    await del(filePath, key);
     return;
   }
 
   // get
   if (typeof value == 'undefined') {
-    return get(filePath, key);
+    return await get(filePath, key);
   }
 
   // set
-  set(filePath, key, value);
+  await set(filePath, key, value);
 }
 
 // path

@@ -28,26 +28,26 @@ const db = require('qiao-config')('your path');
 ### all
 
 ```javascript
-db.all();
+await db.all();
 ```
 
 ### clear
 
 ```javascript
-db.clear();
+await db.clear();
 ```
 
 ### config
 
 ```javascript
 // get
-db.config(key);
+await db.config(key);
 
 // set
-db.config(key, value);
+await db.config(key, value);
 
 // del
-db.config(key, null);
+await db.config(key, null);
 ```
 
 ## version
