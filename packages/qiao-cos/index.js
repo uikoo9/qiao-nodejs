@@ -82,7 +82,6 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
     for (let i = 0; i < files.length; i++) {
       const file = qiaoFile.path.resolve(files[i].path, files[i].name);
       const dest = destFolder + '/' + files[i].name;
-      console.log(1, file, dest);
       uploadFileWithCallback(app, dest, file, (err, data) => {
         allFiles.push(data);
         if (err || !data || data.statusCode != 200) {

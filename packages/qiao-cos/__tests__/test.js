@@ -7,14 +7,18 @@ const config = require('./config.json');
 // qiao-cos
 const qcos = require('../index.js')(config);
 
-/**
- * upload file demo
- * upload /your/test.js to your bucket's test/test.js
- */
+// test
 test('upload file', async (t) => {
   const destPath = 'test/test.js';
   const sourceFile = './index.js';
 
   const rs = await qcos.uploadFile(destPath, sourceFile);
+  t.truthy(rs);
+});
+test('upload folder', async (t) => {
+  const destPath = 'test';
+  const sourceFolder = './src';
+
+  const rs = await qcos.uploadFolder(destPath, sourceFolder);
   t.truthy(rs);
 });
