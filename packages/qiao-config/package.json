@@ -1,6 +1,6 @@
 {
   "name": "qiao-config",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "json config to local file",
   "keywords": [
     "json",
