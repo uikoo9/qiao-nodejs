@@ -1,13 +1,15 @@
 {
-  "name": "qiao-file",
-  "version": "2.0.7",
-  "description": "nodejs file tool",
+  "name": "qiao-zip",
+  "version": "2.0.3",
+  "description": "nodejs zip and unzip tool",
   "keywords": [
-    "fs",
-    "tool"
+    "zip",
+    "unzip",
+    "adm-zip",
+    "archiver"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-file",
+  "homepage": "https://code.insistime.com/qiao-zip",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -23,11 +25,13 @@
     "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
-    "build": "rollup -c",
-    "test": "ava"
+    "build": "rollup -c"
   },
   "dependencies": {
-    "fs-extra": "^11.1.0"
+    "adm-zip": "^0.5.10",
+    "archiver": "^5.3.1",
+    "iconv-lite": "^0.6.3",
+    "qiao-file": "^2.0.3"
   },
   "nx": {
     "namedInputs": {
