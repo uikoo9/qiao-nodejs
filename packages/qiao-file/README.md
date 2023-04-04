@@ -150,7 +150,7 @@ const res = await isExists(fpath);
 ## version
 
 ## 0.1.7.20230404
-1. add ava
+1. add ava 
 2. readDir --> readdir
 
 ### 0.1.6.20230307
