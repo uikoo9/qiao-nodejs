@@ -24,5 +24,22 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.0"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
   }
 }
