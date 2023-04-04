@@ -178,3 +178,4 @@ dist
 
 ## -- qiao-nodejs --
 packages/**/__tests__/1
+packages/**/__tests__/config.json
