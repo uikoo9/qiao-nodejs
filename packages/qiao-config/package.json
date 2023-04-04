@@ -28,6 +28,9 @@
   "scripts": {
     "build": "rollup -c"
   },
+  "dependencies": {
+    "qiao-file": "^2.0.9"
+  },
   "nx": {
     "namedInputs": {
       "default": [

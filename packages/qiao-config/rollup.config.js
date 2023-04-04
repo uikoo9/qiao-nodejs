@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['fs', 'path'],
+  external: ['path', 'qiao-file'],
 };

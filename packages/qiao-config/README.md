@@ -7,6 +7,8 @@ nodejs 下基于本地文件的 config 能力
 
 ## install
 
+安装
+
 ```bash
 npm i qiao-config
 ```

@@ -1,45 +1,7 @@
 'use strict';
 
 var path = require('path');
-var fs = require('fs');
-
-// fs
-
-/**
- * write file
- * @param {*} filePath
- * @param {*} data
- */
-const writeFile = (filePath, data) => {
-  fs.writeFileSync(filePath, data);
-};
-
-/**
- * read file
- * @param {*} filePath
- * @returns
- */
-const readFile = (filePath) => {
-  try {
-    // not exists write file
-    if (!isExists(filePath)) writeFile(filePath, '');
-
-    return fs.readFileSync(filePath, { encoding: 'utf8' });
-  } catch (e) {
-    return null;
-  }
-};
-
-// is exists
-function isExists(filePath) {
-  try {
-    fs.accessSync(filePath);
-
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
+var qiaoFile = require('qiao-file');
 
 // io
 
@@ -48,7 +10,7 @@ function isExists(filePath) {
  * @param {*} filePath
  * @returns
  */
-const clear = (filePath) => {
+const clear = async (filePath) => {
   // check
   if (!filePath) {
     console.log('qiao-config:clear, need path');
@@ -57,7 +19,7 @@ const clear = (filePath) => {
 
   // io
   try {
-    writeFile(filePath, '');
+    await qiaoFile.writeFile(filePath, '');
   } catch (e) {
     console.log(`qiao-config:clear, write file error ${e.message}`);
   }
@@ -68,7 +30,7 @@ const clear = (filePath) => {
  * @param {*} filePath
  * @returns
  */
-const all = (filePath) => {
+const all = async (filePath) => {
   // check
   if (!filePath) {
     console.log('qiao-config:all, need path');
@@ -77,7 +39,7 @@ const all = (filePath) => {
 
   let json;
   try {
-    const jsonStr = readFile(filePath);
+    const jsonStr = await qiaoFile.readFile(filePath);
 
     json = JSON.parse(jsonStr);
   } catch (e) {
@@ -93,7 +55,7 @@ const all = (filePath) => {
  * @param {*} key
  * @returns
  */
-const get = (filePath, key) => {
+const get = async (filePath, key) => {
   // check
   if (!filePath) {
     console.log('qiao-config:get, need path');
@@ -105,7 +67,7 @@ const get = (filePath, key) => {
   }
 
   // get
-  const json = all(filePath);
+  const json = await all(filePath);
   return json[key];
 };
 
@@ -116,7 +78,7 @@ const get = (filePath, key) => {
  * @param {*} value
  * @returns
  */
-const set = (filePath, key, value) => {
+const set = async (filePath, key, value) => {
   // check
   if (!filePath) {
     console.log('qiao-config:set, need path');
@@ -128,12 +90,12 @@ const set = (filePath, key, value) => {
   }
 
   // set
-  const json = all(filePath);
+  const json = await all(filePath);
   json[key] = value;
 
   // io
   try {
-    writeFile(filePath, JSON.stringify(json));
+    await qiaoFile.writeFile(filePath, JSON.stringify(json));
   } catch (e) {
     console.log(`qiao-config:set, write file error ${e.message}`);
   }
@@ -145,7 +107,7 @@ const set = (filePath, key, value) => {
  * @param {*} key
  * @returns
  */
-const del = (filePath, key) => {
+const del = async (filePath, key) => {
   // check
   if (!filePath) {
     console.log('qiao-config:del, need path');
@@ -157,16 +119,16 @@ const del = (filePath, key) => {
   }
 
   // get
-  const v = get(filePath, key);
+  const v = await get(filePath, key);
   if (!v) return;
 
   // del
-  const json = all(filePath);
+  const json = await all(filePath);
   delete json[key];
 
   // io
   try {
-    writeFile(filePath, JSON.stringify(json));
+    await qiaoFile.writeFile(filePath, JSON.stringify(json));
   } catch (e) {
     console.log(`qiao-config:del, write file error ${e.message}`);
   }

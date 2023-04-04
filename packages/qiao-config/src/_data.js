@@ -1,12 +1,12 @@
 // io
-import { writeFile, readFile } from './_io.js';
+import { writeFile, readFile } from 'qiao-file';
 
 /**
  * clear
  * @param {*} filePath
  * @returns
  */
-export const clear = (filePath) => {
+export const clear = async (filePath) => {
   // check
   if (!filePath) {
     console.log('qiao-config:clear, need path');
@@ -15,7 +15,7 @@ export const clear = (filePath) => {
 
   // io
   try {
-    writeFile(filePath, '');
+    await writeFile(filePath, '');
   } catch (e) {
     console.log(`qiao-config:clear, write file error ${e.message}`);
   }
@@ -26,7 +26,7 @@ export const clear = (filePath) => {
  * @param {*} filePath
  * @returns
  */
-export const all = (filePath) => {
+export const all = async (filePath) => {
   // check
   if (!filePath) {
     console.log('qiao-config:all, need path');
@@ -35,7 +35,7 @@ export const all = (filePath) => {
 
   let json;
   try {
-    const jsonStr = readFile(filePath);
+    const jsonStr = await readFile(filePath);
 
     json = JSON.parse(jsonStr);
   } catch (e) {
@@ -51,7 +51,7 @@ export const all = (filePath) => {
  * @param {*} key
  * @returns
  */
-export const get = (filePath, key) => {
+export const get = async (filePath, key) => {
   // check
   if (!filePath) {
     console.log('qiao-config:get, need path');
@@ -63,7 +63,7 @@ export const get = (filePath, key) => {
   }
 
   // get
-  const json = all(filePath);
+  const json = await all(filePath);
   return json[key];
 };
 
@@ -74,7 +74,7 @@ export const get = (filePath, key) => {
  * @param {*} value
  * @returns
  */
-export const set = (filePath, key, value) => {
+export const set = async (filePath, key, value) => {
   // check
   if (!filePath) {
     console.log('qiao-config:set, need path');
@@ -86,12 +86,12 @@ export const set = (filePath, key, value) => {
   }
 
   // set
-  const json = all(filePath);
+  const json = await all(filePath);
   json[key] = value;
 
   // io
   try {
-    writeFile(filePath, JSON.stringify(json));
+    await writeFile(filePath, JSON.stringify(json));
   } catch (e) {
     console.log(`qiao-config:set, write file error ${e.message}`);
   }
@@ -103,7 +103,7 @@ export const set = (filePath, key, value) => {
  * @param {*} key
  * @returns
  */
-export const del = (filePath, key) => {
+export const del = async (filePath, key) => {
   // check
   if (!filePath) {
     console.log('qiao-config:del, need path');
@@ -115,16 +115,16 @@ export const del = (filePath, key) => {
   }
 
   // get
-  const v = get(filePath, key);
+  const v = await get(filePath, key);
   if (!v) return;
 
   // del
-  const json = all(filePath);
+  const json = await all(filePath);
   delete json[key];
 
   // io
   try {
-    writeFile(filePath, JSON.stringify(json));
+    await writeFile(filePath, JSON.stringify(json));
   } catch (e) {
     console.log(`qiao-config:del, write file error ${e.message}`);
   }
