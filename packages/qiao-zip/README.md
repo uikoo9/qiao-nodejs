@@ -48,6 +48,10 @@ const res = await zip(src, dest, true);
 
 ## version
 
+### 0.2.5.20230404
+
+1. add ava
+
 ### 0.2.4.20230315
 
 1. 2.0.0
