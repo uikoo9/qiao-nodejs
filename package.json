@@ -5,7 +5,7 @@
     "prepare": "husky install",
     "build": "lerna run build",
     "test": "lerna run test",
-    "publish": "lerna publish"
+    "pb": "lerna publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
