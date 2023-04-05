@@ -56,7 +56,7 @@ const res = await unzip(zipFile, destFolder);
   - 类型: string
   - 说明: 压缩的目标路径
 - subdir
-  - 类型: string
+  - 类型: boolean
   - 说明: 是否包含文件夹
   - 默认值: false
 - return
