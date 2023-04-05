@@ -36,6 +36,17 @@ import { isExists } from 'qiao-file';
 
 复制文件或文件夹
 
+- src
+  - 类型: string
+  - 说明: 文件或文件夹地址
+- dest
+  - 类型: string
+  - 说明: 目标文件或文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
 const res = await cp(src, dest);
 ```
@@ -44,6 +55,17 @@ const res = await cp(src, dest);
 
 移动文件或文件夹
 
+- src
+  - 类型: string
+  - 说明: 文件或文件夹地址
+- dest
+  - 类型: string
+  - 说明: 目标文件或文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
 const res = await mv(src, dest);
 ```
@@ -51,6 +73,14 @@ const res = await mv(src, dest);
 ### rm
 
 删除文件或文件夹
+
+- path
+  - 类型: string
+  - 说明: 文件或文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
 
 ```javascript
 const res = await rm(path);
@@ -64,6 +94,14 @@ const res = await rm(path);
 
 创建文件夹
 
+- dirpath
+  - 类型: string
+  - 说明: 文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
 const res = await mkdir(dirpath);
 ```
@@ -72,6 +110,14 @@ const res = await mkdir(dirpath);
 
 读取文件夹内容
 
+- dirpath
+  - 类型: string
+  - 说明: 文件夹地址
+- return
+  - 类型: string[]
+  - 说明: dirpath 下的文件或文件夹路径
+  - true: 成功
+
 ```javascript
 const res = await readdir(dirpath);
 ```
@@ -79,6 +125,14 @@ const res = await readdir(dirpath);
 ### lsdir
 
 列出文件夹下所有的文件和文件夹路径
+
+- dirpath
+  - 类型: string
+  - 说明: 文件夹地址
+- return
+  - 类型: string[]
+  - 说明: dirpath 下的文件或文件夹路径
+  - true: 成功
 
 ```javascript
 const res = await lsdir(dirpath);

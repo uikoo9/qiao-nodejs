@@ -149,17 +149,17 @@ async function getFoldersAndFiles(fpath, folders, files) {
   if (!dirs) return;
 
   // read
-  const realPath = path.resolve(fpath);
   for (let i = 0; i < dirs.length; i++) {
     const dir = dirs[i];
-    const isDirRes = await isDir(dir);
+    const realPath = path.resolve(fpath, dir);
+    const isDirRes = await isDir(realPath);
     if (isDirRes) {
       folders.push({
         path: realPath,
         name: dir,
       });
 
-      await getFoldersAndFiles(path.resolve(realPath, `./${dir}`), folders, files);
+      await getFoldersAndFiles(realPath, folders, files);
     } else {
       files.push({
         path: realPath,

@@ -38,6 +38,7 @@ import { zip, unzip } from 'qiao-zip';
   - 类型: string
   - 说明: 解压缩目标文件夹
 - return
+  - 类型: boolean
   - 说明: 结果
   - true: 成功
 
@@ -60,6 +61,7 @@ const res = await unzip(zipFile, destFolder);
   - 说明: 是否包含文件夹
   - 默认值: false
 - return
+  - 类型: boolean
   - 说明: 结果
   - true: 成功
 
