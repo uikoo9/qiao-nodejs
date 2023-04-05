@@ -31,6 +31,16 @@ import { zip, unzip } from 'qiao-zip';
 
 解压缩 zip 文件
 
+- zipFile
+  - 类型: string
+  - 说明: zip文件路径
+- destFolder
+  - 类型: string
+  - 说明: 解压缩目标文件夹
+- return
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
 const res = await unzip(zipFile, destFolder);
 ```
@@ -38,6 +48,20 @@ const res = await unzip(zipFile, destFolder);
 ### zip
 
 压缩文件或文件夹
+
+- src
+  - 类型: string
+  - 说明: 待压缩的文件或者文件夹
+- dest
+  - 类型: string
+  - 说明: 压缩的目标路径
+- subdir
+  - 类型: string
+  - 说明: 是否包含文件夹
+  - 默认值: false
+- return
+  - 说明: 结果
+  - true: 成功
 
 ```javascript
 const res = await zip(src, dest);
