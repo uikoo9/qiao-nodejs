@@ -33,7 +33,7 @@ import { zip, unzip } from 'qiao-zip';
 
 - zipFile
   - 类型: string
-  - 说明: zip文件路径
+  - 说明: zip 文件路径
 - destFolder
   - 类型: string
   - 说明: 解压缩目标文件夹
