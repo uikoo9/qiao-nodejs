@@ -70,3 +70,19 @@ test.serial('mv folder / dest is exists', async (t) => {
   const res = await mv('./__tests__/1/cp', './__tests__/1/mv');
   t.true(res);
 });
+
+// rm
+test.serial('rm file / normal', async (t) => {
+  await cp('./src', './__tests__/1/rm/src');
+
+  const res = await rm('./__tests__/1/rm/src/index.js');
+  t.true(res);
+});
+test.serial('rm folder / normal', async (t) => {
+  const res = await rm('./__tests__/1/rm/src');
+  t.true(res);
+});
+test.serial('rm / path not exists', async (t) => {
+  const res = await rm(PATH_NOT_EXISTS);
+  t.true(res);
+});
