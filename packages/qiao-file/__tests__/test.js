@@ -4,7 +4,7 @@ const test = require('ava');
 // q
 const { cp, mv } = require('../index.js');
 
-// cp
+// cp file
 test.serial('copy file / normal', async (t) => {
   const src = './index.js';
   const dest = './__tests__/1/cp/index.js';
@@ -23,12 +23,27 @@ test.serial('copy file / dest is exists', async (t) => {
   const res = await cp(src, dest);
   t.true(res);
 });
-test.serial('copy folder', async (t) => {
+
+// cp folder
+test.serial('copy folder / normal', async (t) => {
   const src = './src';
   const dest = './__tests__/1/cp/src';
   const res = await cp(src, dest);
   t.true(res);
 });
+test.serial('copy folder / src not exists', async (t) => {
+  const src = '/path/not/exists';
+  const dest = './__tests__/1/cp/src';
+  const res = await cp(src, dest);
+  t.falsy(res);
+});
+test.serial('copy folder / dest is exists', async (t) => {
+  const src = './src';
+  const dest = './__tests__/1/cp/src';
+  const res = await cp(src, dest);
+  t.true(res);
+});
+
 
 // mv
 // test.serial('mv folder', async (t) => {
