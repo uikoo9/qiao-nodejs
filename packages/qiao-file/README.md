@@ -41,7 +41,7 @@ import { isExists } from 'qiao-file';
   - 说明: 文件或文件夹地址
 - dest
   - 类型: string
-  - 说明: 目标文件或文件夹地址
+  - 说明: 目标文件或文件夹地址，如果 dest 存在，默认会覆盖
 - return
   - 类型: boolean
   - 说明: 结果
@@ -60,7 +60,7 @@ const res = await cp(src, dest);
   - 说明: 文件或文件夹地址
 - dest
   - 类型: string
-  - 说明: 目标文件或文件夹地址
+  - 说明: 目标文件或文件夹地址，如果 dest 存在，默认会覆盖
 - return
   - 类型: boolean
   - 说明: 结果

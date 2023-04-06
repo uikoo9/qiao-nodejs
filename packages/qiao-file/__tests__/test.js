@@ -56,7 +56,17 @@ test.serial('mv file / dest is exists', async (t) => {
   const res = await mv('./__tests__/1/cp/src/index.js', './__tests__/1/mv/index.js');
   t.true(res);
 });
-// test.serial('mv file', async (t) => {
-//   const res = await mv('./__tests__/1/cp/index.js', './__tests__/1/mv/index.js');
-//   t.true(res);
-// });
+
+// mv folder
+test.serial('mv folder / normal', async (t) => {
+  const res = await mv('./__tests__/1/cp/src', './__tests__/1/mv/src');
+  t.true(res);
+});
+test.serial('mv folder / src not exists', async (t) => {
+  const res = await mv(PATH_NOT_EXISTS, './__tests__/1/mv/src');
+  t.falsy(res);
+});
+test.serial('mv folder / dest is exists', async (t) => {
+  const res = await mv('./__tests__/1/cp', './__tests__/1/mv');
+  t.true(res);
+});
