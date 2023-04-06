@@ -1,6 +1,10 @@
 // fs
 import { pathExists, copy, move, remove } from 'fs-extra';
 
+// debug
+import Debug from 'debug';
+const debug = Debug('qiao-file');
+
 /**
  * cp
  * @param {*} src file or folder src path
@@ -11,16 +15,16 @@ export const cp = async (src, dest) => {
   try {
     const srcExists = await pathExists(src);
     if (!srcExists) {
-      console.log('qiao-file / cp / src not exists');
+      debug('/ cp / src not exists');
       return;
     }
 
     await copy(src, dest);
-    console.log('qiao-file / cp / success');
+    debug('/ cp / success');
 
     return true;
   } catch (e) {
-    console.log('qiao-file / cp / fail');
+    debug('/ cp / fail');
     console.log(e);
   }
 };

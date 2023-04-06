@@ -2,6 +2,7 @@
 
 var fsExtra = require('fs-extra');
 var path = require('path');
+var Debug = require('debug');
 var readline = require('readline');
 
 function _interopNamespaceDefault(e) {
@@ -25,6 +26,7 @@ var fsExtra__namespace = /*#__PURE__*/_interopNamespaceDefault(fsExtra);
 var path__namespace = /*#__PURE__*/_interopNamespaceDefault(path);
 
 // fs
+const debug = Debug('qiao-file');
 
 /**
  * cp
@@ -36,16 +38,16 @@ const cp = async (src, dest) => {
   try {
     const srcExists = await fsExtra.pathExists(src);
     if (!srcExists) {
-      console.log('qiao-file / cp / src not exists');
+      debug('/ cp / src not exists');
       return;
     }
 
     await fsExtra.copy(src, dest);
-    console.log('qiao-file / cp / success');
+    debug('/ cp / success');
 
     return true;
   } catch (e) {
-    console.log('qiao-file / cp / fail');
+    debug('/ cp / fail');
     console.log(e);
   }
 };
