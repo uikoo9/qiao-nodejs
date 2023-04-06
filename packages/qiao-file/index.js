@@ -59,9 +59,18 @@ const cp = async (src, dest) => {
  */
 const mv = async (oldPath, newPath) => {
   try {
-    await fsExtra.move(oldPath, newPath);
+    const srcExists = await fsExtra.pathExists(oldPath);
+    if (!srcExists) {
+      debug('/ mv / src not exists');
+      return;
+    }
+
+    await fsExtra.move(oldPath, newPath, { overwrite: true });
+    debug('/ mv / success');
+
     return true;
   } catch (e) {
+    debug('/ mv / fail');
     console.log(e);
   }
 };

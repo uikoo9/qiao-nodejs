@@ -36,9 +36,18 @@ export const cp = async (src, dest) => {
  */
 export const mv = async (oldPath, newPath) => {
   try {
-    await move(oldPath, newPath);
+    const srcExists = await pathExists(oldPath);
+    if (!srcExists) {
+      debug('/ mv / src not exists');
+      return;
+    }
+
+    await move(oldPath, newPath, { overwrite: true });
+    debug('/ mv / success');
+
     return true;
   } catch (e) {
+    debug('/ mv / fail');
     console.log(e);
   }
 };
