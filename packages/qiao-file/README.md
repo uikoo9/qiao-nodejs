@@ -116,7 +116,9 @@ const res = await mkdir(dirpath);
 - return
   - 类型: string[]
   - 说明: dirpath 下的文件或文件夹路径
-  - true: 成功
+  - ```javascript
+    ['path', ...]
+    ```
 
 ```javascript
 const res = await readdir(dirpath);
@@ -130,9 +132,26 @@ const res = await readdir(dirpath);
   - 类型: string
   - 说明: 文件夹地址
 - return
-  - 类型: string[]
+  - 类型: object
   - 说明: dirpath 下的文件或文件夹路径
-  - true: 成功
+  - ```javascript
+    {
+      files: [
+        {
+          name: 'index.js',
+          path: '/path/to/index.js',
+        },
+        ...
+      ],
+      folders: [
+        {
+          name: '1',
+          path: '/path/to/1',
+        },
+        ...
+      ],
+    }
+    ```
 
 ```javascript
 const res = await lsdir(dirpath);

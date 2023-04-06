@@ -1,5 +1,5 @@
 // fs
-import { copy, move, remove } from 'fs-extra';
+import { pathExists, copy, move, remove } from 'fs-extra';
 
 /**
  * cp
@@ -9,9 +9,18 @@ import { copy, move, remove } from 'fs-extra';
  */
 export const cp = async (src, dest) => {
   try {
+    const srcExists = await pathExists(src);
+    if (!srcExists) {
+      console.log('qiao-file / cp / src not exists');
+      return;
+    }
+
     await copy(src, dest);
+    console.log('qiao-file / cp / success');
+
     return true;
   } catch (e) {
+    console.log('qiao-file / cp / fail');
     console.log(e);
   }
 };

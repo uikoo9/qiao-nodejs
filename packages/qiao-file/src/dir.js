@@ -29,9 +29,7 @@ export const mkdir = async (dir) => {
 export const readdir = (dirPath) => {
   return new Promise((resolve) => {
     fsReadDir(dirPath, (err, files) => {
-      if (err) return resolve();
-
-      return resolve(files);
+      resolve(err ? false : files);
     });
   });
 };

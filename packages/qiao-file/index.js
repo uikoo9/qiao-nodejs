@@ -34,9 +34,18 @@ var path__namespace = /*#__PURE__*/_interopNamespaceDefault(path);
  */
 const cp = async (src, dest) => {
   try {
+    const srcExists = await fsExtra.pathExists(src);
+    if (!srcExists) {
+      console.log('qiao-file / cp / src not exists');
+      return;
+    }
+
     await fsExtra.copy(src, dest);
+    console.log('qiao-file / cp / success');
+
     return true;
   } catch (e) {
+    console.log('qiao-file / cp / fail');
     console.log(e);
   }
 };
@@ -119,9 +128,7 @@ const mkdir = async (dir) => {
 const readdir = (dirPath) => {
   return new Promise((resolve) => {
     fsExtra.readdir(dirPath, (err, files) => {
-      if (err) return resolve();
-
-      return resolve(files);
+      resolve(err ? false : files);
     });
   });
 };
