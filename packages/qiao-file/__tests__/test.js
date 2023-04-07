@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // q
-const { rm, cp, mv } = require('../index.js');
+const { rm, cp, mv, mkdir } = require('../index.js');
 
 // const
 const PATH_NOT_EXISTS = '/path/not/exists';
@@ -84,5 +84,15 @@ test.serial('rm folder / normal', async (t) => {
 });
 test.serial('rm / path not exists', async (t) => {
   const res = await rm(PATH_NOT_EXISTS);
+  t.true(res);
+});
+
+// mkdir
+test('mkdir', async (t) => {
+  const res = await mkdir('./__tests__/1/mkdir/3/4');
+  t.true(res);
+});
+test('mkdir again', async (t) => {
+  const res = await mkdir('./__tests__/1/mkdir/3/4');
   t.true(res);
 });
