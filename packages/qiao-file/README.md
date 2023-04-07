@@ -285,6 +285,7 @@ const res = await writeFile(filePath, content);
 ### 0.1.8.20230407
 
 1. 优化测试用例和 readme
+2. 3.0.0
 
 ### 0.1.7.20230404
 

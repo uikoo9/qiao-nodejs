@@ -78,6 +78,11 @@ const res = await zip(src, dest, true);
 
 ## version
 
+### 0.2.6.20230407
+
+1. 优化测试用例和 readme
+2. 3.0.0
+
 ### 0.2.5.20230404
 
 1. add ava
