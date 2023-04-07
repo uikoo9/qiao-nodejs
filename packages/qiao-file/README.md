@@ -161,6 +161,28 @@ const res = await lsdir(dirpath);
 
 列出文件夹下所有的文件和文件夹信息，以树的方式
 
+- dirpath
+  - 类型: string
+  - 说明: 文件夹地址
+- ignores
+  - 类型: string[]
+  - 说明：需要过滤的路径
+- return
+  - 类型: object[]
+  - 说明: dirpath 下的文件和文件夹信息，以树的方式
+  - ```javascript
+    [
+      {
+        children: [],
+        name: 'filename',
+        path: '',
+      },
+    ];
+    ```
+  ```
+
+  ```
+
 ```javascript
 const dirpath = 'xx';
 const ignores = ['node_modules', 'is-'];
