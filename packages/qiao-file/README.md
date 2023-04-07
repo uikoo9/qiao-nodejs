@@ -270,6 +270,14 @@ const res = await writeFile(filePath, content);
 
 判断文件路径是否为文件夹
 
+- fpath
+  - 类型: string
+  - 说明: 文件或者文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 是文件夹
+
 ```javascript
 const res = await isDir(fpath);
 ```
@@ -284,7 +292,7 @@ const res = await isDir(fpath);
 - return
   - 类型: boolean
   - 说明: 结果
-  - true: 成功
+  - true: 存在
 
 ```javascript
 const res = await isExists(fpath);
