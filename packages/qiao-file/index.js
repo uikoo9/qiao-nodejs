@@ -3,7 +3,6 @@
 var fsExtra = require('fs-extra');
 var path = require('path');
 var Debug = require('debug');
-var readline = require('readline');
 
 function _interopNamespaceDefault(e) {
   var n = Object.create(null);
@@ -26,7 +25,7 @@ var fsExtra__namespace = /*#__PURE__*/_interopNamespaceDefault(fsExtra);
 var path__namespace = /*#__PURE__*/_interopNamespaceDefault(path);
 
 // fs
-const debug = Debug('qiao-file');
+const debug$6 = Debug('qiao-file');
 
 /**
  * cp
@@ -38,19 +37,22 @@ const cp = async (src, dest) => {
   try {
     const srcExists = await fsExtra.pathExists(src);
     if (!srcExists) {
-      debug('/ cp / src not exists');
+      debug$6('/ cp / src not exists');
       return;
     }
 
     await fsExtra.copy(src, dest);
-    debug('/ cp / success');
+    debug$6('/ cp / success');
 
     return true;
   } catch (e) {
-    debug('/ cp / fail');
+    debug$6('/ cp / fail');
     console.log(e);
   }
 };
+
+// fs
+const debug$5 = Debug('qiao-file');
 
 /**
  * mv
@@ -61,19 +63,22 @@ const mv = async (oldPath, newPath) => {
   try {
     const srcExists = await fsExtra.pathExists(oldPath);
     if (!srcExists) {
-      debug('/ mv / src not exists');
+      debug$5('/ mv / src not exists');
       return;
     }
 
     await fsExtra.move(oldPath, newPath, { overwrite: true });
-    debug('/ mv / success');
+    debug$5('/ mv / success');
 
     return true;
   } catch (e) {
-    debug('/ mv / fail');
+    debug$5('/ mv / fail');
     console.log(e);
   }
 };
+
+// fs
+const debug$4 = Debug('qiao-file');
 
 /**
  * rm
@@ -83,39 +88,17 @@ const mv = async (oldPath, newPath) => {
 const rm = async (fpath) => {
   try {
     await fsExtra.remove(fpath);
+    debug$4('/ rm / success');
+
     return true;
   } catch (e) {
+    debug$4('/ rm / fail');
     console.log(e);
   }
 };
 
 // fs
-
-/**
- * is exists
- * @param {*} path
- * @returns
- */
-const isExists = async (path) => {
-  return await fsExtra.pathExists(path);
-};
-
-/**
- * is dir
- * @param {*} dir
- * @returns
- */
-const isDir = async (dir) => {
-  // check
-  const dirExists = await isExists(dir);
-  if (!dirExists) return;
-
-  // stat
-  const statRes = await fsExtra.stat(dir);
-  return statRes.isDirectory();
-};
-
-// path
+const debug$3 = Debug('qiao-file');
 
 /**
  * mk dir
@@ -125,11 +108,16 @@ const isDir = async (dir) => {
 const mkdir = async (dir) => {
   try {
     await fsExtra.ensureDir(dir);
+    debug$3('/ mkdir / success');
+
     return true;
   } catch (e) {
+    debug$3('/ mkdir / fail');
     console.log(e);
   }
 };
+
+// fs
 
 /**
  * read dir
@@ -143,6 +131,26 @@ const readdir = (dirPath) => {
     });
   });
 };
+
+// fs
+
+/**
+ * is dir
+ * @param {*} dir
+ * @returns
+ */
+const isDir = async (dir) => {
+  // check
+  const dirExists = await fsExtra.pathExists(dir);
+  if (!dirExists) return;
+
+  // stat
+  const statRes = await fsExtra.stat(dir);
+  return statRes.isDirectory();
+};
+
+// path
+const debug$2 = Debug('qiao-file');
 
 /**
  * ls dir
@@ -164,6 +172,7 @@ const lsdir = async (dir) => {
 async function getFoldersAndFiles(fpath, folders, files) {
   // check
   const dirs = await readdir(fpath);
+  debug$2('/ lsdir / getFoldersAndFiles / dirs', dirs);
   if (!dirs) return;
 
   // read
@@ -171,6 +180,11 @@ async function getFoldersAndFiles(fpath, folders, files) {
     const dir = dirs[i];
     const realPath = path.resolve(fpath, dir);
     const isDirRes = await isDir(realPath);
+    debug$2('/ lsdir / getFoldersAndFiles / dir', dir);
+    debug$2('/ lsdir / getFoldersAndFiles / realPath', realPath);
+    debug$2('/ lsdir / getFoldersAndFiles / isDirRes', isDirRes);
+
+    //
     if (isDirRes) {
       folders.push({
         path: realPath,
@@ -186,6 +200,8 @@ async function getFoldersAndFiles(fpath, folders, files) {
     }
   }
 }
+
+// path
 
 /**
  * ls tree
@@ -261,6 +277,9 @@ const extname = (filePath) => {
   return path.extname(filePath.toLowerCase());
 };
 
+// fs
+const debug$1 = Debug('qiao-file');
+
 /**
  * readFile
  * @param {*} filePath
@@ -269,39 +288,24 @@ const extname = (filePath) => {
  */
 const readFile = async (filePath, options) => {
   // check
+  debug$1('/ readFile / filePath', filePath);
   if (!filePath) return;
 
   try {
     // opt
     const opt = { encoding: 'utf8' };
     options = options || opt;
+    debug$1('/ readFile / options', options);
 
     return await fsExtra.readFile(filePath, options);
   } catch (e) {
+    debug$1('/ readFile / fail');
     console.log(e);
   }
 };
 
-/**
- * readFileLineByLine
- * @param {*} filePath
- * @param {*} onLine
- * @param {*} onClose
- */
-const readFileLineByLine = (filePath, onLine, onClose) => {
-  // rl
-  const rl = readline.createInterface({
-    input: fsExtra.createReadStream(filePath, { encoding: 'utf8' }),
-  });
-
-  // on
-  rl.on('line', function (line) {
-    if (onLine) onLine(line);
-  });
-  rl.on('close', function () {
-    if (onClose) onClose();
-  });
-};
+// fs
+const debug = Debug('qiao-file');
 
 /**
  * writeFile
@@ -311,18 +315,32 @@ const readFileLineByLine = (filePath, onLine, onClose) => {
  */
 const writeFile = async (filePath, fileData, options) => {
   // check
+  debug('/ writeFile / filePath', filePath);
   if (!filePath) return;
 
   try {
     // vars
     fileData = fileData || '';
     options = options || {};
-    await fsExtra.outputFile(filePath, fileData, options);
+    debug('/ writeFile / options', options);
 
+    await fsExtra.outputFile(filePath, fileData, options);
     return true;
   } catch (e) {
+    debug('/ writeFile / fail');
     console.log(e);
   }
+};
+
+// fs
+
+/**
+ * is exists
+ * @param {*} path
+ * @returns
+ */
+const isExists = async (path) => {
+  return await fsExtra.pathExists(path);
 };
 
 exports.fs = fsExtra__namespace;
@@ -336,7 +354,6 @@ exports.lstree = lstree;
 exports.mkdir = mkdir;
 exports.mv = mv;
 exports.readFile = readFile;
-exports.readFileLineByLine = readFileLineByLine;
 exports.readdir = readdir;
 exports.rm = rm;
 exports.writeFile = writeFile;
