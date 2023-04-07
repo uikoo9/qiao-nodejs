@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // q
-const { rm, cp, mv, mkdir, readdir, lsdir, lstree, extname } = require('../index.js');
+const { rm, cp, mv, mkdir, readdir, lsdir, lstree, extname, readFile } = require('../index.js');
 
 // const
 const PATH_NOT_EXISTS = '/path/not/exists';
@@ -125,4 +125,14 @@ test('lstree', async (t) => {
 test('extname is .js', (t) => {
   const res = extname('./extname.js');
   t.is(res, '.js');
+});
+
+// read file
+test('read file', async (t) => {
+  const res = await readFile('./index.js');
+  t.truthy(res);
+});
+test('read file / path not exists', async (t) => {
+  const res = await readFile(PATH_NOT_EXISTS);
+  t.falsy(res);
 });

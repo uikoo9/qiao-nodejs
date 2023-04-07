@@ -214,6 +214,13 @@ const res = extname(filePath);
 
 读取文件内容
 
+- filePath
+  - 类型: string
+  - 说明: 文件地址
+- return
+  - 类型: string
+  - 说明: 文件内容
+
 ```javascript
 const res = await readFile(filePath);
 ```
@@ -221,6 +228,16 @@ const res = await readFile(filePath);
 ### readFileLineByLine
 
 按行读取文件
+
+- filePath
+  - 类型: string
+  - 说明: 文件地址
+- onLine
+  - 类型: function
+  - 说明: 每行的回调函数
+- onClose
+  - 类型: function
+  - 说明: 整个文件读取完毕的回调函数
 
 ```javascript
 readFileLineByLine(filePath, onLine, onClose);
