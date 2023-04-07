@@ -28,9 +28,54 @@ const { isExists } = require('qiao-file');
 import { isExists } from 'qiao-file';
 ```
 
-## cmd
+## api
 
-复制，移动，删除文件或文件夹
+### extname
+
+获取文件的后缀
+
+- filePath
+  - 类型: string
+  - 说明: 文件地址
+- return
+  - 类型: string
+  - 说明: 文件后缀，例如.js
+
+```javascript
+const res = extname(filePath);
+```
+
+### isExists
+
+判断文件或者文件夹是否存在
+
+- fpath
+  - 类型: string
+  - 说明: 文件或者文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 存在
+
+```javascript
+const res = await isExists(fpath);
+```
+
+### isDir
+
+判断文件路径是否为文件夹
+
+- fpath
+  - 类型: string
+  - 说明: 文件或者文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 是文件夹
+
+```javascript
+const res = await isDir(fpath);
+```
 
 ### cp
 
@@ -85,10 +130,6 @@ const res = await mv(src, dest);
 ```javascript
 const res = await rm(path);
 ```
-
-## dir
-
-文件夹相关操作
 
 ### mkdir
 
@@ -181,33 +222,10 @@ const res = await lsdir(dirpath);
     ];
     ```
 
-  ```
-
-  ```
-
 ```javascript
 const dirpath = 'xx';
 const ignores = ['node_modules', 'is-'];
 const res = await lstree(dirpath, ignores);
-```
-
-## file
-
-文件相关操作
-
-### extname
-
-获取文件的后缀
-
-- filePath
-  - 类型: string
-  - 说明: 文件地址
-- return
-  - 类型: string
-  - 说明: 文件后缀，例如.js
-
-```javascript
-const res = extname(filePath);
 ```
 
 ### readFile
@@ -262,45 +280,13 @@ readFileLineByLine(filePath, onLine, onClose);
 const res = await writeFile(filePath, content);
 ```
 
-## is
-
-文件相关判断
-
-### isDir
-
-判断文件路径是否为文件夹
-
-- fpath
-  - 类型: string
-  - 说明: 文件或者文件夹地址
-- return
-  - 类型: boolean
-  - 说明: 结果
-  - true: 是文件夹
-
-```javascript
-const res = await isDir(fpath);
-```
-
-### isExists
-
-判断文件或者文件夹是否存在
-
-- fpath
-  - 类型: string
-  - 说明: 文件或者文件夹地址
-- return
-  - 类型: boolean
-  - 说明: 结果
-  - true: 存在
-
-```javascript
-const res = await isExists(fpath);
-```
-
 ## version
 
-## 0.1.7.20230404
+### 0.1.8.20230407
+
+1. 优化测试用例和 readme
+
+### 0.1.7.20230404
 
 1. add ava
 2. readDir --> readdir
