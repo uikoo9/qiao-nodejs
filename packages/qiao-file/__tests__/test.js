@@ -2,7 +2,20 @@
 const test = require('ava');
 
 // q
-const { rm, cp, mv, mkdir, readdir, lsdir, lstree, extname, readFile, writeFile, isExists, isDir } = require('../index.js');
+const {
+  rm,
+  cp,
+  mv,
+  mkdir,
+  readdir,
+  lsdir,
+  lstree,
+  extname,
+  readFile,
+  writeFile,
+  isExists,
+  isDir,
+} = require('../index.js');
 
 // const
 const PATH_NOT_EXISTS = '/path/not/exists';
@@ -41,7 +54,6 @@ test.serial('copy folder / dest is exists', async (t) => {
   const res = await cp('./src', './__tests__/1/cp/src');
   t.true(res);
 });
-
 
 // mv file
 test.serial('mv file / normal', async (t) => {
@@ -139,7 +151,7 @@ test('read file / path not exists', async (t) => {
 
 // write file
 test('write file', async (t) => {
-  const res = await writeFile('./__tests__/1/write-file/1.js', 'test');
+  const res = await writeFile('./__tests__/1/write-file/1.js', 'console.log();');
   t.true(res);
 });
 
