@@ -247,8 +247,19 @@ readFileLineByLine(filePath, onLine, onClose);
 
 写文件
 
+- filePath
+  - 类型: string
+  - 说明: 文件地址
+- content
+  - 类型: string
+  - 说明: 文件内容
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
-const res = await writeFile(filePath, 'sth');
+const res = await writeFile(filePath, content);
 ```
 
 ## is
