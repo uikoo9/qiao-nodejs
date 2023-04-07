@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // q
-const { rm, cp, mv, mkdir, readdir, lsdir, lstree, extname, readFile, writeFile } = require('../index.js');
+const { rm, cp, mv, mkdir, readdir, lsdir, lstree, extname, readFile, writeFile, isExists } = require('../index.js');
 
 // const
 const PATH_NOT_EXISTS = '/path/not/exists';
@@ -141,4 +141,14 @@ test('read file / path not exists', async (t) => {
 test('write file', async (t) => {
   const res = await writeFile('./__tests__/1/write-file/1.js', 'test');
   t.true(res);
+});
+
+// is exists
+test('isExists / path is exists', async (t) => {
+  const res = await isExists('./__tests__/test.js');
+  t.true(res);
+});
+test('isExists / path not exists', async (t) => {
+  const res = await isExists(PATH_NOT_EXISTS);
+  t.false(res);
 });

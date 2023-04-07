@@ -278,6 +278,14 @@ const res = await isDir(fpath);
 
 判断文件或者文件夹是否存在
 
+- fpath
+  - 类型: string
+  - 说明: 文件或者文件夹地址
+- return
+  - 类型: boolean
+  - 说明: 结果
+  - true: 成功
+
 ```javascript
 const res = await isExists(fpath);
 ```
