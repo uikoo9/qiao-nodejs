@@ -5,6 +5,10 @@
 
 nodejs 下 zip 和 unzip 工具
 
+1. [Node.js 压缩为 zip 文件：archiver](https://blog.csdn.net/uikoo9/article/details/116381493)
+2. [Node.js 解压缩 zip 文件：adm-zip](https://blog.csdn.net/uikoo9/article/details/116381396)
+3. [qiao-zip：Node.js 下 zip 和 unzip](https://blog.csdn.net/uikoo9/article/details/116381568)
+
 ## install
 
 安装
