@@ -71,7 +71,17 @@ const qcos = require('qiao-cos')(config);
 
 ### uploadFile
 
-同步上传文件
+上传文件
+
+- destPath
+  - 类型: string
+  - 说明: cos 的目标路径
+- sourceFile
+  - 类型: string
+  - 说明: 待上传的文件路径
+- return
+  - 类型: object
+  - 说明: cos 返回的结果
 
 ```javascript
 const destPath = 'test/test.js';
@@ -83,7 +93,17 @@ console.log(rs);
 
 ### uploadFolder
 
-同步上传文件夹
+上传文件夹
+
+- destPath
+  - 类型: string
+  - 说明: cos 的目标路径
+- sourceFolder
+  - 类型: string
+  - 说明: 待上传的文件夹路径
+- return
+  - 类型: object
+  - 说明: cos 返回的结果
 
 ```javascript
 const destPath = 'test';
@@ -94,6 +114,10 @@ console.log(rs);
 ```
 
 ## version
+
+### 0.1.4.20230407
+
+1. 3.0.0
 
 ## 0.1.3.20230404
 
