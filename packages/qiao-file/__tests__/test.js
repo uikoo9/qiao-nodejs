@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // q
-const { rm, cp, mv, mkdir, readdir } = require('../index.js');
+const { rm, cp, mv, mkdir, readdir, lsdir } = require('../index.js');
 
 // const
 const PATH_NOT_EXISTS = '/path/not/exists';
@@ -101,4 +101,14 @@ test('mkdir again', async (t) => {
 test('readdir', async (t) => {
   const res = await readdir('./__tests__');
   t.true(res && res.length === 3);
+});
+test('readdir / dir not exists', async (t) => {
+  const res = await readdir(PATH_NOT_EXISTS);
+  t.false(res);
+});
+
+// lsdir
+test('lsdir', async (t) => {
+  const res = await lsdir('./__tests__');
+  t.truthy(res && res.files && res.files.length && res.folders && res.folders.length);
 });
