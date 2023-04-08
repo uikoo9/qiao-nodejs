@@ -9,5 +9,6 @@ nodejs 相关 npm 包
 3.  [qiao-console](packages/qiao-console/README.md): nodejs 下 console 常见 api 封装
 4.  [qiao-cos](packages/qiao-cos/README.md): nodejs 下腾讯云 cos 常见 api 封装
 5.  [qiao-file](packages/qiao-file/README.md): nodejs 下文件相关封装
-6.  [qiao-ping](packages/qiao-ping/README.md): nodejs 下 ping 能力
-7.  [qiao-zip](packages/qiao-zip/README.md): nodejs 下 zip 和 unzip 工具
+6.  [qiao-parallel](packages/qiao-parallel/README.md): nodejs 下并行执行任务
+7.  [qiao-ping](packages/qiao-ping/README.md): nodejs 下 ping 能力
+8.  [qiao-zip](packages/qiao-zip/README.md): nodejs 下 zip 和 unzip 工具
