@@ -182,7 +182,7 @@ var parallel = require('qiao-parallel');
 
 ## version
 
-### 0.2.6.20230408
+### 0.0.3.20230408
 
 1. 3.0.0
 
