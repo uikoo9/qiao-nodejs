@@ -11,4 +11,5 @@ nodejs 相关 npm 包
 5.  [qiao-file](packages/qiao-file/README.md): nodejs 下文件相关封装
 6.  [qiao-parallel](packages/qiao-parallel/README.md): nodejs 下并行执行任务
 7.  [qiao-ping](packages/qiao-ping/README.md): nodejs 下 ping 能力
-8.  [qiao-zip](packages/qiao-zip/README.md): nodejs 下 zip 和 unzip 工具
+8.  [qiao-process](packages/qiao-process/README.md): nodejs 下 process 能力
+9.  [qiao-zip](packages/qiao-zip/README.md): nodejs 下 zip 和 unzip 工具
