@@ -31,7 +31,7 @@
     "test-fork": "node __tests__/fork.js"
   },
   "devDependencies": {
-    "qiao-console": "^1.0.4"
+    "qiao-console": "^3.0.0"
   },
   "dependencies": {
     "qiao-process": "^0.0.9"
