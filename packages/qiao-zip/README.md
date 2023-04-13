@@ -13,7 +13,7 @@ nodejs 下 zip 和 unzip 工具
 
 安装
 
-```bash
+```shell
 npm i qiao-zip
 ```
 

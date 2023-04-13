@@ -12,7 +12,7 @@ nodejs 下文件相关封装
 
 安装
 
-```bash
+```shell
 npm i qiao-file
 ```
 

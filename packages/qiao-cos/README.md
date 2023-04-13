@@ -9,7 +9,7 @@ nodejs 下腾讯云 cos 常见 api 封装
 
 安装
 
-```bash
+```shell
 npm i qiao-cos
 ```
 
@@ -30,7 +30,7 @@ npm i qiao-cos
 
 也可以在 cli 下使用
 
-```bash
+```shell
 # 全局安装
 npm i -g qiao-cos
 

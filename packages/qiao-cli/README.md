@@ -9,7 +9,7 @@ nodejs 下 cli 能力
 
 安装
 
-```bash
+```shell
 npm i qiao-cli
 ```
 

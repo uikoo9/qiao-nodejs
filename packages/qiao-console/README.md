@@ -9,7 +9,7 @@ nodejs 下 console 常见 api 封装
 
 安装
 
-```bash
+```shell
 npm i qiao-console
 ```
 

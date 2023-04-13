@@ -9,7 +9,7 @@ nodejs 下基于本地文件的 config 能力
 
 安装
 
-```bash
+```shell
 npm i qiao-config
 ```
 

@@ -9,7 +9,7 @@ nodejs 下并行执行任务，详见：[一篇文章了解 JS 并行任务](htt
 
 安装
 
-```bash
+```shell
 npm i qiao-parallel
 ```
 
