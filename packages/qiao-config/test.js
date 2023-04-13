@@ -2,7 +2,7 @@
 const test = require('ava');
 
 // db
-const db = require('../index.js')();
+const db = require('./index.js')();
 
 // config
 test.serial('config / clear and all', async (t) => {

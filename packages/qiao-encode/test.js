@@ -15,7 +15,7 @@ const {
   randomLetterAll,
   randomLetterNumber,
   randomIn,
-} = require('../index.js');
+} = require('./index.js');
 
 // uuid
 test('uuid / default', (t) => {
