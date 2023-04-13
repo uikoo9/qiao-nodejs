@@ -4,6 +4,7 @@ package-lock.json
 
 # packages
 packages/qiao-config/__tests__/
+packages/qiao-file/__tests__/1
 packages/qiao-file/index.js
 packages/qiao-zip/__tests__
 packages/qiao-zip/index.js
