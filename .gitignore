@@ -177,4 +177,6 @@ dist
 ## -- nodejs --
 
 ## -- qiao-nodejs --
+packages/**/1
 packages/**/__tests__/1
+packages/qiao-downloader/config.json
