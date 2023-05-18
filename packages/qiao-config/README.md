@@ -85,37 +85,3 @@ await db.config(key, value);
 // del
 await db.config(key, null);
 ```
-
-## version
-
-### 0.0.6.20230407
-
-1. 优化测试用例和 readme
-2. 3.0.0
-
-### 0.0.5.20230404
-
-1. add ava
-
-### 0.0.4.20221118
-
-1. 1.0.0
-
-### 0.0.3.20201105
-
-1. c --> config
-2. custom path
-
-### 0.0.2.20200901
-
-1. del ok
-2. c ok
-3. md
-
-### 0.0.1.20200828
-
-1. init project
-2. get ok
-3. set ok
-4. all ok
-5. clear ok
