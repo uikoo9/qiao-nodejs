@@ -16,7 +16,8 @@
   "module": "src/index.js",
   "sideEffets": false,
   "files": [
-    "src"
+    "src",
+    "config.json"
   ],
   "repository": {
     "type": "git",
