@@ -31,7 +31,7 @@
     "lint-staged": "^13.2.3",
     "nx": "^16.5.1",
     "prettier": "^3.0.0",
-    "qiao-lerna": "^3.3.5",
+    "qiao-lerna": "^3.3.7",
     "rollup": "^3.26.2"
   }
 }
