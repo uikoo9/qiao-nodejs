@@ -17,11 +17,11 @@ function _interopNamespaceDefault(e) {
           d.get
             ? d
             : {
-              enumerable: true,
-              get: function () {
-                return e[k];
+                enumerable: true,
+                get: function () {
+                  return e[k];
+                },
               },
-            },
         );
       }
     });

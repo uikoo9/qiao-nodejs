@@ -180,3 +180,4 @@ dist
 packages/**/1
 packages/**/__tests__/1
 packages/qiao-downloader/config.json
+packages/qiao-downloader/1
