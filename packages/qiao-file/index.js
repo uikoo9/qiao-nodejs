@@ -3,6 +3,7 @@
 var fsExtra = require('fs-extra');
 var path = require('path');
 var Debug = require('debug');
+var readline = require('readline');
 
 function _interopNamespaceDefault(e) {
   var n = Object.create(null);
@@ -289,25 +290,26 @@ const extname = (filePath) => {
 const debug$1 = Debug('qiao-file');
 
 /**
- * readFile
+ * writeFile
  * @param {*} filePath
- * @param {*} options https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfilesyncpath-options
- * @returns
+ * @param {*} fileData
+ * @param {*} options https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fswritefilesyncfile-data-options
  */
-const readFile = async (filePath, options) => {
+const writeFile = async (filePath, fileData, options) => {
   // check
-  debug$1('/ readFile / filePath', filePath);
+  debug$1('/ writeFile / filePath', filePath);
   if (!filePath) return;
 
   try {
-    // opt
-    const opt = { encoding: 'utf8' };
-    options = options || opt;
-    debug$1('/ readFile / options', options);
+    // vars
+    fileData = fileData || '';
+    options = options || {};
+    debug$1('/ writeFile / options', options);
 
-    return await fsExtra.readFile(filePath, options);
+    await fsExtra.outputFile(filePath, fileData, options);
+    return true;
   } catch (e) {
-    debug$1('/ readFile / fail');
+    debug$1('/ writeFile / fail');
     console.log(e);
   }
 };
@@ -316,28 +318,50 @@ const readFile = async (filePath, options) => {
 const debug = Debug('qiao-file');
 
 /**
- * writeFile
+ * readFile
  * @param {*} filePath
- * @param {*} fileData
- * @param {*} options https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fswritefilesyncfile-data-options
+ * @param {*} options https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfilesyncpath-options
+ * @returns
  */
-const writeFile = async (filePath, fileData, options) => {
+const readFile = async (filePath, options) => {
   // check
-  debug('/ writeFile / filePath', filePath);
+  debug('/ readFile / filePath', filePath);
   if (!filePath) return;
 
   try {
-    // vars
-    fileData = fileData || '';
-    options = options || {};
-    debug('/ writeFile / options', options);
+    // opt
+    const opt = { encoding: 'utf8' };
+    options = options || opt;
+    debug('/ readFile / options', options);
 
-    await fsExtra.outputFile(filePath, fileData, options);
-    return true;
+    return await fsExtra.readFile(filePath, options);
   } catch (e) {
-    debug('/ writeFile / fail');
+    debug('/ readFile / fail');
     console.log(e);
   }
+};
+
+// readline
+
+/**
+ * readFileLineByLine
+ * @param {*} filePath
+ * @param {*} onLine
+ * @param {*} onClose
+ */
+const readFileLineByLine = (filePath, onLine, onClose) => {
+  // rl
+  const rl = readline.createInterface({
+    input: fsExtra.createReadStream(filePath, { encoding: 'utf8' }),
+  });
+
+  // on
+  rl.on('line', function (line) {
+    if (onLine) onLine(line);
+  });
+  rl.on('close', function () {
+    if (onClose) onClose();
+  });
 };
 
 // fs
@@ -362,6 +386,7 @@ exports.lstree = lstree;
 exports.mkdir = mkdir;
 exports.mv = mv;
 exports.readFile = readFile;
+exports.readFileLineByLine = readFileLineByLine;
 exports.readdir = readdir;
 exports.rm = rm;
 exports.writeFile = writeFile;

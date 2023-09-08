@@ -15,8 +15,9 @@ export * from './lstree.js';
 
 // file
 export * from './extname.js';
-export * from './read-file.js';
 export * from './write-file.js';
+export * from './read-file.js';
+export * from './read-file-by-line.js';
 
 // is
 export * from './is-dir.js';
