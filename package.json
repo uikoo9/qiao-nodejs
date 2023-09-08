@@ -10,7 +10,7 @@
     "prettier": "qpro prettier",
     "eslint": "qpro eslint",
     "test": "lerna run test",
-    "lint": "npm run build && npm run prettier && npm run eslint && npm run test",
+    "lint": "npm run test && npm run prettier && npm run eslint",
     "postinstall": "npm run lint",
     "pb": "lerna publish",
     "graph": "nx graph",
