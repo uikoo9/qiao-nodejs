@@ -33,7 +33,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "nx": {
     "namedInputs": {
