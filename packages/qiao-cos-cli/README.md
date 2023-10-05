@@ -1,7 +1,7 @@
-## qiao-cos
+## qiao-cos-li
 
-[![npm version](https://img.shields.io/npm/v/qiao-cos.svg?style=flat-square)](https://www.npmjs.org/package/qiao-cos)
-[![npm downloads](https://img.shields.io/npm/dm/qiao-cos.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-cos)
+[![npm version](https://img.shields.io/npm/v/qiao-cos-li.svg?style=flat-square)](https://www.npmjs.org/package/qiao-cos-li)
+[![npm downloads](https://img.shields.io/npm/dm/qiao-cos-li.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-cos-li)
 
 nodejs 下腾讯云 cos 常见 api 封装
 
@@ -10,7 +10,7 @@ nodejs 下腾讯云 cos 常见 api 封装
 安装
 
 ```shell
-npm i qiao-cos
+npm i qiao-cos-li
 ```
 
 ## config.json
@@ -26,6 +26,25 @@ npm i qiao-cos
 }
 ```
 
+## cli
+
+也可以在 cli 下使用
+
+```shell
+# 全局安装
+npm i -g qiao-cos-li
+
+# 帮助
+qcos
+qcos -h
+
+# 上传文件
+qcos file|fi z:/workspaces/qiao-cos-li/test/config.json d:/test.js test.js
+
+# 上传文件夹
+qcos folder|fo z:/workspaces/qiao-cos-li/test/config.json d:/test/cocos test9
+```
+
 ## api
 
 ### use
@@ -34,10 +53,10 @@ npm i qiao-cos
 
 ```javascript
 // cjs
-const COS = require('qiao-cos');
+const COS = require('qiao-cos-li');
 
 // mjs
-import COS from 'qiao-cos';
+import COS from 'qiao-cos-li';
 ```
 
 ### qcos
@@ -46,7 +65,7 @@ import COS from 'qiao-cos';
 // config
 const config = require('./config.json');
 
-// qiao-cos
+// qiao-cos-li
 const qcos = COS(config);
 ```
 

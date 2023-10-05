@@ -1,8 +1,6 @@
-// progress
-import progress from 'progress';
-
 // qiao
 import { path, lsdir } from 'qiao-file';
+import { progress } from 'qiao-cli';
 
 // upload file
 import { uploadFileWithCallback } from './upload-file.js';

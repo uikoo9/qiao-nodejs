@@ -3,10 +3,10 @@
 var COS = require('cos-nodejs-sdk-v5');
 var qiaoFile = require('qiao-file');
 var Debug = require('debug');
-var progress = require('progress');
+var qiaoCli = require('qiao-cli');
 
 // file
-const debug = Debug('qiao-cos');
+const debug = Debug('qiao-cos-li');
 
 /**
  * upload file
@@ -67,7 +67,7 @@ const uploadFileWithCallback = (app, dest, source, cb) => {
   );
 };
 
-// progress
+// qiao
 
 /**
  * upload folder
@@ -93,7 +93,7 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
   // files
   const paths = await qiaoFile.lsdir(sourceFolder);
   const files = paths.files;
-  const bar = new progress('uploading files... :current/:total', {
+  const bar = new qiaoCli.progress('uploading files... :current/:total', {
     total: files.length,
   });
 
@@ -155,11 +155,11 @@ const { md5 } = require('qiao-encode');
 const cdnSign = (key, filepath, timeout) => {
   // check
   if (!key) {
-    console.log('qiao-cos / cdnSign / need config.key');
+    console.log('qiao-cos-li / cdnSign / need config.key');
     return;
   }
   if (!filepath) {
-    console.log('qiao-cos / cdnSign / need filepath');
+    console.log('qiao-cos-li / cdnSign / need filepath');
     return;
   }
 
