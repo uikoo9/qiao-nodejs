@@ -5,6 +5,57 @@ var qiaoFile = require('qiao-file');
 var Debug = require('debug');
 var progress = require('progress');
 
+// md5
+const { md5 } = require('qiao-encode');
+
+/**
+ * sign img
+ * @param {*} key
+ * @param {*} filepath
+ * @param {*} timeout s
+ * @returns
+ */
+const cdnSign = (key, filepath, timeout) => {
+  // check
+  if (!key) {
+    console.log('qiao-cos / cdnSign / need config.key');
+    return;
+  }
+  if (!filepath) {
+    console.log('qiao-cos / cdnSign / need filepath');
+    return;
+  }
+
+  // str
+  const now = parseInt(Date.now() / 1000) + (timeout || 0);
+  const str = key + filepath + now;
+
+  // md5
+  const md5Str = md5(str, 'hex');
+
+  // url
+  return `${filepath}?sign=${md5Str}&t=${now}`;
+};
+
+/**
+ * listBuckets
+ * @returns
+ */
+const listBuckets = (app) => {
+  return new Promise((resolve, reject) => {
+    // check
+    if (!app || !app.client) return reject(new Error('need app, app.client'));
+
+    // upload
+    app.client.getService(function (err, data) {
+      if (err) return reject(err);
+      if (!data || data.statusCode !== 200) return reject(new Error('list buckets error'));
+
+      resolve(data);
+    });
+  });
+};
+
 // file
 const debug = Debug('qiao-cos');
 
@@ -142,38 +193,6 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
   });
 };
 
-// md5
-const { md5 } = require('qiao-encode');
-
-/**
- * sign img
- * @param {*} key
- * @param {*} filepath
- * @param {*} timeout s
- * @returns
- */
-const cdnSign = (key, filepath, timeout) => {
-  // check
-  if (!key) {
-    console.log('qiao-cos / cdnSign / need config.key');
-    return;
-  }
-  if (!filepath) {
-    console.log('qiao-cos / cdnSign / need filepath');
-    return;
-  }
-
-  // str
-  const now = parseInt(Date.now() / 1000) + (timeout || 0);
-  const str = key + filepath + now;
-
-  // md5
-  const md5Str = md5(str, 'hex');
-
-  // url
-  return `${filepath}?sign=${md5Str}&t=${now}`;
-};
-
 // cos
 
 /**
@@ -197,15 +216,22 @@ const init = (config) => {
     SecretKey: config.SecretKey,
   });
 
+  // cdn
+  app.cdnSign = (filepath, timeout) => {
+    return cdnSign(config.signKey, filepath, timeout);
+  };
+
+  // bucket
+  app.listBuckets = async () => {
+    return await listBuckets(app);
+  };
+
   // upload
   app.uploadFile = async (dest, source) => {
     return await uploadFile(app, dest, source);
   };
   app.uploadFolder = async (destFolder, sourceFolder) => {
     return await uploadFolder(app, destFolder, sourceFolder);
-  };
-  app.cdnSign = (filepath, timeout) => {
-    return cdnSign(config.signKey, filepath, timeout);
   };
 
   // return
