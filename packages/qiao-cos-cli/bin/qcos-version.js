@@ -4,5 +4,5 @@ const cli = require('qiao-cli');
 // cmd for common
 cli.cmd
   .version(require('../package.json').version, '-v, --version')
-  .description('qiao-cos-li, tencent cos upload tool on nodejs')
+  .description('qiao-cos-cli, tencent cos upload cli tool')
   .usage('<command> [options]');

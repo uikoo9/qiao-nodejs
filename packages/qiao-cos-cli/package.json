@@ -1,17 +1,18 @@
 {
-  "name": "qiao-cos-li",
+  "name": "qiao-cos-cli",
   "version": "4.0.1",
-  "description": "tencent cos upload tool on nodejs",
+  "description": "tencent cos upload cli tool",
   "keywords": [
     "tencent",
     "cos",
     "nodejs",
     "upload",
     "upload file",
-    "upload folder"
+    "upload folder",
+    "cli tool"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-cos-li",
+  "homepage": "https://code.insistime.com/qiao-cos-cli",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -34,11 +35,8 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "cos-nodejs-sdk-v5": "^2.12.4",
-    "debug": "^4.3.4",
     "qiao-cli": "^4.0.0",
-    "qiao-encode": "^4.0.0",
-    "qiao-file": "^4.0.0"
+    "qiao-cos": "^4.0.1"
   },
   "nx": {
     "namedInputs": {
