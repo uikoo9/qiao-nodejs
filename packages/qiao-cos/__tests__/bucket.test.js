@@ -16,3 +16,8 @@ test('list objects', async (t) => {
   const res = await qcos.listObjects('13_insistime_editor/', 2);
   t.truthy(res);
 });
+test('list objects all', async (t) => {
+  const res = await qcos.listObjectsAll('13_insistime_editor/');
+  t.log(res.length);
+  t.pass();
+});

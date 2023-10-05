@@ -107,12 +107,33 @@ const res = await qcos.listBuckets();
 - max
   - 类型: number
   - 说明: 单次返回最大条数，默认1000，最大1000
+- marker
+  - 类型: string
+  - 说明: 上次返回的结尾
 - return
   - 类型: object
   - 说明: 对象相关信息
 
 ```javascript
 const res = await qcos.listObjects();
+```
+
+### listObjectsAll
+
+列出所有对象
+
+- prefix
+  - 类型: string
+  - 说明: 筛选的前缀
+- max
+  - 类型: number
+  - 说明: 单次返回最大条数，默认1000，最大1000
+- return
+  - 类型: object
+  - 说明: 对象相关信息
+
+```javascript
+const res = await qcos.listObjectsAll();
 ```
 
 ## upload

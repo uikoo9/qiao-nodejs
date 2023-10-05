@@ -5,7 +5,7 @@ import COS from 'cos-nodejs-sdk-v5';
 import { cdnSign } from './cdn-sign.js';
 
 // bucket
-import { listBuckets, listObjects } from './bucket.js';
+import { listBuckets, listObjects, listObjectsAll } from './bucket.js';
 
 // upload
 import { uploadFile } from './upload-file.js';
@@ -41,8 +41,11 @@ const init = (config) => {
   app.listBuckets = async () => {
     return await listBuckets(app);
   };
-  app.listObjects = async (prefix, max) => {
-    return await listObjects(app, prefix, max);
+  app.listObjects = async (prefix, max, marker) => {
+    return await listObjects(app, prefix, max, marker);
+  };
+  app.listObjectsAll = async (prefix, max) => {
+    return await listObjectsAll(app, prefix, max);
   };
 
   // upload

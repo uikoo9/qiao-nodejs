@@ -60,9 +60,11 @@ const listBuckets = (app) => {
  * listObjects
  * @param {*} app
  * @param {*} prefix
+ * @param {*} max
+ * @param {*} marker
  * @returns
  */
-const listObjects = (app, prefix, max) => {
+const listObjects = (app, prefix, max, marker) => {
   return new Promise((resolve, reject) => {
     // check
     if (!app || !app.client || !app.config) return reject(new Error('need app, app.client, app.config'));
@@ -74,6 +76,7 @@ const listObjects = (app, prefix, max) => {
     };
     if (prefix) options.Prefix = prefix;
     if (max) options.MaxKeys = max;
+    if (marker) options.Marker = marker;
 
     // list object
     app.client.getBucket(options, (err, data) => {
@@ -84,6 +87,38 @@ const listObjects = (app, prefix, max) => {
     });
   });
 };
+
+/**
+ * listObjectsAll
+ * @param {*} app
+ * @param {*} prefix
+ * @param {*} max
+ * @param {*} marker
+ * @returns
+ */
+const listObjectsAll = async (app, prefix, max) => {
+  const list = [];
+
+  await getObjects(list, app, prefix, max);
+  return list;
+};
+
+// get objects
+async function getObjects(list, app, prefix, max, marker) {
+  try {
+    // get
+    const res = await listObjects(app, prefix, max, marker);
+    console.log('qiao-cos / getObjects / IsTruncated', res.IsTruncated);
+    console.log('qiao-cos / getObjects / NextMarker', res.NextMarker);
+    console.log('qiao-cos / getObjects / Contents', res.Contents.length);
+    list.push(...res.Contents);
+
+    // go
+    if (res.IsTruncated === 'true') await getObjects(list, app, prefix, max, res.NextMarker);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // file
 const debug = Debug('qiao-cos');
@@ -254,8 +289,11 @@ const init = (config) => {
   app.listBuckets = async () => {
     return await listBuckets(app);
   };
-  app.listObjects = async (prefix, max) => {
-    return await listObjects(app, prefix, max);
+  app.listObjects = async (prefix, max, marker) => {
+    return await listObjects(app, prefix, max, marker);
+  };
+  app.listObjectsAll = async (prefix, max) => {
+    return await listObjectsAll(app, prefix, max);
   };
 
   // upload
