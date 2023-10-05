@@ -19,3 +19,4 @@ nodejs 相关 npm 包
 13. [qiao-project](./packages/qiao-project/README.md): frontend monorepo project tool
 14. [qiao-webpack](./packages/qiao-webpack/README.md): 开箱即用的 webpack 脚手架
 15. [qiao-zip](packages/qiao-zip/README.md): nodejs 下 zip 和 unzip 工具
+16. [qiao-zip-cli](packages/qiao-zip-cli/README.md): node zip and unzip cli tool
