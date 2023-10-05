@@ -97,6 +97,24 @@ bucket相关操作
 const res = await qcos.listBuckets();
 ```
 
+### listObjects
+
+列出对象列表
+
+- prefix
+  - 类型: string
+  - 说明: 筛选的前缀
+- max
+  - 类型: number
+  - 说明: 单次返回最大条数，默认1000，最大1000
+- return
+  - 类型: object
+  - 说明: 对象相关信息
+
+```javascript
+const res = await qcos.listObjects();
+```
+
 ## upload
 
 ### uploadFile

@@ -12,3 +12,7 @@ test('list bucket', async (t) => {
   const res = await qcos.listBuckets();
   t.truthy(res);
 });
+test('list objects', async (t) => {
+  const res = await qcos.listObjects('13_insistime_editor/', 2);
+  t.truthy(res);
+});
