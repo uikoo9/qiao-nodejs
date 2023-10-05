@@ -1,6 +1,6 @@
 {
   "name": "qiao-process",
-  "version": "3.4.7",
+  "version": "4.0.0",
   "description": "nodejs process tool",
   "keywords": [
     "nodejs",
