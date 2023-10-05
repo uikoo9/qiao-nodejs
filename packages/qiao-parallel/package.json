@@ -1,0 +1,56 @@
+{
+  "name": "qiao-parallel",
+  "version": "3.4.7",
+  "description": "Execute multiple tasks in parallel",
+  "keywords": [
+    "execute",
+    "multiple",
+    "tasks",
+    "parallel"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.insistime.com/qiao-parallel",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/index.js",
+  "sideEffets": false,
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-nodejs/issues"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test-normal": "node __tests__/normal.js",
+    "test-parallel": "node __tests__/parallel.js",
+    "test-fork": "node __tests__/fork.js"
+  },
+  "devDependencies": {
+    "qiao-console": "^3.4.7"
+  },
+  "dependencies": {
+    "qiao-process": "^3.4.7"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}

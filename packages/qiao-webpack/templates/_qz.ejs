@@ -1,0 +1,34 @@
+<!-- server properties-->
+{{if data}}
+<input type="hidden" id="qzServerPropertiesInput" value="{{ data }}" />
+<script id="qzServerPropertiesScript">
+  function getQZServerProperties() {
+    console.log('start parse qz server properties');
+
+    // ele
+    var $script = document.getElementById('qzServerPropertiesScript');
+    var $input = document.getElementById('qzServerPropertiesInput');
+    if (!$script || !$input || !$input.value) return;
+    console.log('start parse qz server properties / get data');
+
+    try {
+      // data
+      var data = JSON.parse($input.value);
+      if (!data) return;
+      console.log('start parse qz server properties / get json');
+
+      // remove
+      window.qzServerProperties = data;
+      console.log('start parse qz server properties / qz', window.qzServerProperties);
+
+      $input.remove();
+      $script.remove();
+      console.log('start parse qz server properties / remove');
+    } catch (e) {
+      console.log('parse serverProperties error');
+      console.log(e);
+    }
+  }
+  getQZServerProperties();
+</script>
+{{/if}}

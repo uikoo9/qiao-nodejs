@@ -1,0 +1,61 @@
+{
+  "name": "qiao-project",
+  "version": "3.6.7",
+  "description": "frontend monorepo project tool",
+  "keywords": [
+    "frontend",
+    "monorepo",
+    "project tool"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.insistime.com/qiao-project",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/index.js",
+  "sideEffets": false,
+  "files": [
+    "bin",
+    "src"
+  ],
+  "bin": {
+    "qpro": "./bin/qpro.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-nodejs/issues"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.3",
+    "qiao-cli": "^3.4.7",
+    "qiao-file": "^3.2.4"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}
