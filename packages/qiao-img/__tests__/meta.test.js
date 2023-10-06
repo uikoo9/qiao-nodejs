@@ -11,6 +11,14 @@ test('meta', async (t) => {
 
   t.truthy(info);
 });
+test.failing('meta / not exists', async (t) => {
+  const input = './__tests__/demo1.png';
+  const info = await meta(input);
+
+  t.truthy(info);
+});
+
+// stats
 test('stats', async (t) => {
   const input = './__tests__/demo.png';
   const info = await stats(input);

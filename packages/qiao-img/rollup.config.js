@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['sharp'],
+  external: ['debug', 'sharp', 'qiao-file'],
 };
