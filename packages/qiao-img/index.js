@@ -4,6 +4,33 @@ var sharp = require('sharp');
 var Debug = require('debug');
 var qiaoFile = require('qiao-file');
 
+function _interopNamespaceDefault(e) {
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(
+          n,
+          k,
+          d.get
+            ? d
+            : {
+                enumerable: true,
+                get: function () {
+                  return e[k];
+                },
+              },
+        );
+      }
+    });
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+
+var sharp__namespace = /*#__PURE__*/ _interopNamespaceDefault(sharp);
+
 // sharp
 const debug$2 = Debug('qiao-img');
 
@@ -205,6 +232,7 @@ const convert = async (input, output, meta, convertType, convertOptions) => {
   }
 };
 
+exports.sharp = sharp__namespace;
 exports.buffer = buffer;
 exports.convert = convert;
 exports.file = file;
