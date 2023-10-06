@@ -1,35 +1,8 @@
 'use strict';
 
-var sharp = require('sharp');
+var sharp$1 = require('sharp');
 var Debug = require('debug');
 var qiaoFile = require('qiao-file');
-
-function _interopNamespaceDefault(e) {
-  var n = Object.create(null);
-  if (e) {
-    Object.keys(e).forEach(function (k) {
-      if (k !== 'default') {
-        var d = Object.getOwnPropertyDescriptor(e, k);
-        Object.defineProperty(
-          n,
-          k,
-          d.get
-            ? d
-            : {
-                enumerable: true,
-                get: function () {
-                  return e[k];
-                },
-              },
-        );
-      }
-    });
-  }
-  n.default = e;
-  return Object.freeze(n);
-}
-
-var sharp__namespace = /*#__PURE__*/ _interopNamespaceDefault(sharp);
 
 // sharp
 const debug$2 = Debug('qiao-img');
@@ -50,7 +23,7 @@ const meta = async (input) => {
   }
 
   try {
-    const res = await await sharp(input).metadata();
+    const res = await await sharp$1(input).metadata();
     console.log('qiao-img / meta / success');
     debug$2('qiao-img / meta / success:', res);
     return res;
@@ -76,7 +49,7 @@ const stats = async (input) => {
   }
 
   try {
-    const res = await await sharp(input).stats();
+    const res = await await sharp$1(input).stats();
     console.log('qiao-img / stats / success');
     debug$2('qiao-img / stats / success:', res);
     return res;
@@ -119,9 +92,9 @@ const file = async (input, output, meta) => {
     let res;
     if (meta) {
       meta = meta === true ? {} : meta;
-      res = await sharp(input).withMetadata(meta).toFile(output);
+      res = await sharp$1(input).withMetadata(meta).toFile(output);
     } else {
-      res = await sharp(input).toFile(output);
+      res = await sharp$1(input).toFile(output);
     }
     console.log('qiao-img / file / success');
     debug$1('qiao-img / file / success:', res);
@@ -151,9 +124,9 @@ const buffer = async (input, meta) => {
     let res;
     if (meta) {
       meta = meta === true ? {} : meta;
-      res = await sharp(input).withMetadata(meta).toBuffer({ resolveWithObject: true });
+      res = await sharp$1(input).withMetadata(meta).toBuffer({ resolveWithObject: true });
     } else {
-      res = await sharp(input).toBuffer({ resolveWithObject: true });
+      res = await sharp$1(input).toBuffer({ resolveWithObject: true });
     }
     console.log('qiao-img / buffer / success');
     debug$1('qiao-img / buffer / success:', res);
@@ -219,9 +192,9 @@ const convert = async (input, output, meta, convertType, convertOptions) => {
     let res;
     if (meta) {
       meta = meta === true ? {} : meta;
-      res = await sharp(input)[convertType](convertOptions).withMetadata(meta).toFile(output);
+      res = await sharp$1(input)[convertType](convertOptions).withMetadata(meta).toFile(output);
     } else {
-      res = await sharp(input)[convertType](convertOptions).toFile(output);
+      res = await sharp$1(input)[convertType](convertOptions).toFile(output);
     }
     console.log('qiao-img / convert / success');
     debug('qiao-img / convert / success:', res);
@@ -232,9 +205,12 @@ const convert = async (input, output, meta, convertType, convertOptions) => {
   }
 };
 
-exports.sharp = sharp__namespace;
+// sharp
+const sharp = sharp$1;
+
 exports.buffer = buffer;
 exports.convert = convert;
 exports.file = file;
 exports.meta = meta;
+exports.sharp = sharp;
 exports.stats = stats;
