@@ -16,12 +16,12 @@ const debug = Debug('qiao-img');
  */
 export const file = async (input, output, meta) => {
   // log
-  debug('qiao-img / file / input:', input);
-  debug('qiao-img / file / output:', output);
+  console.log('qiao-img / file / input:', input);
+  console.log('qiao-img / file / output:', output);
 
   // check
   if (!input || !output) {
-    debug('qiao-img / file / fail: need input and output');
+    console.log('qiao-img / file / fail: need input and output');
     return;
   }
 
@@ -29,9 +29,9 @@ export const file = async (input, output, meta) => {
   const dirname = path.dirname(output);
   const res = await mkdir(dirname);
   if (res) {
-    debug('qiao-img / file / mkdir / success');
+    console.log('qiao-img / file / mkdir / success');
   } else {
-    debug('qiao-img / file / mkdir / fail');
+    console.log('qiao-img / file / mkdir / fail');
   }
 
   try {
@@ -42,11 +42,12 @@ export const file = async (input, output, meta) => {
     } else {
       res = await sharp(input).toFile(output);
     }
+    console.log('qiao-img / file / success');
     debug('qiao-img / file / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / file / error:');
-    debug(error);
+    console.log('qiao-img / file / error:');
+    console.log(error);
   }
 };
 
@@ -57,11 +58,11 @@ export const file = async (input, output, meta) => {
  */
 export const buffer = async (input, meta) => {
   // log
-  debug('qiao-img / buffer / input:', input);
+  console.log('qiao-img / buffer / input:', input);
 
   // check
   if (!input) {
-    debug('qiao-img / buffer / fail: need input');
+    console.log('qiao-img / buffer / fail: need input');
     return;
   }
 
@@ -73,10 +74,11 @@ export const buffer = async (input, meta) => {
     } else {
       res = await sharp(input).toBuffer({ resolveWithObject: true });
     }
+    console.log('qiao-img / buffer / success');
     debug('qiao-img / buffer / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / buffer / error:');
-    debug(error);
+    console.log('qiao-img / buffer / error:');
+    console.log(error);
   }
 };

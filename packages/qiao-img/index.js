@@ -5,7 +5,7 @@ var Debug = require('debug');
 var qiaoFile = require('qiao-file');
 
 // sharp
-const debug$1 = Debug('qiao-img');
+const debug$2 = Debug('qiao-img');
 
 /**
  * meta
@@ -14,21 +14,22 @@ const debug$1 = Debug('qiao-img');
  */
 const meta = async (input) => {
   // log
-  debug$1('qiao-img / meta / input:', input);
+  console.log('qiao-img / meta / input:', input);
 
   // check
   if (!input) {
-    debug$1('qiao-img / meta / fail: need input');
+    console.log('qiao-img / meta / fail: need input');
     return;
   }
 
   try {
     const res = await await sharp(input).metadata();
-    debug$1('qiao-img / meta / success:', res);
+    console.log('qiao-img / meta / success');
+    debug$2('qiao-img / meta / success:', res);
     return res;
   } catch (error) {
-    debug$1('qiao-img / meta / error:');
-    debug$1(error);
+    console.log('qiao-img / meta / error:');
+    console.log(error);
   }
 };
 
@@ -39,26 +40,27 @@ const meta = async (input) => {
  */
 const stats = async (input) => {
   // log
-  debug$1('qiao-img / stats / input:', input);
+  console.log('qiao-img / stats / input:', input);
 
   // check
   if (!input) {
-    debug$1('qiao-img / stats / fail: need input');
+    console.log('qiao-img / stats / fail: need input');
     return;
   }
 
   try {
     const res = await await sharp(input).stats();
-    debug$1('qiao-img / stats / success:', res);
+    console.log('qiao-img / stats / success');
+    debug$2('qiao-img / stats / success:', res);
     return res;
   } catch (error) {
-    debug$1('qiao-img / stats / error:');
-    debug$1(error);
+    console.log('qiao-img / stats / error:');
+    console.log(error);
   }
 };
 
 // sharp
-const debug = Debug('qiao-img');
+const debug$1 = Debug('qiao-img');
 
 /**
  * file
@@ -68,12 +70,12 @@ const debug = Debug('qiao-img');
  */
 const file = async (input, output, meta) => {
   // log
-  debug('qiao-img / file / input:', input);
-  debug('qiao-img / file / output:', output);
+  console.log('qiao-img / file / input:', input);
+  console.log('qiao-img / file / output:', output);
 
   // check
   if (!input || !output) {
-    debug('qiao-img / file / fail: need input and output');
+    console.log('qiao-img / file / fail: need input and output');
     return;
   }
 
@@ -81,9 +83,9 @@ const file = async (input, output, meta) => {
   const dirname = qiaoFile.path.dirname(output);
   const res = await qiaoFile.mkdir(dirname);
   if (res) {
-    debug('qiao-img / file / mkdir / success');
+    console.log('qiao-img / file / mkdir / success');
   } else {
-    debug('qiao-img / file / mkdir / fail');
+    console.log('qiao-img / file / mkdir / fail');
   }
 
   try {
@@ -94,11 +96,12 @@ const file = async (input, output, meta) => {
     } else {
       res = await sharp(input).toFile(output);
     }
-    debug('qiao-img / file / success:', res);
+    console.log('qiao-img / file / success');
+    debug$1('qiao-img / file / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / file / error:');
-    debug(error);
+    console.log('qiao-img / file / error:');
+    console.log(error);
   }
 };
 
@@ -109,11 +112,11 @@ const file = async (input, output, meta) => {
  */
 const buffer = async (input, meta) => {
   // log
-  debug('qiao-img / buffer / input:', input);
+  console.log('qiao-img / buffer / input:', input);
 
   // check
   if (!input) {
-    debug('qiao-img / buffer / fail: need input');
+    console.log('qiao-img / buffer / fail: need input');
     return;
   }
 
@@ -125,15 +128,85 @@ const buffer = async (input, meta) => {
     } else {
       res = await sharp(input).toBuffer({ resolveWithObject: true });
     }
-    debug('qiao-img / buffer / success:', res);
+    console.log('qiao-img / buffer / success');
+    debug$1('qiao-img / buffer / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / buffer / error:');
-    debug(error);
+    console.log('qiao-img / buffer / error:');
+    console.log(error);
+  }
+};
+
+// sharp
+const debug = Debug('qiao-img');
+
+// convertTypes
+const convertTypes = ['jpeg', 'png', 'webp', 'gif', 'jp2', 'tiff', 'avif', 'heif', 'jxl'];
+
+/**
+ * convert
+ * @param {*} input
+ * @param {*} output
+ * @param {*} meta
+ * @param {*} convertType
+ * @param {*} convertOptions
+ * @returns
+ */
+const convert = async (input, output, meta, convertType, convertOptions) => {
+  // log
+  console.log('qiao-img / convert / input:', input);
+  console.log('qiao-img / convert / output:', output);
+  console.log('qiao-img / convert / meta:', meta);
+  console.log('qiao-img / convert / convertType:', convertType);
+  console.log('qiao-img / convert / convertOptions:', convertOptions);
+
+  // check
+  if (!input) {
+    console.log('qiao-img / convert / fail: need input');
+    return;
+  }
+  if (!output) {
+    console.log('qiao-img / convert / fail: need output');
+    return;
+  }
+  if (!convertType) {
+    console.log('qiao-img / convert / fail: need convertType');
+    return;
+  }
+  if (convertTypes.indexOf(convertType) === -1) {
+    console.log('qiao-img / convert / fail: unsupport convertType');
+    return;
+  }
+
+  // dir
+  const dirname = qiaoFile.path.dirname(output);
+  const res = await qiaoFile.mkdir(dirname);
+  if (res) {
+    console.log('qiao-img / convert / mkdir / success');
+  } else {
+    console.log('qiao-img / convert / mkdir / fail');
+  }
+
+  try {
+    convertOptions = convertOptions || {};
+    let res;
+    if (meta) {
+      meta = meta === true ? {} : meta;
+      res = await sharp(input)[convertType](convertOptions).withMetadata(meta).toFile(output);
+    } else {
+      res = await sharp(input)[convertType](convertOptions).toFile(output);
+    }
+    console.log('qiao-img / convert / success');
+    debug('qiao-img / convert / success:', res);
+    return res;
+  } catch (error) {
+    console.log('qiao-img / convert / error:');
+    console.log(error);
   }
 };
 
 exports.buffer = buffer;
+exports.convert = convert;
 exports.file = file;
 exports.meta = meta;
 exports.stats = stats;

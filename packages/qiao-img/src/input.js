@@ -12,21 +12,22 @@ const debug = Debug('qiao-img');
  */
 export const meta = async (input) => {
   // log
-  debug('qiao-img / meta / input:', input);
+  console.log('qiao-img / meta / input:', input);
 
   // check
   if (!input) {
-    debug('qiao-img / meta / fail: need input');
+    console.log('qiao-img / meta / fail: need input');
     return;
   }
 
   try {
     const res = await await sharp(input).metadata();
+    console.log('qiao-img / meta / success');
     debug('qiao-img / meta / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / meta / error:');
-    debug(error);
+    console.log('qiao-img / meta / error:');
+    console.log(error);
   }
 };
 
@@ -37,20 +38,21 @@ export const meta = async (input) => {
  */
 export const stats = async (input) => {
   // log
-  debug('qiao-img / stats / input:', input);
+  console.log('qiao-img / stats / input:', input);
 
   // check
   if (!input) {
-    debug('qiao-img / stats / fail: need input');
+    console.log('qiao-img / stats / fail: need input');
     return;
   }
 
   try {
     const res = await await sharp(input).stats();
+    console.log('qiao-img / stats / success');
     debug('qiao-img / stats / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / stats / error:');
-    debug(error);
+    console.log('qiao-img / stats / error:');
+    console.log(error);
   }
 };

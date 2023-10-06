@@ -175,3 +175,45 @@ const info = await buffer(input, true);
 // replace metadata
 const info = await buffer(input, {});
 ```
+
+### convert
+
+图片转换
+
+- input
+  - 类型: string|buffer
+  - 说明: 待解析图片地址或buffer
+- output
+  - 类型: string
+  - 说明: 输出的图片地址
+- meta
+  - 类型: boolean|object
+  - 说明:
+    - true: 保留metadata
+    - object: 写入的metadata，详见: [https://sharp.pixelplumbing.com/api-output#withmetadata](https://sharp.pixelplumbing.com/api-output#withmetadata)
+- convertType
+  - 类型: string
+  - 说明: 转换格式，包括（'jpeg', 'png', 'webp', 'gif', 'jp2', 'tiff', 'avif', 'heif', 'jxl'）
+- convertOptions
+  - 类型: object
+  - 说明: 转换的参数，详见: [https://sharp.pixelplumbing.com/api-output#jpeg](https://sharp.pixelplumbing.com/api-output#jpeg)
+- return
+  - 类型: object
+  - 说明: 文件信息
+  - ```js
+    {
+      channels: 4,
+      format: 'png',
+      height: 260,
+      premultiplied: false,
+      size: 22813,
+      width: 506,
+    }
+    ```
+
+```javascript
+const info = await convert(input, output, meta, convertType, convertOptions);
+
+// to jpg
+const info = await convert(input, output, null, 'jpeg', {});
+```
