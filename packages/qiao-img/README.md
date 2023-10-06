@@ -25,8 +25,41 @@ npm i qiao-img
 
 ```javascript
 // cjs
-const { convert } = require('qiao-img');
+const { meta } = require('qiao-img');
 
 // mjs
-import { convert } from 'qiao-img';
+import { meta } from 'qiao-img';
+```
+
+## api
+
+### meta
+
+获取图片信息
+
+- input
+  - 类型: string|buffer
+  - 说明: 待解析图片地址或buffer
+- return
+  - 类型: object
+  - 说明: 图片信息
+  - ```js
+    {
+        channels: 4,
+        density: 72,
+        depth: 'uchar',
+        exif: Buffer @Uint8Array [],
+        format: 'png',
+        hasAlpha: true,
+        hasProfile: true,
+        height: 260,
+        icc: Buffer @Uint8Array [],
+        isProgressive: false,
+        space: 'srgb',
+        width: 506,
+    }
+    ```
+
+```javascript
+const info = await meta(input);
 ```

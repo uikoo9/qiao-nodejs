@@ -8,6 +8,6 @@ const { meta } = require('../index.js');
 test('meta', async (t) => {
   const input = './__tests__/demo.png';
   const info = await meta(input);
-  t.log(info);
-  t.pass();
+
+  t.truthy(info);
 });
