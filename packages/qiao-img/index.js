@@ -61,19 +61,19 @@ const stats = async (input) => {
 const debug = Debug('qiao-img');
 
 /**
- * convert
+ * file
  * @param {*} input
  * @param {*} output
  * @returns
  */
-const convert = async (input, output) => {
+const file = async (input, output, meta) => {
   // log
-  debug('qiao-img / convert / input:', input);
-  debug('qiao-img / convert / output:', output);
+  debug('qiao-img / file / input:', input);
+  debug('qiao-img / file / output:', output);
 
   // check
   if (!input || !output) {
-    debug('qiao-img / convert / fail: need input and output');
+    debug('qiao-img / file / fail: need input and output');
     return;
   }
 
@@ -81,17 +81,23 @@ const convert = async (input, output) => {
   const dirname = qiaoFile.path.dirname(output);
   const res = await qiaoFile.mkdir(dirname);
   if (res) {
-    debug('qiao-img / convert / mkdir / success');
+    debug('qiao-img / file / mkdir / success');
   } else {
-    debug('qiao-img / convert / mkdir / fail');
+    debug('qiao-img / file / mkdir / fail');
   }
 
   try {
-    const res = await sharp(input).toFile(output);
-    debug('qiao-img / convert / success:', res);
+    let res;
+    if (meta) {
+      meta = meta === true ? {} : meta;
+      res = await sharp(input).withMetadata(meta).toFile(output);
+    } else {
+      res = await sharp(input).toFile(output);
+    }
+    debug('qiao-img / file / success:', res);
     return res;
   } catch (error) {
-    debug('qiao-img / convert / error:');
+    debug('qiao-img / file / error:');
     debug(error);
   }
 };
@@ -101,7 +107,7 @@ const convert = async (input, output) => {
  * @param {*} input
  * @returns
  */
-const buffer = async (input) => {
+const buffer = async (input, meta) => {
   // log
   debug('qiao-img / buffer / input:', input);
 
@@ -112,7 +118,13 @@ const buffer = async (input) => {
   }
 
   try {
-    const res = await sharp(input).toBuffer({ resolveWithObject: true });
+    let res;
+    if (meta) {
+      meta = meta === true ? {} : meta;
+      res = await sharp(input).withMetadata(meta).toBuffer({ resolveWithObject: true });
+    } else {
+      res = await sharp(input).toBuffer({ resolveWithObject: true });
+    }
     debug('qiao-img / buffer / success:', res);
     return res;
   } catch (error) {
@@ -122,6 +134,6 @@ const buffer = async (input) => {
 };
 
 exports.buffer = buffer;
-exports.convert = convert;
+exports.file = file;
 exports.meta = meta;
 exports.stats = stats;

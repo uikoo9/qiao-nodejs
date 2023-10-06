@@ -76,56 +76,7 @@ const info = await meta(input);
   - 说明: 生图信息
   - ```js
     {
-      channels: [
-        {
-          max: 249,
-          maxX: 76,
-          maxY: 45,
-          mean: 38.72487838248708,
-          min: 31,
-          minX: 0,
-          minY: 16,
-          squaresSum: 320131661,
-          stdev: 30.557190935522204,
-          sum: 5094645,
-        },
-        {
-          max: 220,
-          maxX: 70,
-          maxY: 208,
-          mean: 39.68903922164792,
-          min: 31,
-          minX: 0,
-          minY: 16,
-          squaresSum: 346678450,
-          stdev: 32.55647250213309,
-          sum: 5221490,
-        },
-        {
-          max: 250,
-          maxX: 304,
-          maxY: 47,
-          mean: 40.46915475828519,
-          min: 31,
-          minX: 0,
-          minY: 16,
-          squaresSum: 390685258,
-          stdev: 36.49511234838205,
-          sum: 5324122,
-        },
-        {
-          max: 255,
-          maxX: 0,
-          maxY: 16,
-          mean: 255,
-          min: 255,
-          minX: 0,
-          minY: 16,
-          squaresSum: 8554689000,
-          stdev: 0,
-          sum: 33547800,
-        },
-      ],
+      channels: [],
       dominant: {
         b: 24,
         g: 24,
@@ -141,6 +92,48 @@ const info = await meta(input);
 const info = await stats(input);
 ```
 
+### file
+
+将图片输出到文件
+
+- input
+  - 类型: string|buffer
+  - 说明: 待解析图片地址或buffer
+- output
+  - 类型: string
+  - 说明: 输出的图片地址
+- meta
+  - 类型: boolean|object
+  - 说明:
+    - true: 保留metadata
+    - object: 写入的metadata，详见: [https://sharp.pixelplumbing.com/api-output#withmetadata](https://sharp.pixelplumbing.com/api-output#withmetadata)
+- return
+  - 类型: object
+  - 说明: 文件信息
+  - ```js
+    {
+      channels: 4,
+      format: 'png',
+      height: 260,
+      premultiplied: false,
+      size: 22813,
+      width: 506,
+    }
+    ```
+
+```javascript
+const info = await file(input, output, meta);
+
+// remove metadata
+const info = await file(input, output);
+
+// hold metadata
+const info = await file(input, output, true);
+
+// replace metadata
+const info = await file(input, output, {});
+```
+
 ### buffer
 
 获取图片的buffer信息
@@ -148,6 +141,11 @@ const info = await stats(input);
 - input
   - 类型: string|buffer
   - 说明: 待解析图片地址或buffer
+- meta
+  - 类型: boolean|object
+  - 说明:
+    - true: 保留metadata
+    - object: 写入的metadata，详见: [https://sharp.pixelplumbing.com/api-output#withmetadata](https://sharp.pixelplumbing.com/api-output#withmetadata)
 - return
   - 类型: object
   - 说明: buffer信息
@@ -167,4 +165,13 @@ const info = await stats(input);
 
 ```javascript
 const info = await buffer(input);
+
+// remove metadata
+const info = await buffer(input);
+
+// hold metadata
+const info = await buffer(input, true);
+
+// replace metadata
+const info = await buffer(input, {});
 ```
