@@ -140,3 +140,31 @@ const info = await meta(input);
 ```javascript
 const info = await stats(input);
 ```
+
+### buffer
+
+获取图片的buffer信息
+
+- input
+  - 类型: string|buffer
+  - 说明: 待解析图片地址或buffer
+- return
+  - 类型: object
+  - 说明: buffer信息
+  - ```js
+    {
+      data: Buffer @Uint8Array [],
+      info: {
+        channels: 4,
+        format: 'png',
+        height: 260,
+        premultiplied: false,
+        size: 22813,
+        width: 506,
+      },
+    }
+    ```
+
+```javascript
+const info = await buffer(input);
+```

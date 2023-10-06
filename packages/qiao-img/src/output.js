@@ -43,3 +43,28 @@ export const convert = async (input, output) => {
     debug(error);
   }
 };
+
+/**
+ * buffer
+ * @param {*} input
+ * @returns
+ */
+export const buffer = async (input) => {
+  // log
+  debug('qiao-img / buffer / input:', input);
+
+  // check
+  if (!input) {
+    debug('qiao-img / buffer / fail: need input');
+    return;
+  }
+
+  try {
+    const res = await sharp(input).toBuffer({ resolveWithObject: true });
+    debug('qiao-img / buffer / success:', res);
+    return res;
+  } catch (error) {
+    debug('qiao-img / buffer / error:');
+    debug(error);
+  }
+};
