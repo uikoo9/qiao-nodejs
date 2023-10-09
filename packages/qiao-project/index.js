@@ -1,5 +1,8 @@
 'use strict';
 
+var json = require('@rollup/plugin-json');
+var pluginNodeResolve = require('@rollup/plugin-node-resolve');
+var rollup = require('rollup');
 var qiaoConsole = require('qiao-console');
 var qiaoFile = require('qiao-file');
 var qiaoParallel = require('qiao-parallel');
@@ -7,7 +10,6 @@ var qiaoNpms = require('qiao-npms');
 var qiaoCli = require('qiao-cli');
 var eslint = require('eslint');
 var prettier = require('prettier');
-var rollup = require('rollup');
 
 function _interopNamespaceDefault(e) {
   var n = Object.create(null);
@@ -35,6 +37,81 @@ function _interopNamespaceDefault(e) {
 }
 
 var prettier__namespace = /*#__PURE__*/ _interopNamespaceDefault(prettier);
+
+/**
+ * getConfig
+ * @param {*} configPath
+ * @param {*} defaultConfig
+ * @returns
+ */
+const getConfig = (configPath, defaultConfig) => {
+  try {
+    let config;
+    if (configPath) {
+      config = require(configPath);
+      console.log('qiao-project / getConfig /', configPath);
+    } else {
+      config = defaultConfig;
+      console.log('qiao-project / getConfig / default config');
+    }
+
+    console.log(config);
+    return config;
+  } catch (error) {
+    console.log('qiao-project / getConfig /', error);
+  }
+};
+
+// rollup
+
+/**
+ * rollupBuild
+ * @param {*} configPath
+ */
+const rollupBuild = async (configPath) => {
+  // start
+  console.log('qiao-project / rollup / start');
+
+  // config
+  const config = getConfig(configPath);
+  if (!config) process.exit(1);
+
+  // cwd
+  const cwd = process.cwd();
+  console.log('qiao-project / rollup / cwd', cwd);
+
+  // output
+  const output = config.output;
+  delete config.output;
+
+  // input
+  const inputOptions = config;
+  const outputOptionsList = Array.isArray(output) ? output : [output];
+
+  // go
+  let bundle;
+  let buildFailed = false;
+  try {
+    console.log(`qiao-project / rollup / input / ${inputOptions.input}`);
+    bundle = await rollup.rollup(inputOptions);
+    for (const outputOptions of outputOptionsList) {
+      console.log(`qiao-project / rollup / output / ${outputOptions.file}`);
+      await bundle.write(outputOptions);
+    }
+
+    console.log('qiao-project / rollup / end');
+  } catch (error) {
+    buildFailed = true;
+    console.log('qiao-project / rollup / error');
+    console.error(error);
+  }
+
+  // close
+  if (bundle) await bundle.close();
+
+  // exit
+  process.exit(buildFailed ? 1 : 0);
+};
 
 // qiao
 
@@ -284,30 +361,6 @@ const config$1 = {
   },
 };
 
-/**
- * getConfig
- * @param {*} configPath
- * @param {*} defaultConfig
- * @returns
- */
-const getConfig = (configPath, defaultConfig) => {
-  try {
-    let config;
-    if (configPath) {
-      config = require(configPath);
-      console.log('qiao-project / getConfig /', configPath);
-    } else {
-      config = defaultConfig;
-      console.log('qiao-project / getConfig / default config');
-    }
-
-    console.log(config);
-    return config;
-  } catch (error) {
-    console.log('qiao-project / getConfig /', error);
-  }
-};
-
 // eslint
 
 /**
@@ -526,58 +579,17 @@ async function formatFiles(cwd, config) {
 }
 
 // rollup
+const rollupPluginJson = json;
 
-/**
- * rollupBuild
- * @param {*} configPath
- */
-const rollupBuild = async (configPath) => {
-  // start
-  console.log('qiao-project / rollup / start');
-
-  // config
-  const config = getConfig(configPath);
-  if (!config) process.exit(1);
-
-  // cwd
-  const cwd = process.cwd();
-  console.log('qiao-project / rollup / cwd', cwd);
-
-  // output
-  const output = config.output;
-  delete config.output;
-
-  // input
-  const inputOptions = config;
-  const outputOptionsList = Array.isArray(output) ? output : [output];
-
-  // go
-  let bundle;
-  let buildFailed = false;
-  try {
-    console.log(`qiao-project / rollup / input / ${inputOptions.input}`);
-    bundle = await rollup.rollup(inputOptions);
-    for (const outputOptions of outputOptionsList) {
-      console.log(`qiao-project / rollup / output / ${outputOptions.file}`);
-      await bundle.write(outputOptions);
-    }
-
-    console.log('qiao-project / rollup / end');
-  } catch (error) {
-    buildFailed = true;
-    console.log('qiao-project / rollup / error');
-    console.error(error);
-  }
-
-  // close
-  if (bundle) await bundle.close();
-
-  // exit
-  process.exit(buildFailed ? 1 : 0);
-};
-
+Object.defineProperty(exports, 'rollupNodeResolve', {
+  enumerable: true,
+  get: function () {
+    return pluginNodeResolve.nodeResolve;
+  },
+});
 exports.downloadCounts = downloadCounts;
 exports.pkg = pkg;
 exports.rollupBuild = rollupBuild;
+exports.rollupPluginJson = rollupPluginJson;
 exports.runEslint = runEslint;
 exports.runPrettier = runPrettier;
