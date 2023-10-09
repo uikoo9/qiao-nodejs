@@ -39,7 +39,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
     "qiao-cli": "^4.0.0",
-    "qiao-file": "^4.0.0"
+    "qiao-console": "^4.0.0",
+    "qiao-file": "^4.0.0",
+    "qiao-npms": "^4.0.0",
+    "qiao-parallel": "^4.0.0"
   },
   "nx": {
     "namedInputs": {
