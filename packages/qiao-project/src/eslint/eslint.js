@@ -3,6 +3,7 @@ import { ESLint } from 'eslint';
 
 // config
 import { config as defaultConfig } from './eslint-config.js';
+import { getConfig } from '../util.js';
 
 /**
  * run eslint
@@ -12,8 +13,8 @@ export const runEslint = async (configPath) => {
   console.log('qiao-project / eslint / start');
 
   // config
-  const config = getConfig(configPath);
-  if (!config) return;
+  const config = getConfig(configPath, defaultConfig);
+  if (!config) process.exit(1);
 
   // cwd
   const cwd = process.cwd();
@@ -47,22 +48,3 @@ export const runEslint = async (configPath) => {
     process.exit(1);
   }
 };
-
-// get config
-function getConfig(configPath) {
-  try {
-    let eslintConfig;
-    if (configPath) {
-      eslintConfig = require(configPath);
-      console.log('qiao-project / eslint / config /', configPath);
-    } else {
-      eslintConfig = defaultConfig;
-      console.log('qiao-project / eslint / config / default config');
-    }
-
-    console.log(eslintConfig);
-    return eslintConfig;
-  } catch (error) {
-    console.log('qiao-project / eslint / config /', error);
-  }
-}

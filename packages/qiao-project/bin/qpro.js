@@ -9,6 +9,7 @@ require('./qpro-pkg.js');
 require('./qpro-commitizen.js');
 require('./qpro-eslint.js');
 require('./qpro-prettier.js');
+require('./qpro-rollup.js');
 require('./qpro-version.js');
 
 // parse

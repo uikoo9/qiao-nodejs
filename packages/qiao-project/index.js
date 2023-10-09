@@ -7,6 +7,7 @@ var qiaoNpms = require('qiao-npms');
 var qiaoCli = require('qiao-cli');
 var eslint = require('eslint');
 var prettier = require('prettier');
+var rollup = require('rollup');
 
 function _interopNamespaceDefault(e) {
   var n = Object.create(null);
@@ -283,6 +284,30 @@ const config$1 = {
   },
 };
 
+/**
+ * getConfig
+ * @param {*} configPath
+ * @param {*} defaultConfig
+ * @returns
+ */
+const getConfig = (configPath, defaultConfig) => {
+  try {
+    let config;
+    if (configPath) {
+      config = require(configPath);
+      console.log('qiao-project / getConfig /', configPath);
+    } else {
+      config = defaultConfig;
+      console.log('qiao-project / getConfig / default config');
+    }
+
+    console.log(config);
+    return config;
+  } catch (error) {
+    console.log('qiao-project / getConfig /', error);
+  }
+};
+
 // eslint
 
 /**
@@ -293,8 +318,8 @@ const runEslint = async (configPath) => {
   console.log('qiao-project / eslint / start');
 
   // config
-  const config = getConfig$1(configPath);
-  if (!config) return;
+  const config = getConfig(configPath, config$1);
+  if (!config) process.exit(1);
 
   // cwd
   const cwd = process.cwd();
@@ -328,25 +353,6 @@ const runEslint = async (configPath) => {
     process.exit(1);
   }
 };
-
-// get config
-function getConfig$1(configPath) {
-  try {
-    let eslintConfig;
-    if (configPath) {
-      eslintConfig = require(configPath);
-      console.log('qiao-project / eslint / config /', configPath);
-    } else {
-      eslintConfig = config$1;
-      console.log('qiao-project / eslint / config / default config');
-    }
-
-    console.log(eslintConfig);
-    return eslintConfig;
-  } catch (error) {
-    console.log('qiao-project / eslint / config /', error);
-  }
-}
 
 /**
  * prettier config
@@ -465,35 +471,16 @@ const runPrettier = async (configPath) => {
   console.log('qiao-project / prettier / start');
 
   // config
-  const config = getConfig(configPath);
-  if (!config) return;
+  const config$1 = getConfig(configPath, config);
+  if (!config$1) process.exit(1);
 
   // cwd
   const cwd = process.cwd();
   console.log('qiao-project / prettier / cwd', cwd);
 
   // format
-  await formatFiles(cwd, config);
+  await formatFiles(cwd, config$1);
 };
-
-// get config
-function getConfig(configPath) {
-  try {
-    let eslintConfig;
-    if (configPath) {
-      eslintConfig = require(configPath);
-      console.log('qiao-project / prettier / config /', configPath);
-    } else {
-      eslintConfig = config;
-      console.log('qiao-project / prettier / config / default config');
-    }
-
-    console.log(eslintConfig);
-    return eslintConfig;
-  } catch (error) {
-    console.log('qiao-project / prettier / config /', error);
-  }
-}
 
 // format files
 async function formatFiles(cwd, config) {
@@ -502,7 +489,7 @@ async function formatFiles(cwd, config) {
     const res = await qiaoFile.lsdir(cwd);
     if (!res || !res.files || !res.files.length) {
       console.log('qiao-project / prettier / format / no files');
-      return;
+      process.exit(1);
     }
 
     // files
@@ -534,10 +521,63 @@ async function formatFiles(cwd, config) {
     console.log('qiao-project / prettier / end');
   } catch (error) {
     console.log('qiao-project / prettier / format /', error);
+    process.exit(1);
   }
 }
 
+// rollup
+
+/**
+ * rollupBuild
+ * @param {*} configPath
+ */
+const rollupBuild = async (configPath) => {
+  // start
+  console.log('qiao-project / rollup / start');
+
+  // config
+  const config = getConfig(configPath);
+  if (!config) process.exit(1);
+
+  // cwd
+  const cwd = process.cwd();
+  console.log('qiao-project / rollup / cwd', cwd);
+
+  // output
+  const output = config.output;
+  delete config.output;
+
+  // input
+  const inputOptions = config;
+  const outputOptionsList = Array.isArray(output) ? output : [output];
+
+  // go
+  let bundle;
+  let buildFailed = false;
+  try {
+    console.log(`qiao-project / rollup / input / ${inputOptions.input}`);
+    bundle = await rollup.rollup(inputOptions);
+    for (const outputOptions of outputOptionsList) {
+      console.log(`qiao-project / rollup / output / ${outputOptions.file}`);
+      await bundle.write(outputOptions);
+    }
+
+    console.log('qiao-project / rollup / end');
+  } catch (error) {
+    buildFailed = true;
+    console.log('qiao-project / rollup / error');
+    console.error(error);
+  }
+
+  // close
+  if (bundle) await bundle.close();
+
+  // exit
+  process.exit(buildFailed ? 1 : 0);
+};
+
 exports.downloadCounts = downloadCounts;
 exports.pkg = pkg;
+exports.rollupBuild = rollupBuild;
 exports.runEslint = runEslint;
 exports.runPrettier = runPrettier;

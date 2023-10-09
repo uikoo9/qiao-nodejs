@@ -6,6 +6,7 @@ import { lsdir, readFile, writeFile } from 'qiao-file';
 
 // config
 import { config as defaultConfig } from './prettier-config.js';
+import { getConfig } from '../util.js';
 
 // ignore
 import { isIgnore, getIgnores } from './prettier-ignore.js';
@@ -18,8 +19,8 @@ export const runPrettier = async (configPath) => {
   console.log('qiao-project / prettier / start');
 
   // config
-  const config = getConfig(configPath);
-  if (!config) return;
+  const config = getConfig(configPath, defaultConfig);
+  if (!config) process.exit(1);
 
   // cwd
   const cwd = process.cwd();
@@ -29,25 +30,6 @@ export const runPrettier = async (configPath) => {
   await formatFiles(cwd, config);
 };
 
-// get config
-function getConfig(configPath) {
-  try {
-    let eslintConfig;
-    if (configPath) {
-      eslintConfig = require(configPath);
-      console.log('qiao-project / prettier / config /', configPath);
-    } else {
-      eslintConfig = defaultConfig;
-      console.log('qiao-project / prettier / config / default config');
-    }
-
-    console.log(eslintConfig);
-    return eslintConfig;
-  } catch (error) {
-    console.log('qiao-project / prettier / config /', error);
-  }
-}
-
 // format files
 async function formatFiles(cwd, config) {
   try {
@@ -55,7 +37,7 @@ async function formatFiles(cwd, config) {
     const res = await lsdir(cwd);
     if (!res || !res.files || !res.files.length) {
       console.log('qiao-project / prettier / format / no files');
-      return;
+      process.exit(1);
     }
 
     // files
@@ -87,5 +69,6 @@ async function formatFiles(cwd, config) {
     console.log('qiao-project / prettier / end');
   } catch (error) {
     console.log('qiao-project / prettier / format /', error);
+    process.exit(1);
   }
 }
