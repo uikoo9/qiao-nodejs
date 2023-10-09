@@ -581,7 +581,7 @@ async function formatFiles(cwd, config) {
 // rollup
 const rollupPluginJson = json;
 
-Object.defineProperty(exports, 'rollupNodeResolve', {
+Object.defineProperty(exports, 'rollupPluginNodeResolve', {
   enumerable: true,
   get: function () {
     return pluginNodeResolve.nodeResolve;

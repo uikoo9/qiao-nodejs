@@ -1,6 +1,6 @@
 // rollup
 import json from '@rollup/plugin-json';
-export { nodeResolve as rollupNodeResolve } from '@rollup/plugin-node-resolve';
+export { nodeResolve as rollupPluginNodeResolve } from '@rollup/plugin-node-resolve';
 export const rollupPluginJson = json;
 export * from './rollup/rollup.js';
 

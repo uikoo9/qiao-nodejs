@@ -18,5 +18,7 @@ module.exports = {
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
     'rollup',
+    '@rollup/plugin-json',
+    '@rollup/plugin-node-resolve',
   ],
 };
