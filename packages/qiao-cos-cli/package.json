@@ -32,7 +32,7 @@
     "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
     "qiao-cli": "^4.0.0",
