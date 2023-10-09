@@ -82,6 +82,20 @@ const rollupBuild = async (configPath) => {
   const cwd = process.cwd();
   console.log('qiao-project / rollup / cwd', cwd);
 
+  // array
+  if (Array.isArray(config)) {
+    for (const configItem of config) {
+      const buildFailed = await build(configItem);
+      if (buildFailed) process.exit(1);
+    }
+  } else {
+    const buildFailed = await build(config);
+    if (buildFailed) process.exit(1);
+  }
+};
+
+// build
+async function build(config) {
   // output
   const output = config.output;
   delete config.output;
@@ -111,9 +125,9 @@ const rollupBuild = async (configPath) => {
   // close
   if (bundle) await bundle.close();
 
-  // exit
-  process.exit(buildFailed ? 1 : 0);
-};
+  // return
+  return buildFailed;
+}
 
 // qiao
 
