@@ -1,6 +1,8 @@
 'use strict';
 
+var copy = require('rollup-plugin-copy');
 var json = require('@rollup/plugin-json');
+var commonjs = require('@rollup/plugin-commonjs');
 var pluginNodeResolve = require('@rollup/plugin-node-resolve');
 var rollup = require('rollup');
 var qiaoConsole = require('qiao-console');
@@ -579,7 +581,9 @@ async function formatFiles(cwd, config) {
 }
 
 // rollup
+const rollupPluginCopy = copy;
 const rollupPluginJson = json;
+const rollupPluginCommonjs = commonjs;
 
 Object.defineProperty(exports, 'rollupPluginNodeResolve', {
   enumerable: true,
@@ -590,6 +594,8 @@ Object.defineProperty(exports, 'rollupPluginNodeResolve', {
 exports.downloadCounts = downloadCounts;
 exports.pkg = pkg;
 exports.rollupBuild = rollupBuild;
+exports.rollupPluginCommonjs = rollupPluginCommonjs;
+exports.rollupPluginCopy = rollupPluginCopy;
 exports.rollupPluginJson = rollupPluginJson;
 exports.runEslint = runEslint;
 exports.runPrettier = runPrettier;
