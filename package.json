@@ -15,8 +15,8 @@
     "cz": "qpro commitizen",
     "pb": "lerna publish",
     "graph": "nx graph",
-    "check": "ncu && lerna exec ncu --concurrency=1",
-    "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1",
+    "check": "ncu && lerna exec ncu --concurrency=1 --ignore=qiao-cli --ignore=qiao-npms",
+    "update": "ncu -u && lerna exec 'ncu -u' --concurrency=1 --ignore=qiao-cli --ignore=qiao-npms",
     "pkg": "qlerna pkg ./packages",
     "dpkg": "qlerna pkg ./packages dev"
   },
