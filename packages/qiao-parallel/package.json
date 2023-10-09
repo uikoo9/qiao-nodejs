@@ -1,6 +1,6 @@
 {
   "name": "qiao-parallel",
-  "version": "4.0.0",
+  "version": "4.1.1",
   "description": "Execute multiple tasks in parallel",
   "keywords": [
     "execute",
@@ -31,10 +31,10 @@
     "test-fork": "node __tests__/fork.js"
   },
   "devDependencies": {
-    "qiao-console": "^4.0.0"
+    "qiao-console": "^4.1.1"
   },
   "dependencies": {
-    "qiao-process": "^4.0.0"
+    "qiao-process": "^4.1.1"
   },
   "nx": {
     "namedInputs": {

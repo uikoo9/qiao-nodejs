@@ -1,6 +1,6 @@
 {
   "name": "qiao-file",
-  "version": "4.0.0",
+  "version": "4.1.1",
   "description": "nodejs file tool",
   "keywords": [
     "fs",
