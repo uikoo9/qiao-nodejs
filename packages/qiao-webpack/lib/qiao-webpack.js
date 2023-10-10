@@ -15,7 +15,7 @@ const webpackConfig = require('../config/webpack.js');
  */
 exports.analyzer = function (configPath, target) {
   const configJs = webpackConfig.build(configPath, target, true);
-  if (!configJs) return;
+  if (!configJs) process.exit(1);
 
   webpackCompiler(configJs);
 };
@@ -25,7 +25,7 @@ exports.analyzer = function (configPath, target) {
  */
 exports.build = function (configPath, target) {
   const configJs = webpackConfig.build(configPath, target);
-  if (!configJs) return;
+  if (!configJs) process.exit(1);
 
   webpackCompiler(configJs);
 };
@@ -36,7 +36,7 @@ exports.build = function (configPath, target) {
 exports.dev = function (configPath, target) {
   // config js
   const configJs = webpackConfig.dev(configPath, target);
-  if (!configJs) return;
+  if (!configJs) process.exit(1);
 
   // compiler
   const compiler = webpack(configJs);
@@ -53,8 +53,8 @@ exports.dev = function (configPath, target) {
 function webpackCompiler(configJs) {
   const compiler = webpack(configJs);
   compiler.run(function (err, stats) {
-    var hasError = logUtil.showErr(err, stats);
-    if (hasError) return;
+    const hasError = logUtil.showErr(err, stats);
+    if (hasError) process.exit(1);
 
     logUtil.log();
     logUtil.suc('build success!');
