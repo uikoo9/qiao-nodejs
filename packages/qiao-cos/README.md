@@ -26,6 +26,10 @@ npm i qiao-cos
 }
 ```
 
+## cli
+
+也支持cli使用，详见[qiao-cos-cli](https://www.npmjs.com/package/qiao-cos-cli)
+
 ## use
 
 使用

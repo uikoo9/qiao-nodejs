@@ -30,6 +30,10 @@ npm i -g qiao-cos-cli
 }
 ```
 
+## api
+
+也支持nodejs api使用，详见[qiao-cos](https://www.npmjs.com/package/qiao-cos)
+
 ## cli
 
 ```shell
