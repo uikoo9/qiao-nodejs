@@ -17,6 +17,10 @@ nodejs 下 zip 和 unzip 工具
 npm i qiao-zip
 ```
 
+## cli
+
+也支持cli使用，详见[qiao-zip-cli](https://www.npmjs.com/package/qiao-zip-cli)
+
 ## use
 
 使用

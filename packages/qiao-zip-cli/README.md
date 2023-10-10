@@ -17,6 +17,10 @@ npm i -D qiao-zip-cli
 npm i -g qiao-zip-cli
 ```
 
+## api
+
+也支持nodejs api使用，详见[qiao-zip](https://www.npmjs.com/package/qiao-zip)
+
 ## cli
 
 ### help
