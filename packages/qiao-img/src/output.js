@@ -1,8 +1,8 @@
 // sharp
 import sharp from 'sharp';
 
-// qiao
-import { path, mkdir } from 'qiao-file';
+// util
+import { ensureInputOutput } from './_util.js';
 
 // debug
 import Debug from 'debug';
@@ -15,24 +15,9 @@ const debug = Debug('qiao-img');
  * @returns
  */
 export const file = async (input, output, meta) => {
-  // log
-  console.log('qiao-img / file / input:', input);
-  console.log('qiao-img / file / output:', output);
-
-  // check
-  if (!input || !output) {
-    console.log('qiao-img / file / fail: need input and output');
-    return;
-  }
-
-  // dir
-  const dirname = path.dirname(output);
-  const res = await mkdir(dirname);
-  if (res) {
-    console.log('qiao-img / file / mkdir / success');
-  } else {
-    console.log('qiao-img / file / mkdir / fail');
-  }
+  // ensure
+  const ensure = await ensureInputOutput(input, output);
+  if (!ensure) return;
 
   try {
     let res;

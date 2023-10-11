@@ -6,3 +6,4 @@ export const sharp = Sharp;
 export * from './input.js';
 export * from './output.js';
 export * from './convert.js';
+export * from './resize.js';
