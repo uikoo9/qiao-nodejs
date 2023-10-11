@@ -217,3 +217,24 @@ const info = await convert(input, output, meta, convertType, convertOptions);
 // to jpg
 const info = await convert(input, output, null, 'jpeg', {});
 ```
+
+### resize
+
+图片缩放
+
+- input
+  - 类型: string|buffer
+  - 说明: 待解析图片地址或buffer
+- output
+  - 类型: string
+  - 说明: 输出的图片地址
+- options
+  - 类型: object
+  - 说明: resize选项
+- return
+  - 类型: object
+  - 说明: 文件信息
+
+```javascript
+const info = await resize(input, output, options);
+```
