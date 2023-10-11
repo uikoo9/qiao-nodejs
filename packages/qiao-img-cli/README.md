@@ -33,4 +33,7 @@ qimg -h
 
 # resize
 qimg resize src width height fit
+
+# convert
+qimg convert src format
 ```
