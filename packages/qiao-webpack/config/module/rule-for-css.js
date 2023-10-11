@@ -22,7 +22,7 @@ module.exports = function (isDev, cssIncludes) {
   ];
 
   // default css includes
-  const defaultCssIncludes = [/node_modules[\\/]@wangeditor/, /node_modules[\\/]prismjs/];
+  const defaultCssIncludes = [/node_modules[\\/]@wangeditor/, /node_modules[\\/]prismjs/, /node_modules[\\/]purecss/];
 
   // return
   return {
