@@ -15,6 +15,11 @@ npm i -D qiao-img-cli
 
 # global
 npm i -g qiao-img-cli
+
+# 由于依赖sharp，国内最好使用对应的源
+npm_config_sharp_binary_host="https://npmmirror.com/mirrors/sharp" \
+npm_config_sharp_libvips_binary_host="https://npmmirror.com/mirrors/sharp-libvips" \
+npm i -g qiao-img-cli
 ```
 
 ## api
@@ -36,4 +41,7 @@ qimg resize src width height fit
 
 # convert
 qimg convert src format
+
+# meta
+qimg meta src
 ```
