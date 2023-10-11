@@ -29,7 +29,7 @@ const checkSupportFormat = (fotmat) => {
 // img
 
 // namespace
-const namespace$1 = 'qiao-img-cli';
+const namespace$2 = 'qiao-img-cli';
 
 /**
  * resizeIt
@@ -41,35 +41,35 @@ const namespace$1 = 'qiao-img-cli';
 const resizeIt = async (src, width, height, fit) => {
   // method
   const methodName = 'resize';
-  console.log(`${namespace$1} / ${methodName} / src:`, src);
-  console.log(`${namespace$1} / ${methodName} / width:`, width);
-  console.log(`${namespace$1} / ${methodName} / height:`, height);
-  console.log(`${namespace$1} / ${methodName} / fit:`, fit);
+  console.log(`${namespace$2} / ${methodName} / src:`, src);
+  console.log(`${namespace$2} / ${methodName} / width:`, width);
+  console.log(`${namespace$2} / ${methodName} / height:`, height);
+  console.log(`${namespace$2} / ${methodName} / fit:`, fit);
 
   // const
   const srcs = src.split('.');
   const ext = srcs[srcs.length - 1].toLowerCase();
   const widthInt = parseInt(width);
   const heightInt = parseInt(height);
-  console.log(`${namespace$1} / ${methodName} / ext:`, ext);
+  console.log(`${namespace$2} / ${methodName} / ext:`, ext);
 
   // check
   if (!checkSupportFormat(ext)) {
-    console.log(`${namespace$1} / ${methodName} / error: unsupport format`);
+    console.log(`${namespace$2} / ${methodName} / error: unsupport format`);
     return;
   }
   if (isNaN(widthInt) && isNaN(heightInt)) {
-    console.log(`${namespace$1} / ${methodName} / error: need width or number`);
+    console.log(`${namespace$2} / ${methodName} / error: need width or number`);
     return;
   }
   if (!checkResizeFit(fit)) {
-    console.log(`${namespace$1} / ${methodName} / error: unsupport fit`);
+    console.log(`${namespace$2} / ${methodName} / error: unsupport fit`);
     return;
   }
 
   // output
   const output = `${src}_resize.${ext}`;
-  console.log(`${namespace$1} / ${methodName} / output:`, output);
+  console.log(`${namespace$2} / ${methodName} / output:`, output);
 
   // options
   const options = {
@@ -85,7 +85,7 @@ const resizeIt = async (src, width, height, fit) => {
 // img
 
 // namespace
-const namespace = 'qiao-img-cli';
+const namespace$1 = 'qiao-img-cli';
 
 /**
  * convertIt
@@ -101,27 +101,58 @@ const convertIt = async (src, format) => {
   const srcs = src.split('.');
   const ext = srcs[srcs.length - 1].toLowerCase();
   const outputFormat = format.toLowerCase();
+  console.log(`${namespace$1} / ${methodName} / src:`, src);
+  console.log(`${namespace$1} / ${methodName} / ext:`, ext);
+  console.log(`${namespace$1} / ${methodName} / format:`, outputFormat);
+
+  // check
+  if (!checkSupportFormat(ext)) {
+    console.log(`${namespace$1} / ${methodName} / error: unsupport input format`);
+    return;
+  }
+  if (!checkSupportFormat(outputFormat)) {
+    console.log(`${namespace$1} / ${methodName} / error: unsupport output format`);
+    return;
+  }
+
+  // output
+  const output = `${src}_convert.${outputFormat}`;
+  console.log(`${namespace$1} / ${methodName} / output:`, output);
+
+  // convert
+  return await qiaoImg.file(src, output);
+};
+
+// img
+
+// namespace
+const namespace = 'qiao-img-cli';
+
+/**
+ * metaIt
+ * @param {*} src
+ * @returns
+ */
+const metaIt = async (src) => {
+  // method
+  const methodName = 'meta';
+
+  // const
+  const srcs = src.split('.');
+  const ext = srcs[srcs.length - 1].toLowerCase();
   console.log(`${namespace} / ${methodName} / src:`, src);
   console.log(`${namespace} / ${methodName} / ext:`, ext);
-  console.log(`${namespace} / ${methodName} / format:`, outputFormat);
 
   // check
   if (!checkSupportFormat(ext)) {
     console.log(`${namespace} / ${methodName} / error: unsupport input format`);
     return;
   }
-  if (!checkSupportFormat(outputFormat)) {
-    console.log(`${namespace} / ${methodName} / error: unsupport output format`);
-    return;
-  }
 
-  // output
-  const output = `${src}_convert.${outputFormat}`;
-  console.log(`${namespace} / ${methodName} / output:`, output);
-
-  // convert
-  return await qiaoImg.file(src, output);
+  // meta
+  return await qiaoImg.meta(src);
 };
 
 exports.convertIt = convertIt;
+exports.metaIt = metaIt;
 exports.resizeIt = resizeIt;
