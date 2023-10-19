@@ -10,6 +10,9 @@ const ruleForSass = require('./rule-for-sass.js');
 // rule for img
 const ruleForImg = require('./rule-for-img.js');
 
+// rule for js
+const ruleForJs = require('./rule-for-js.js');
+
 // rule for react
 const ruleForReact = require('./rule-for-react.js');
 
@@ -29,6 +32,7 @@ module.exports = function (isDev, cssIncludes, postCssConfig) {
       ruleForLess(isDev),
       ruleForSass(isDev, postCssConfig),
       ruleForReact(isDev),
+      ruleForJs,
       ruleForImg,
       ruleForEjs,
     ],
