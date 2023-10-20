@@ -19,7 +19,7 @@ module.exports = {
               safari: '11.1',
             },
             useBuiltIns: 'usage',
-            corejs: '3.6.5',
+            corejs: '3.33.0',
           },
         ],
       ],
