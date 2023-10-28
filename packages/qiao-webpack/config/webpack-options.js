@@ -21,7 +21,7 @@ module.exports = function (isDev, qiaoWebpack, isAnalyzer) {
   // options
   const options = {
     mode: isDev ? 'development' : 'production',
-    module: webpack_module(isDev, qiaoWebpack.cssIncludes, qiaoWebpack.postCssConfig),
+    module: webpack_module(isDev, qiaoWebpack),
     plugins: webpack_plugins(isDev, qiaoWebpack.plugins, isAnalyzer),
     performance: qiaoWebpack.performance || webpack_performance,
     optimization: webpack_optimization(isDev, qiaoWebpack.cacheGroups),

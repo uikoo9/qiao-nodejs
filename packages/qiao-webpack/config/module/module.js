@@ -22,19 +22,24 @@ const ruleForEjs = require('./rule-for-ejs.js');
 /**
  * module
  * @param {*} isDev
- * @param {*} cssIncludes
- * @param {*} postCssConfig
+ * @param {*} options
+ * @returns
  */
-module.exports = function (isDev, cssIncludes, postCssConfig) {
+module.exports = function (isDev, options) {
+  const rules = [
+    ruleForCss(isDev, options.cssIncludes),
+    ruleForLess(isDev),
+    ruleForSass(isDev, options.postCssConfig),
+    ruleForReact(isDev),
+    ruleForImg,
+    ruleForEjs,
+  ];
+
+  // corejs
+  if (options.corejs) rules.push(ruleForJs);
+
+  // return
   return {
-    rules: [
-      ruleForCss(isDev, cssIncludes),
-      ruleForLess(isDev),
-      ruleForSass(isDev, postCssConfig),
-      ruleForReact(isDev),
-      ruleForJs,
-      ruleForImg,
-      ruleForEjs,
-    ],
+    rules: rules,
   };
 };
