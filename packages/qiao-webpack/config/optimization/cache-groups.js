@@ -2,12 +2,21 @@
  * default cache groups
  */
 module.exports = {
+  // core-js
+  corejs: {
+    test: /[\\/]node_modules[\\/]core-js[\\/]/,
+    name: 'corejs',
+    chunks: 'all',
+    priority: 0,
+    reuseExistingChunk: true,
+  },
+
   // react
   react: {
     test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/,
     name: 'react',
     chunks: 'all',
-    priority: 0,
+    priority: -1,
     reuseExistingChunk: true,
   },
 
@@ -16,7 +25,7 @@ module.exports = {
     test: /[\\/]node_modules[\\/]axios[\\/]/,
     name: 'axios',
     chunks: 'all',
-    priority: -1,
+    priority: -2,
     reuseExistingChunk: true,
   },
 
@@ -25,7 +34,7 @@ module.exports = {
     test: /[\\/]node_modules[\\/]qiao.cookie.js|qiao-json|qiao-ajax|qiao-service|qiao-ui[\\/]/,
     name: 'qiao-ui',
     chunks: 'all',
-    priority: -21,
+    priority: -3,
     reuseExistingChunk: true,
   },
 
@@ -49,6 +58,13 @@ module.exports = {
     name: 'bootstrap',
     chunks: 'all',
     priority: -33,
+    reuseExistingChunk: true,
+  },
+  mantine: {
+    test: /[\\/]node_modules[\\/]@mantine[\\/]/,
+    name: 'mantine',
+    chunks: 'all',
+    priority: -34,
     reuseExistingChunk: true,
   },
 
@@ -75,9 +91,25 @@ module.exports = {
     reuseExistingChunk: true,
   },
 
+  // others
+  alioss: {
+    test: /[\\/]node_modules[\\/]ali-oss[\\/]/,
+    name: 'alioss',
+    chunks: 'all',
+    priority: -51,
+    reuseExistingChunk: true,
+  },
+  cryptojs: {
+    test: /[\\/]node_modules[\\/]crypto-js[\\/]/,
+    name: 'cryptojs',
+    chunks: 'all',
+    priority: -52,
+    reuseExistingChunk: true,
+  },
+
   // default
   default: {
-    priority: -51,
+    priority: -61,
     reuseExistingChunk: true,
   },
 };
