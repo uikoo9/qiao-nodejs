@@ -1,6 +1,6 @@
 {
   "name": "qiao-cos-cli",
-  "version": "4.1.7",
+  "version": "4.2.5",
   "description": "tencent cos upload cli tool",
   "keywords": [
     "tencent",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "qiao-cli": "^4.1.1",
-    "qiao-cos": "^4.1.7"
+    "qiao-cos": "^4.2.5"
   },
   "nx": {
     "namedInputs": {
