@@ -1,8 +1,11 @@
 # project
+
+.nx
 node_modules
 package-lock.json
 
 # packages
-packages/qiao-file/__tests__/1
-packages/qiao-zip/__tests__
+
+packages/qiao-file/**tests**/1
+packages/qiao-zip/**tests**
 packages/qiao-downloader/1

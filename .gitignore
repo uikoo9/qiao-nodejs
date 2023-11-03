@@ -177,6 +177,7 @@ dist
 ## -- nodejs --
 
 ## -- qiao-nodejs --
+.nx
 packages/**/1
 packages/**/__tests__/1
 packages/**/__tests__/config.json
