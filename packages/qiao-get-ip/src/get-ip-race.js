@@ -2,7 +2,12 @@
 import { getIPByWebsite } from './get-ip-by-website.js';
 
 // websites
-const websites = ['https://icanhazip.com/', 'https://ifconfig.me/ip', 'https://checkip.amazonaws.com/'];
+const websites = [
+  'https://api.ipify.org/',
+  'https://icanhazip.com/',
+  'https://ifconfig.me/ip',
+  'https://checkip.amazonaws.com/',
+];
 
 // default timeout
 const defaultTimeout = 500;
