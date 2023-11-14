@@ -1,6 +1,6 @@
 {
   "name": "qiao-project",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "frontend monorepo project tool",
   "keywords": [
     "frontend",
@@ -41,11 +41,11 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
-    "qiao-cli": "^4.1.1",
-    "qiao-console": "^4.1.1",
-    "qiao-file": "^4.1.1",
-    "qiao-npms": "^4.1.1",
-    "qiao-parallel": "^4.1.1",
+    "qiao-cli": "^4.2.6",
+    "qiao-console": "^4.2.6",
+    "qiao-file": "^4.2.6",
+    "qiao-npms": "^4.2.6",
+    "qiao-parallel": "^4.2.6",
     "rollup": "^4.2.0",
     "rollup-plugin-copy": "^3.5.0"
   },
