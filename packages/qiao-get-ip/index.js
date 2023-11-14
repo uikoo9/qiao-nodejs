@@ -54,6 +54,9 @@ ipRegex.v6 = (options) =>
  * @returns
  */
 const getIPByWebsite = (url, timeout) => {
+  const r = Date.now();
+  const label = `qiao-get-ip / ${r} / get ip from ${url}`;
+  console.time(label);
   return new Promise((resolve, reject) => {
     qiaoAjax
       .get(url, {
@@ -73,6 +76,7 @@ const getIPByWebsite = (url, timeout) => {
         if (!isIp) return;
 
         // return
+        console.timeEnd(label);
         return resolve(ip);
       })
       .catch((e) => {
@@ -87,12 +91,14 @@ const getIPByWebsite = (url, timeout) => {
 const websites = [
   'https://api.ipify.org/',
   'https://icanhazip.com/',
+  'https://ipinfo.io/ip',
   'https://ifconfig.me/ip',
   'https://checkip.amazonaws.com/',
+  'http://txt.go.sohu.com/ip/soip',
 ];
 
 // default timeout
-const defaultTimeout = 500;
+const defaultTimeout = 300;
 
 /**
  * get ip race

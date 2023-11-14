@@ -11,6 +11,9 @@ import i from 'ip-regex';
  * @returns
  */
 export const getIPByWebsite = (url, timeout) => {
+  const r = Date.now();
+  const label = `qiao-get-ip / ${r} / get ip from ${url}`;
+  console.time(label);
   return new Promise((resolve, reject) => {
     get(url, {
       timeout: timeout,
@@ -29,6 +32,7 @@ export const getIPByWebsite = (url, timeout) => {
         if (!isIp) return;
 
         // return
+        console.timeEnd(label);
         return resolve(ip);
       })
       .catch((e) => {

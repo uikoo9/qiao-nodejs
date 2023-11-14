@@ -5,12 +5,14 @@ import { getIPByWebsite } from './get-ip-by-website.js';
 const websites = [
   'https://api.ipify.org/',
   'https://icanhazip.com/',
+  'https://ipinfo.io/ip',
   'https://ifconfig.me/ip',
   'https://checkip.amazonaws.com/',
+  'http://txt.go.sohu.com/ip/soip',
 ];
 
 // default timeout
-const defaultTimeout = 500;
+const defaultTimeout = 300;
 
 /**
  * get ip race

@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js",
-    "test": "ava __tests__/test.js"
+    "test": "ava"
   },
   "dependencies": {
     "ip-regex": "^5.0.0",

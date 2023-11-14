@@ -5,7 +5,7 @@ const test = require('ava');
 const { JSDOM } = require('jsdom');
 
 // ip
-const { getIP } = require('../index.js');
+const { getIP } = require('./index.js');
 
 // nodejs
 test.serial('get ip on nodejs', async (t) => {

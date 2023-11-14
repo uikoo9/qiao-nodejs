@@ -29,7 +29,7 @@ import { getIP } from 'qiao-get-ip';
 
 - timeout
   - 类型: number
-  - 说明: 超时时间，单位 ms，默认为 500ms
+  - 说明: 超时时间，单位 ms，默认为 300ms
 - return
   - 类型: string
   - 说明: ip
@@ -40,9 +40,11 @@ const ip = await getIP(timeout);
 
 ## fast
 
-请求以下几个网站，返回最快的响应，默认超时时间为 500ms
+请求以下几个网站，返回最快的响应，默认超时时间为 300ms
 
 - [https://api.ipify.org/](https://api.ipify.org/)
 - [https://icanhazip.com/](https://icanhazip.com/)
+- [https://ipinfo.io/ip](https://ipinfo.io/ip)
 - [https://ifconfig.me/ip](https://ifconfig.me/ip)
 - [https://checkip.amazonaws.com/](https://checkip.amazonaws.com/)
+- [http://txt.go.sohu.com/ip/soip](http://txt.go.sohu.com/ip/soip)
