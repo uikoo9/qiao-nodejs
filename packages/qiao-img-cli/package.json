@@ -1,6 +1,6 @@
 {
   "name": "qiao-img-cli",
-  "version": "4.2.6",
+  "version": "4.3.0",
   "description": "nodejs img cli tool",
   "keywords": [
     "nodejs",
@@ -35,8 +35,8 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "qiao-cli": "^4.2.6",
-    "qiao-img": "^4.2.6"
+    "qiao-cli": "^4.3.0",
+    "qiao-img": "^4.3.0"
   },
   "nx": {
     "namedInputs": {
