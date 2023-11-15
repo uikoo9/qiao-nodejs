@@ -23,10 +23,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uikoo9/qiao-z.git"
+    "url": "git+https://github.com/uikoo9/qiao-nodejs.git"
   },
   "bugs": {
-    "url": "https://github.com/uikoo9/qiao-z/issues"
+    "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js",
