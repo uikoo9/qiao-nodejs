@@ -9,7 +9,8 @@ export const rollupPluginCommonjs = commonjs;
 export * from './rollup/rollup.js';
 
 // other
+export * from './eslint/eslint.js';
 export * from './lerna/lerna-dc.js';
 export * from './lerna/lerna-pkg.js';
-export * from './eslint/eslint.js';
+export * from './npm/npm.js';
 export * from './prettier/prettier.js';

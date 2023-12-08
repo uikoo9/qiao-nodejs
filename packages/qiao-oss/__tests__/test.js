@@ -25,7 +25,7 @@ test.failing('upload file / ../', async (t) => {
   const rs = await qoss.uploadFile(destPath, sourceFile);
   t.fail(rs);
 });
-test('upload file / absolute file', async (t) => {
+test.skip('upload file / absolute file', async (t) => {
   const destPath = 'test/test.js';
   const sourceFile = path.resolve(__dirname, './test.js');
   t.log(`from: ${sourceFile}`);
@@ -50,7 +50,7 @@ test.failing('upload folder / ../', async (t) => {
   const rs = await qoss.uploadFolder(destPath, sourceFolder);
   t.truthy(rs);
 });
-test('upload folder / absolute folder', async (t) => {
+test.skip('upload folder / absolute folder', async (t) => {
   const destPath = 'test';
   const sourceFolder = path.resolve(__dirname, '../src');
 

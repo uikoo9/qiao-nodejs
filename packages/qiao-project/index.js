@@ -5,12 +5,12 @@ var json = require('@rollup/plugin-json');
 var commonjs = require('@rollup/plugin-commonjs');
 var pluginNodeResolve = require('@rollup/plugin-node-resolve');
 var rollup = require('rollup');
+var eslint = require('eslint');
 var qiaoConsole = require('qiao-console');
 var qiaoFile = require('qiao-file');
 var qiaoParallel = require('qiao-parallel');
 var qiaoNpms = require('qiao-npms');
 var qiaoCli = require('qiao-cli');
-var eslint = require('eslint');
 var prettier = require('prettier');
 
 function _interopNamespaceDefault(e) {
@@ -128,6 +128,84 @@ async function build(config) {
   // return
   return buildFailed;
 }
+
+/**
+ * eslint config
+ */
+const config$2 = {
+  env: {
+    browser: true,
+    node: true,
+    commonjs: true,
+    es2022: true,
+    jest: true,
+  },
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'prettier'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  rules: {
+    indent: ['error', 2, { SwitchCase: 1 }],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+
+    'react/display-name': 'off',
+    'react/prop-types': 'off',
+  },
+};
+
+// eslint
+
+/**
+ * run eslint
+ */
+const runEslint = async (configPath) => {
+  // start
+  console.log('qiao-project / eslint / start');
+
+  // config
+  const config = getConfig(configPath, config$2);
+  if (!config) process.exit(1);
+
+  // cwd
+  const cwd = process.cwd();
+  console.log('qiao-project / eslint / cwd', cwd);
+
+  // extensions
+  const extensions = ['.js', '.ts', '.jsx'];
+  console.log('qiao-project / eslint / extensions /', extensions);
+
+  // eslint
+  const eslint$1 = new eslint.ESLint({
+    useEslintrc: false,
+    overrideConfig: config,
+    extensions: extensions,
+    errorOnUnmatchedPattern: false,
+    fix: true,
+  });
+
+  // files
+  const results = await eslint$1.lintFiles([cwd]);
+  console.log(`qiao-project / eslint / ${results.length} files`);
+
+  // res
+  const formatter = await eslint$1.loadFormatter('stylish');
+  const resultText = formatter.format(results);
+
+  // end
+  console.log('qiao-project / eslint / end');
+  if (resultText) {
+    console.log(resultText);
+    process.exit(1);
+  }
+};
 
 // qiao
 
@@ -346,45 +424,105 @@ const pkg = async (folderName, isDev) => {
 };
 
 /**
- * eslint config
+ * npm config
  */
-const config$1 = {
-  env: {
-    browser: true,
-    node: true,
-    commonjs: true,
-    es2022: true,
-    jest: true,
-  },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'prettier'],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  settings: {
-    react: {
-      version: 'detect',
+const config$1 = [
+  {
+    name: 'cookie',
+    notRecommended: ['js-cookie'],
+    recommended: {
+      npm: 'qiao.cookie.js',
+      doc: 'https://code.insistime.com/qiao.cookie.js#/',
     },
   },
-  rules: {
-    indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
+];
 
-    'react/display-name': 'off',
-    'react/prop-types': 'off',
-  },
-};
-
-// eslint
+// file
 
 /**
- * run eslint
+ * get npm pkgs
+ * @param {*} cwd
+ * @returns
  */
-const runEslint = async (configPath) => {
+const getNPMPkgs = async (cwd) => {
+  try {
+    const allPkgPaths = [];
+
+    const rootPkg = qiaoFile.path.resolve(cwd, './package.json');
+    allPkgPaths.push(rootPkg);
+
+    const packagesPath = qiaoFile.path.resolve(cwd, './packages');
+    const packages = await qiaoFile.lsdir(packagesPath);
+    if (packages && packages.files && packages.files.length) {
+      for (let i = 0; i < packages.files.length; i++) {
+        const pkgPath = packages.files[i];
+        if (pkgPath.name === 'package.json' && pkgPath.path.indexOf('node_modules') === -1)
+          allPkgPaths.push(pkgPath.path);
+      }
+    }
+
+    return allPkgPaths;
+  } catch (error) {
+    console.log('qiao-project / npm / error', error);
+    process.exit(1);
+  }
+};
+
+// file
+
+/**
+ * check pkgs
+ * @param {*} pkgs
+ * @param {*} config
+ */
+const checkPkgs = async (pkgs, config) => {
+  if (!pkgs || !pkgs.length || !config) {
+    console.log('qiao-project / npm / error / empty pkg or config');
+    process.exit(1);
+  }
+
+  const dependencies = [];
+  for (let i = 0; i < pkgs.length; i++) {
+    const pkg = pkgs[i];
+    console.log('qiao-project / npm / parse / ', pkg);
+
+    try {
+      const pkgStr = await qiaoFile.readFile(pkg);
+      const pkgJson = JSON.parse(pkgStr);
+      if (pkgJson) {
+        if (pkgJson.dependencies) dependencies.push(...Object.keys(pkgJson.dependencies));
+        if (pkgJson.devDependencies) dependencies.push(...Object.keys(pkgJson.devDependencies));
+      }
+    } catch (error) {
+      console.log('qiao-project / npm / error / parse json error');
+      process.exit(1);
+    }
+  }
+
+  // check
+  for (let i = 0; i < config.length; i++) {
+    const configItem = config[i];
+    console.log('qiao-project / check / ', configItem.name);
+
+    for (let j = 0; j < configItem.notRecommended.length; j++) {
+      const notRecommended = configItem.notRecommended[j];
+      if (dependencies.includes(notRecommended)) {
+        console.log(
+          `qiao-project / not recommended pkg / ${notRecommended} / please use ${configItem.recommended.npm}: ${configItem.recommended.doc}`,
+        );
+      }
+    }
+  }
+};
+
+// config
+
+/**
+ * check npm packages
+ */
+const checkNPMPackage = async (configPath) => {
   // start
-  console.log('qiao-project / eslint / start');
+  console.log('qiao-project / npm / start');
 
   // config
   const config = getConfig(configPath, config$1);
@@ -392,35 +530,11 @@ const runEslint = async (configPath) => {
 
   // cwd
   const cwd = process.cwd();
-  console.log('qiao-project / eslint / cwd', cwd);
+  console.log('qiao-project / npm / cwd', cwd);
 
-  // extensions
-  const extensions = ['.js', '.ts', '.jsx'];
-  console.log('qiao-project / eslint / extensions /', extensions);
-
-  // eslint
-  const eslint$1 = new eslint.ESLint({
-    useEslintrc: false,
-    overrideConfig: config,
-    extensions: extensions,
-    errorOnUnmatchedPattern: false,
-    fix: true,
-  });
-
-  // files
-  const results = await eslint$1.lintFiles([cwd]);
-  console.log(`qiao-project / eslint / ${results.length} files`);
-
-  // res
-  const formatter = await eslint$1.loadFormatter('stylish');
-  const resultText = formatter.format(results);
-
-  // end
-  console.log('qiao-project / eslint / end');
-  if (resultText) {
-    console.log(resultText);
-    process.exit(1);
-  }
+  // pkgs
+  const pkgs = await getNPMPkgs(cwd);
+  await checkPkgs(pkgs, config);
 };
 
 /**
@@ -605,6 +719,7 @@ Object.defineProperty(exports, 'rollupPluginNodeResolve', {
     return pluginNodeResolve.nodeResolve;
   },
 });
+exports.checkNPMPackage = checkNPMPackage;
 exports.downloadCounts = downloadCounts;
 exports.pkg = pkg;
 exports.rollupBuild = rollupBuild;
