@@ -13,7 +13,7 @@ module.exports = {
 
   // react
   react: {
-    test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/,
+    test: /[\\/]node_modules[\\/]react|react-dom|react-router|react-router-dom|@remix-run[\\/]router[\\/]/,
     name: 'react',
     chunks: 'all',
     priority: -1,
@@ -61,10 +61,24 @@ module.exports = {
     reuseExistingChunk: true,
   },
   mantine: {
-    test: /[\\/]node_modules[\\/]@mantine[\\/]/,
+    test: /[\\/]node_modules[\\/]@mantine|@floating-ui|embla-carousel|embla-carousel-react[\\/]/,
     name: 'mantine',
     chunks: 'all',
     priority: -34,
+    reuseExistingChunk: true,
+  },
+  lottie: {
+    test: /[\\/]node_modules[\\/]lottie-react|lottie-web[\\/]/,
+    name: 'lottie',
+    chunks: 'all',
+    priority: -35,
+    reuseExistingChunk: true,
+  },
+  konva: {
+    test: /[\\/]node_modules[\\/]konva|react-konva|react-konva-utils[\\/]/,
+    name: 'konva',
+    chunks: 'all',
+    priority: -36,
     reuseExistingChunk: true,
   },
 
@@ -92,18 +106,25 @@ module.exports = {
   },
 
   // others
-  alioss: {
-    test: /[\\/]node_modules[\\/]ali-oss[\\/]/,
-    name: 'alioss',
-    chunks: 'all',
-    priority: -51,
-    reuseExistingChunk: true,
-  },
   cryptojs: {
     test: /[\\/]node_modules[\\/]crypto-js[\\/]/,
     name: 'cryptojs',
     chunks: 'all',
+    priority: -51,
+    reuseExistingChunk: true,
+  },
+  alioss: {
+    test: /[\\/]node_modules[\\/]ali-oss[\\/]/,
+    name: 'alioss',
+    chunks: 'all',
     priority: -52,
+    reuseExistingChunk: true,
+  },
+  aws: {
+    test: /[\\/]node_modules[\\/]@aws-crypto|@aws-sdk|@smithy|fast-xml-parser[\\/]/,
+    name: 'aws',
+    chunks: 'all',
+    priority: -53,
     reuseExistingChunk: true,
   },
 
