@@ -29,6 +29,6 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "axios": "1.6.2"
+    "axios": "1.6.5"
   }
 }
