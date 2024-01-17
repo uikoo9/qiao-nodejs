@@ -40,13 +40,13 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.3",
     "qiao-cli": "^4.3.0",
     "qiao-console": "^4.3.0",
     "qiao-file": "^4.3.5",
     "qiao-npms": "^4.3.5",
     "qiao-parallel": "^4.3.0",
-    "rollup": "^4.9.4",
+    "rollup": "^4.9.5",
     "rollup-plugin-copy": "^3.5.0"
   },
   "nx": {
