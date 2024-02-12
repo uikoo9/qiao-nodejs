@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-get-ip.svg?style=flat-square)](https://www.npmjs.org/package/qiao-get-ip)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-get-ip.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-get-ip)
 
-浏览器和 node.js 下获取公网 ip
+Get public network ip under browser and node.js
 
 ## install
 
@@ -25,22 +25,29 @@ import { getIP } from 'qiao-get-ip';
 
 ### getIP
 
-获取公网 ip
+get public network ip
 
 - timeout
-  - 类型: number
-  - 说明: 超时时间，单位 ms，默认为 300ms
+  - type: number
+  - desc: timeout, ms, default: 300ms
+- debug
+  - type: boolean
+  - desc: whether to display debug logs, default: false
 - return
-  - 类型: string
-  - 说明: ip
+  - type: string
+  - desc: ip
 
 ```javascript
+// ip
 const ip = await getIP(timeout);
+
+// ip debug
+const ip = await getIP(timeout, true);
 ```
 
 ## fast
 
-请求以下几个网站，返回最快的响应，默认超时时间为 300ms
+Request the following websites and return the fastest response. The default timeout is 200ms
 
 - [https://api.ipify.org/](https://api.ipify.org/)
 - [https://icanhazip.com/](https://icanhazip.com/)

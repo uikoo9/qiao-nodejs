@@ -8,12 +8,15 @@ import i from 'ip-regex';
  * get ip by website
  * @param {*} url
  * @param {*} timeout
+ * @param {*} debug
  * @returns
  */
-export const getIPByWebsite = (url, timeout) => {
-  const r = Date.now();
-  const label = `qiao-get-ip / ${r} / get ip from ${url}`;
-  console.time(label);
+export const getIPByWebsite = (url, timeout, debug) => {
+  // debug
+  const label = `qiao-get-ip / ${Date.now()} / get ip from ${url}`;
+  if (debug) console.time(label);
+
+  // go
   return new Promise((resolve, reject) => {
     get(url, {
       timeout: timeout,
@@ -31,12 +34,14 @@ export const getIPByWebsite = (url, timeout) => {
         const isIp = i.v4({ exact: true }).test(ip);
         if (!isIp) return;
 
+        // debug
+        if (debug) console.timeEnd(label);
+
         // return
-        console.timeEnd(label);
         return resolve(ip);
       })
       .catch((e) => {
-        reject(e);
+        return reject(e);
       });
   });
 };

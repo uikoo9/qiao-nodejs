@@ -51,12 +51,15 @@ ipRegex.v6 = (options) =>
  * get ip by website
  * @param {*} url
  * @param {*} timeout
+ * @param {*} debug
  * @returns
  */
-const getIPByWebsite = (url, timeout) => {
-  const r = Date.now();
-  const label = `qiao-get-ip / ${r} / get ip from ${url}`;
-  console.time(label);
+const getIPByWebsite = (url, timeout, debug) => {
+  // debug
+  const label = `qiao-get-ip / ${Date.now()} / get ip from ${url}`;
+  if (debug) console.time(label);
+
+  // go
   return new Promise((resolve, reject) => {
     qiaoAjax
       .get(url, {
@@ -75,12 +78,14 @@ const getIPByWebsite = (url, timeout) => {
         const isIp = ipRegex.v4({ exact: true }).test(ip);
         if (!isIp) return;
 
+        // debug
+        if (debug) console.timeEnd(label);
+
         // return
-        console.timeEnd(label);
         return resolve(ip);
       })
       .catch((e) => {
-        reject(e);
+        return reject(e);
       });
   });
 };
@@ -103,9 +108,10 @@ const defaultTimeout = 300;
 /**
  * get ip race
  * @param {*} timeout
+ * @param {*} debug
  * @returns
  */
-const getIPRace = (timeout) => {
+const getIPRace = (timeout, debug) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
@@ -113,7 +119,7 @@ const getIPRace = (timeout) => {
     const errors = [];
 
     websites.forEach((url) => {
-      getIPByWebsite(url, timeout)
+      getIPByWebsite(url, timeout, debug)
         .then((res) => {
           resolve(res);
         })
@@ -134,10 +140,11 @@ const getIPRace = (timeout) => {
 /**
  * get ip
  * @param {*} timeout
+ * @param {*} debug
  * @returns
  */
-const getIP = (timeout) => {
-  return getIPRace(timeout);
+const getIP = (timeout, debug) => {
+  return getIPRace(timeout, debug);
 };
 
 exports.getIP = getIP;

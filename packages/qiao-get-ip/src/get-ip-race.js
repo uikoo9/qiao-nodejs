@@ -17,9 +17,10 @@ const defaultTimeout = 300;
 /**
  * get ip race
  * @param {*} timeout
+ * @param {*} debug
  * @returns
  */
-export const getIPRace = (timeout) => {
+export const getIPRace = (timeout, debug) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
@@ -27,7 +28,7 @@ export const getIPRace = (timeout) => {
     const errors = [];
 
     websites.forEach((url) => {
-      getIPByWebsite(url, timeout)
+      getIPByWebsite(url, timeout, debug)
         .then((res) => {
           resolve(res);
         })
