@@ -4,6 +4,7 @@
 const cli = require('qiao-cli');
 
 // cmds
+require('./qpro-init.js');
 require('./qpro-commitizen.js');
 require('./qpro-dc.js');
 require('./qpro-eslint.js');

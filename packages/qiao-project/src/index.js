@@ -8,6 +8,9 @@ export const rollupPluginJson = json;
 export const rollupPluginCommonjs = commonjs;
 export * from './rollup/rollup.js';
 
+// init
+export * from './init/init.js';
+
 // other
 export * from './eslint/eslint.js';
 export * from './lerna/lerna-dc.js';

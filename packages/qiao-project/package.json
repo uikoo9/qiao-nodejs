@@ -46,6 +46,7 @@
     "qiao-file": "^4.3.5",
     "qiao-npms": "^4.3.5",
     "qiao-parallel": "^4.3.0",
+    "qiao-zip": "^4.3.5",
     "rollup": "^4.9.5",
     "rollup-plugin-copy": "^3.5.0"
   },

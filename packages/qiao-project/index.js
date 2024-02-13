@@ -5,9 +5,10 @@ var json = require('@rollup/plugin-json');
 var commonjs = require('@rollup/plugin-commonjs');
 var pluginNodeResolve = require('@rollup/plugin-node-resolve');
 var rollup = require('rollup');
+var qiaoFile = require('qiao-file');
+var qiaoZip = require('qiao-zip');
 var eslint = require('eslint');
 var qiaoConsole = require('qiao-console');
-var qiaoFile = require('qiao-file');
 var qiaoParallel = require('qiao-parallel');
 var qiaoNpms = require('qiao-npms');
 var qiaoCli = require('qiao-cli');
@@ -128,6 +129,30 @@ async function build(config) {
   // return
   return buildFailed;
 }
+
+// fs
+
+/**
+ * init
+ * @param {*} root
+ */
+const init = async (root) => {
+  // start
+  console.log('qiao-project / init / start');
+
+  // cwd & dirname
+  const cwd = process.cwd();
+  console.log('qiao-project / init / cwd', cwd);
+  console.log('qiao-project / init / __dirname', __dirname);
+
+  // unzip
+  const zipFile = qiaoFile.path.resolve(__dirname, './src/init/project.zip');
+  const res = await qiaoZip.unzip(zipFile, root);
+  console.log('qiao-project / init / res', res ? 'success' : 'fail');
+
+  // res
+  if (!res) process.exit(1);
+};
 
 /**
  * eslint config
@@ -721,6 +746,7 @@ Object.defineProperty(exports, 'rollupPluginNodeResolve', {
 });
 exports.checkNPMPackage = checkNPMPackage;
 exports.downloadCounts = downloadCounts;
+exports.init = init;
 exports.pkg = pkg;
 exports.rollupBuild = rollupBuild;
 exports.rollupPluginCommonjs = rollupPluginCommonjs;
