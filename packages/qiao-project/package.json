@@ -1,6 +1,6 @@
 {
   "name": "qiao-project",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "frontend monorepo project tool",
   "keywords": [
     "frontend",
@@ -45,7 +45,7 @@
     "qiao-cli": "^4.3.0",
     "qiao-console": "^4.3.0",
     "qiao-file": "^4.3.5",
-    "qiao-npms": "^4.3.5",
+    "qiao-npms": "^4.4.1",
     "qiao-parallel": "^4.3.0",
     "qiao-zip": "^4.3.5",
     "rollup": "^4.10.0",
