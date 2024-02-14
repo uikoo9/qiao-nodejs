@@ -1,28 +1,14 @@
-// path
-const path = require('path');
-
 // qiao
 const cli = require('qiao-cli');
 const qpro = require('../index.js');
 
 /**
  * ncu
- * @param {*} configPath
+ * @param {*} forceUpdate
  */
-const ncu = async (configPath) => {
+const ncu = async (forceUpdate) => {
   try {
-    // final path
-    let finalPath;
-
-    // config path
-    if (configPath) {
-      const cwd = process.cwd();
-      if (configPath.startsWith('./') || configPath.startsWith('../')) configPath = path.resolve(cwd, configPath);
-      finalPath = configPath;
-    }
-
-    // eslint
-    await qpro.ncuRun(finalPath);
+    await qpro.ncuRun(forceUpdate);
   } catch (e) {
     console.log('qiao-project / ncu / error');
     console.log(e);
@@ -30,4 +16,4 @@ const ncu = async (configPath) => {
 };
 
 // cmd for ncu
-cli.cmd.command('ncu [configPath]').description('ncu').action(ncu);
+cli.cmd.command('ncu [forceUpdate]').description('ncu').action(ncu);

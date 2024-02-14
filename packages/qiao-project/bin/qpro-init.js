@@ -21,7 +21,7 @@ const init = async (root) => {
       finalPath = root;
     }
 
-    // eslint
+    // init
     await qpro.init(finalPath);
   } catch (e) {
     console.log('qiao-project / init / error');

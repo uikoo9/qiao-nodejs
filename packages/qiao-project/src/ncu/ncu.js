@@ -6,25 +6,22 @@ import ncu from 'npm-check-updates';
 
 /**
  * ncuRun
- * @param {*} configPath
+ * @param {*} forceUpdate
  */
-export const ncuRun = async (configPath) => {
+export const ncuRun = async (forceUpdate) => {
   // start
-  console.log('qiao-project / ncuRun / start', configPath);
-
-  // cwd & dirname
-  const cwd = process.cwd();
-  console.log('qiao-project / ncuRun / cwd', cwd);
+  console.log('qiao-project / ncuRun / forceUpdate', !!forceUpdate);
 
   // pkg file
+  const cwd = process.cwd();
   const packageFile = path.resolve(cwd, './package.json');
   console.log('qiao-project / ncuRun / packageFile', packageFile);
 
   // ncu
   const upgraded = await ncu.run({
     packageFile: packageFile,
-    upgrade: true,
+    upgrade: !!forceUpdate,
   });
 
-  console.log(upgraded); // { "mypackage": "^2.0.0", ... }
+  console.log('qiao-project / ncuRun / upgraded', upgraded);
 };
