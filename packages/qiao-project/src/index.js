@@ -15,5 +15,6 @@ export * from './init/init.js';
 export * from './eslint/eslint.js';
 export * from './lerna/lerna-dc.js';
 export * from './lerna/lerna-pkg.js';
+export * from './ncu/ncu.js';
 export * from './npm/npm.js';
 export * from './prettier/prettier.js';

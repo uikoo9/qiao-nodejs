@@ -12,6 +12,7 @@ var qiaoConsole = require('qiao-console');
 var qiaoParallel = require('qiao-parallel');
 var qiaoNpms = require('qiao-npms');
 var qiaoCli = require('qiao-cli');
+var ncu = require('npm-check-updates');
 var prettier = require('prettier');
 
 function _interopNamespaceDefault(e) {
@@ -448,6 +449,33 @@ const pkg = async (folderName, isDev) => {
   });
 };
 
+// fs
+
+/**
+ * ncuRun
+ * @param {*} configPath
+ */
+const ncuRun = async (configPath) => {
+  // start
+  console.log('qiao-project / ncuRun / start', configPath);
+
+  // cwd & dirname
+  const cwd = process.cwd();
+  console.log('qiao-project / ncuRun / cwd', cwd);
+
+  // pkg file
+  const packageFile = qiaoFile.path.resolve(cwd, './package.json');
+  console.log('qiao-project / ncuRun / packageFile', packageFile);
+
+  // ncu
+  const upgraded = await ncu.run({
+    packageFile: packageFile,
+    upgrade: true,
+  });
+
+  console.log(upgraded); // { "mypackage": "^2.0.0", ... }
+};
+
 /**
  * npm config
  */
@@ -747,6 +775,7 @@ Object.defineProperty(exports, 'rollupPluginNodeResolve', {
 exports.checkNPMPackage = checkNPMPackage;
 exports.downloadCounts = downloadCounts;
 exports.init = init;
+exports.ncuRun = ncuRun;
 exports.pkg = pkg;
 exports.rollupBuild = rollupBuild;
 exports.rollupPluginCommonjs = rollupPluginCommonjs;

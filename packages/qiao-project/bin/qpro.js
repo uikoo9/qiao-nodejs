@@ -8,6 +8,7 @@ require('./qpro-init.js');
 require('./qpro-commitizen.js');
 require('./qpro-dc.js');
 require('./qpro-eslint.js');
+require('./qpro-ncu.js');
 require('./qpro-npm.js');
 require('./qpro-pkg.js');
 require('./qpro-prettier.js');
