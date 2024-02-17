@@ -1,6 +1,6 @@
 {
   "name": "qiao-zip-cli",
-  "version": "4.3.5",
+  "version": "4.4.2",
   "description": "nodejs zip and unzip cli tool",
   "keywords": [
     "zip",
@@ -33,9 +33,9 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "qiao-cli": "^4.3.0",
-    "qiao-file": "^4.3.5",
-    "qiao-zip": "^4.3.5"
+    "qiao-cli": "^4.4.2",
+    "qiao-file": "^4.4.2",
+    "qiao-zip": "^4.4.2"
   },
   "nx": {
     "namedInputs": {

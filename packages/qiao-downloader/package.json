@@ -1,6 +1,6 @@
 {
   "name": "qiao-downloader",
-  "version": "4.3.5",
+  "version": "4.4.2",
   "description": "download file",
   "keywords": [
     "nodejs",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "qiao-file": "^4.3.5"
+    "qiao-file": "^4.4.2"
   },
   "nx": {
     "namedInputs": {

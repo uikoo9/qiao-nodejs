@@ -1,6 +1,6 @@
 {
   "name": "qiao-cos-cli",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "description": "tencent cos upload cli tool",
   "keywords": [
     "tencent",
@@ -35,8 +35,8 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "qiao-cli": "^4.3.0",
-    "qiao-cos": "^4.4.1"
+    "qiao-cli": "^4.4.2",
+    "qiao-cos": "^4.4.2"
   },
   "nx": {
     "namedInputs": {
