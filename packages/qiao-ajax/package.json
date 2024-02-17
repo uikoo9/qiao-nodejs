@@ -10,7 +10,7 @@
     "request"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-ajax",
+  "homepage": "https://code.insistime.com/#qiao-ajax",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

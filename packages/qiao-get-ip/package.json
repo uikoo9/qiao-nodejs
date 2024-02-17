@@ -13,7 +13,7 @@
     "nodejs"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-get-ip",
+  "homepage": "https://code.insistime.com/#qiao-get-ip",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

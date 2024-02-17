@@ -11,7 +11,7 @@
     "upload folder"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-cos",
+  "homepage": "https://code.insistime.com/#qiao-cos",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

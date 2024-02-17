@@ -9,7 +9,7 @@
     "clear"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-console",
+  "homepage": "https://code.insistime.com/#qiao-console",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

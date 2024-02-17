@@ -8,7 +8,7 @@
     "tool"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/qiao-img",
+  "homepage": "https://code.insistime.com/#qiao-img",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",

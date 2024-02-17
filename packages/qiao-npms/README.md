@@ -134,7 +134,7 @@ await getVersion(packageName);
         date: 2022-06-13T08:06:26.354Z,
         links: {
           npm: 'https://www.npmjs.com/package/qiao-cos',
-          homepage: 'https://code.insistime.com/qiao-cos',
+          homepage: 'https://code.insistime.com/#qiao-cos',
           repository: 'https://github.com/uikoo9/qiao-nodejs',
           bugs: 'https://github.com/uikoo9/qiao-nodejs/issues'
         },
