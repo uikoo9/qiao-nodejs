@@ -30,6 +30,6 @@
     "lint-staged": "^15.2.2",
     "npm-check-updates": "^16.14.15",
     "nx": "^18.0.4",
-    "qiao-project": "^4.4.1"
+    "qiao-project": "^4.4.4"
   }
 }
