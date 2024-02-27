@@ -56,7 +56,7 @@ ipRegex.v6 = (options) =>
  */
 const getIPByWebsite = (url, timeout, debug) => {
   // debug
-  const label = `qiao-get-ip / ${Date.now()} / get ip from ${url}`;
+  const label = `qiao-ip / ${Date.now()} / get ip from ${url}`;
   if (debug) console.time(label);
 
   // go
@@ -67,16 +67,16 @@ const getIPByWebsite = (url, timeout, debug) => {
       })
       .then((res) => {
         // check
-        if (!res || res.status !== 200 || !res.data) return;
+        if (!res || res.status !== 200 || !res.data) return reject(new Error('request ip failed'));
 
         // get ip
         const s = res.data.match(/\d+\.\d+\.\d+\.\d+/g);
         const ip = s && s.length ? s[0] : null;
-        if (!ip) return;
+        if (!ip) return reject(new Error('request ip failed: not ip'));
 
         // is ip
         const isIp = ipRegex.v4({ exact: true }).test(ip);
-        if (!isIp) return;
+        if (!isIp) return reject(new Error('request ip failed: not ipv4'));
 
         // debug
         if (debug) console.timeEnd(label);
@@ -90,10 +90,10 @@ const getIPByWebsite = (url, timeout, debug) => {
   });
 };
 
-// get ip by website
+// get ip
 
-// websites
-const websites = [
+// urls
+const urls = [
   'https://api.ipify.org/',
   'https://icanhazip.com/',
   'https://ipinfo.io/ip',
@@ -106,45 +106,27 @@ const websites = [
 const defaultTimeout = 300;
 
 /**
- * get ip race
- * @param {*} timeout
- * @param {*} debug
- * @returns
+ *
  */
-const getIPRace = (timeout, debug) => {
+const getIP = (timeout, debug) => {
   // timeout
   timeout = timeout || defaultTimeout;
 
-  return new Promise((resolve, reject) => {
-    const errors = [];
-
-    websites.forEach((url) => {
-      getIPByWebsite(url, timeout, debug)
-        .then((res) => {
-          resolve(res);
-        })
-        .catch((e) => {
-          errors.push(e);
-        });
-    });
-
-    // errors
-    setTimeout(() => {
-      if (errors && errors.length) reject(errors);
-    }, timeout + 50);
+  // promises
+  const promises = urls.map(function (url) {
+    return getIPByWebsite(url, timeout, debug);
   });
-};
 
-// get ip race
-
-/**
- * get ip
- * @param {*} timeout
- * @param {*} debug
- * @returns
- */
-const getIP = (timeout, debug) => {
-  return getIPRace(timeout, debug);
+  // return
+  return new Promise((resolve, reject) => {
+    Promise.any(promises)
+      .then((ip) => {
+        resolve(ip);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
 };
 
 exports.getIP = getIP;
