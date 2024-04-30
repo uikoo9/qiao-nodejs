@@ -1,6 +1,6 @@
 {
   "name": "qiao-img",
-  "version": "4.5.4",
+  "version": "4.5.5",
   "description": "nodejs img tool",
   "keywords": [
     "nodejs",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "qiao-file": "^4.5.4",
+    "qiao-file": "^4.5.5",
     "sharp": "^0.33.2"
   },
   "nx": {

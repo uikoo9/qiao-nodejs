@@ -1,6 +1,6 @@
 {
   "name": "qiao-zip-cli",
-  "version": "4.5.4",
+  "version": "4.5.5",
   "description": "nodejs zip and unzip cli tool",
   "keywords": [
     "zip",
@@ -34,8 +34,8 @@
   },
   "dependencies": {
     "qiao-cli": "^4.5.1",
-    "qiao-file": "^4.5.4",
-    "qiao-zip": "^4.5.4"
+    "qiao-file": "^4.5.5",
+    "qiao-zip": "^4.5.5"
   },
   "nx": {
     "namedInputs": {
