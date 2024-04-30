@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "qiao-encode": "^4.5.1"
   },
   "nx": {
     "namedInputs": {
