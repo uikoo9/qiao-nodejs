@@ -29,7 +29,7 @@ export const tmpdir = async () => {
     await ensureDir(tmpDir);
     debug('/ tmpdir / success');
 
-    return true;
+    return tmpDir;
   } catch (e) {
     debug('/ tmpdir / fail');
     console.log(e);

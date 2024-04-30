@@ -126,7 +126,7 @@ const tmpdir = async () => {
     await fsExtra.ensureDir(tmpDir);
     debug$4('/ tmpdir / success');
 
-    return true;
+    return tmpDir;
   } catch (e) {
     debug$4('/ tmpdir / fail');
     console.log(e);
