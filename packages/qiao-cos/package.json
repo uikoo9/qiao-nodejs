@@ -1,6 +1,6 @@
 {
   "name": "qiao-cos",
-  "version": "4.5.2",
+  "version": "4.5.3",
   "description": "tencent cos upload tool on nodejs",
   "keywords": [
     "tencent",
@@ -35,7 +35,7 @@
     "debug": "^4.3.4",
     "progress": "^2.0.3",
     "qiao-encode": "^4.5.1",
-    "qiao-file": "^4.5.1"
+    "qiao-file": "^4.5.3"
   },
   "nx": {
     "namedInputs": {
