@@ -3,6 +3,8 @@
 var fsExtra = require('fs-extra');
 var path = require('path');
 var Debug = require('debug');
+var os = require('os');
+var qiaoEncode = require('qiao-encode');
 var readline = require('readline');
 
 function _interopNamespaceDefault(e) {
@@ -34,7 +36,7 @@ var fsExtra__namespace = /*#__PURE__*/ _interopNamespaceDefault(fsExtra);
 var path__namespace = /*#__PURE__*/ _interopNamespaceDefault(path);
 
 // fs
-const debug$6 = Debug('qiao-file');
+const debug$7 = Debug('qiao-file');
 
 /**
  * cp
@@ -46,22 +48,22 @@ const cp = async (src, dest) => {
   try {
     const srcExists = await fsExtra.pathExists(src);
     if (!srcExists) {
-      debug$6('/ cp / src not exists');
+      debug$7('/ cp / src not exists');
       return;
     }
 
     await fsExtra.copy(src, dest);
-    debug$6('/ cp / success');
+    debug$7('/ cp / success');
 
     return true;
   } catch (e) {
-    debug$6('/ cp / fail');
+    debug$7('/ cp / fail');
     console.log(e);
   }
 };
 
 // fs
-const debug$5 = Debug('qiao-file');
+const debug$6 = Debug('qiao-file');
 
 /**
  * mv
@@ -72,22 +74,22 @@ const mv = async (oldPath, newPath) => {
   try {
     const srcExists = await fsExtra.pathExists(oldPath);
     if (!srcExists) {
-      debug$5('/ mv / src not exists');
+      debug$6('/ mv / src not exists');
       return;
     }
 
     await fsExtra.move(oldPath, newPath, { overwrite: true });
-    debug$5('/ mv / success');
+    debug$6('/ mv / success');
 
     return true;
   } catch (e) {
-    debug$5('/ mv / fail');
+    debug$6('/ mv / fail');
     console.log(e);
   }
 };
 
 // fs
-const debug$4 = Debug('qiao-file');
+const debug$5 = Debug('qiao-file');
 
 /**
  * rm
@@ -97,11 +99,36 @@ const debug$4 = Debug('qiao-file');
 const rm = async (fpath) => {
   try {
     await fsExtra.remove(fpath);
-    debug$4('/ rm / success');
+    debug$5('/ rm / success');
 
     return true;
   } catch (e) {
-    debug$4('/ rm / fail');
+    debug$5('/ rm / fail');
+    console.log(e);
+  }
+};
+
+// os
+const debug$4 = Debug('qiao-file');
+
+/**
+ * mk dir
+ * @param {*} dir
+ * @returns
+ */
+const tmpdir = async () => {
+  try {
+    const tmpPath = os.tmpdir();
+    const randomFolder = qiaoEncode.uuid();
+    const tmpDir = path.resolve(tmpPath, randomFolder);
+    debug$4('/ tmpdir / ', tmpDir);
+
+    await fsExtra.ensureDir(tmpDir);
+    debug$4('/ tmpdir / success');
+
+    return true;
+  } catch (e) {
+    debug$4('/ tmpdir / fail');
     console.log(e);
   }
 };
@@ -389,4 +416,5 @@ exports.readFile = readFile;
 exports.readFileLineByLine = readFileLineByLine;
 exports.readdir = readdir;
 exports.rm = rm;
+exports.tmpdir = tmpdir;
 exports.writeFile = writeFile;

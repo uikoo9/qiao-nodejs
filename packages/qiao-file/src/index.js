@@ -8,6 +8,7 @@ export * from './mv.js';
 export * from './rm.js';
 
 // dir
+export * from './tmpdir.js';
 export * from './mkdir.js';
 export * from './readdir.js';
 export * from './lsdir.js';
