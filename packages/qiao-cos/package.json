@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js",
-    "test": "ava"
+    "test1": "ava"
   },
   "dependencies": {
     "cos-nodejs-sdk-v5": "^2.13.3",

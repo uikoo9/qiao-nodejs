@@ -7,7 +7,7 @@
     "tools"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://qiao-webpack.insistime.com/#/",
+  "homepage": "https://qiao-webpack.vincentqiao.com/#/",
   "license": "MIT",
   "bin": {
     "qwebpack": "bin/qwebpack.js"

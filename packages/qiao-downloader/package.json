@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js",
-    "test": "ava"
+    "test1": "ava"
   },
   "dependencies": {
     "debug": "^4.3.4",

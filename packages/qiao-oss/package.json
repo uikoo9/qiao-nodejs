@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "qpro rollup ./rollup.config.js",
-    "test": "ava"
+    "test1": "ava"
   },
   "dependencies": {
     "ali-oss": "^6.20.0",
