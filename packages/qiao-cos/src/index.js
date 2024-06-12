@@ -4,6 +4,9 @@ import COS from 'cos-nodejs-sdk-v5';
 // cdn
 import { cdnSign } from './cdn-sign.js';
 
+// sts
+import { getCredential } from './sts.js';
+
 // bucket
 import { listBuckets, listObjects, listObjectsAll } from './bucket.js';
 
@@ -35,6 +38,11 @@ const init = (config) => {
   // cdn
   app.cdnSign = (filepath, timeout) => {
     return cdnSign(config.signKey, filepath, timeout);
+  };
+
+  // sts
+  app.getCredential = async (durationSeconds, allowPrefix) => {
+    return await getCredential(durationSeconds, allowPrefix, config);
   };
 
   // bucket

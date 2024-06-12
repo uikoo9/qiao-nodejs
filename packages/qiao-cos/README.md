@@ -54,6 +54,28 @@ const config = require('./config.json');
 const qcos = COS(config);
 ```
 
+## sts
+
+认证相关
+
+### getCredential
+
+获取临时秘钥
+
+- durationSeconds
+  - 类型: number
+  - 说明: 秘钥过期时间，单位秒，默认为1800
+- allowPrefix
+  - 类型: string
+  - 说明: 允许访问的地址前缀
+- return
+  - 类型: object
+  - 说明: 临时秘钥等数据
+
+```javascript
+const sts = await qcos.getCredential(durationSeconds, allowPrefix);
+```
+
 ## cdn
 
 cdn相关操作
