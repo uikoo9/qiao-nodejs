@@ -1,17 +1,12 @@
 {
-  "name": "qiao-cos",
-  "version": "4.5.7",
-  "description": "tencent cos upload tool on nodejs",
+  "name": "qiao-ssh",
+  "version": "4.5.1",
+  "description": "nodejs ssh tool",
   "keywords": [
-    "tencent",
-    "cos",
-    "nodejs",
-    "upload",
-    "upload file",
-    "upload folder"
+    "ssh"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/#qiao-cos",
+  "homepage": "https://code.insistime.com/#qiao-ssh",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -27,17 +22,10 @@
     "url": "https://github.com/uikoo9/qiao-nodejs/issues"
   },
   "scripts": {
-    "build": "qpro rollup ./rollup.config.js",
-    "test1": "ava"
+    "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "cos-nodejs-sdk-v5": "^2.13.3",
-    "debug": "^4.3.4",
-    "progress": "^2.0.3",
-    "qcloud-cos-sts": "^3.1.0",
-    "qiao-encode": "^4.5.1",
-    "qiao-file": "^4.5.5",
-    "qiao.log.js": "^3.7.1"
+    "ssh2": "^1.15.0"
   },
   "nx": {
     "namedInputs": {
