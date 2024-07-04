@@ -25,6 +25,7 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
+    "qiao.log.js": "^3.7.1",
     "ssh2": "^1.15.0"
   },
   "nx": {
