@@ -16,7 +16,7 @@ const logger = qiao_log_js.Logger('qiao-ssh');
 const sshCMD = (options, cmd) => {
   const methodName = 'sshCMD';
   logger.info(methodName, 'options', options);
-  logger.info(methodName, 'options', cmd);
+  logger.info(methodName, 'cmd', cmd);
 
   return new Promise((resolve, reject) => {
     conn.on('ready', () => {
@@ -35,10 +35,10 @@ const sshCMD = (options, cmd) => {
             conn.end();
           })
           .on('data', (data) => {
-            resolve(data);
+            resolve(data.toString());
           })
           .stderr.on('data', (data) => {
-            resolve(data);
+            resolve(data.toString());
           });
       });
     });
