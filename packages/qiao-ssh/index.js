@@ -29,16 +29,18 @@ const sshCMD = (options, cmd) => {
           return;
         }
 
+        let res;
         stream
           .on('close', (code, signal) => {
             logger.info(methodName, 'ssh close', code, signal);
             conn.end();
+            resolve(res);
           })
           .on('data', (data) => {
-            resolve(data.toString());
+            res = data.toString();
           })
           .stderr.on('data', (data) => {
-            resolve(data.toString());
+            res = data.toString();
           });
       });
     });
