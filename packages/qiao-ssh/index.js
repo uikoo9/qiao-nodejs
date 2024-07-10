@@ -4,7 +4,6 @@ var ssh2 = require('ssh2');
 var qiao_log_js = require('qiao.log.js');
 
 // ssh
-const conn = new ssh2.Client();
 const logger = qiao_log_js.Logger('qiao-ssh');
 
 /**
@@ -15,6 +14,8 @@ const logger = qiao_log_js.Logger('qiao-ssh');
  */
 const sshCMD = (options, cmd) => {
   const methodName = 'sshCMD';
+
+  const conn = new ssh2.Client();
   logger.info(methodName, 'options', options);
   logger.info(methodName, 'cmd', cmd);
 

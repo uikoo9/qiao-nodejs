@@ -1,6 +1,5 @@
 // ssh
 import { Client } from 'ssh2';
-const conn = new Client();
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -14,6 +13,8 @@ const logger = Logger('qiao-ssh');
  */
 export const sshCMD = (options, cmd) => {
   const methodName = 'sshCMD';
+
+  const conn = new Client();
   logger.info(methodName, 'options', options);
   logger.info(methodName, 'cmd', cmd);
 
