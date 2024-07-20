@@ -16,7 +16,7 @@ export const delObject = (app, key) => {
       },
       function (err, data) {
         if (err) return reject(err);
-        if (!data || data.statusCode !== 200) return reject(new Error('del object error'));
+        if (!data || data.statusCode !== 204) return reject(new Error('del object error'));
 
         resolve(data);
       },
