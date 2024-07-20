@@ -10,6 +10,9 @@ import { getCredential } from './sts.js';
 // bucket
 import { listBuckets, listObjects, listObjectsAll } from './bucket.js';
 
+// object
+import { delObject } from './object.js';
+
 // upload
 import { uploadFile } from './upload-file.js';
 import { uploadFolder } from './upload-folder.js';
@@ -54,6 +57,11 @@ const init = (config) => {
   };
   app.listObjectsAll = async (prefix, max) => {
     return await listObjectsAll(app, prefix, max);
+  };
+
+  // object
+  app.delObject = async (key) => {
+    return await delObject(app, key);
   };
 
   // upload

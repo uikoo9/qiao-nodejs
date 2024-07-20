@@ -162,6 +162,25 @@ const res = await qcos.listObjects();
 const res = await qcos.listObjectsAll();
 ```
 
+## object
+
+object相关操作
+
+### delObject
+
+删除对象
+
+- key
+  - 类型: string
+  - 说明: 对象名称
+- return
+  - 类型: object
+  - 说明: 删除结果
+
+```javascript
+const res = await qcos.delObject(key);
+```
+
 ## upload
 
 ### uploadFile
