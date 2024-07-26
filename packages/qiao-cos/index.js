@@ -226,7 +226,7 @@ const debug = Debug('qiao-cos');
  * @param {*} source
  * @returns
  */
-const uploadFile = (app, dest, source) => {
+const uploadFile = (app, dest, source, options) => {
   // check
   if (!app || !app.client || !app.config) {
     return Promise.reject(new Error('need app, app.client, app.config'));
@@ -234,48 +234,57 @@ const uploadFile = (app, dest, source) => {
 
   // upload
   return new Promise((resolve, reject) => {
-    uploadFileWithCallback(app, dest, source, (err, data) => {
+    options = options || {};
+    options.callback = (err, data) => {
       return err ? reject(err) : resolve(data);
-    });
+    };
+
+    uploadFileWithCallback(app, dest, source, options);
   });
 };
 
 /**
- * upload file with callback
+ * uploadFileWithCallback
  * @param {*} app
  * @param {*} dest
  * @param {*} source
- * @param {*} cb
+ * @param {*} options
  * @returns
  */
-const uploadFileWithCallback = (app, dest, source, cb) => {
+const uploadFileWithCallback = (app, dest, source, options) => {
   // check
   if (!app || !app.client || !app.config) {
-    if (cb) cb(new Error('need app, app.client, app.config'));
+    if (options.callback) options.callback(new Error('need app, app.client, app.config'));
     return;
   }
 
   // is absolute
   if (!qiaoFile.path.isAbsolute(source)) {
-    if (cb) cb(new Error('source file path must be absolute'));
+    if (options.callback) options.callback(new Error('source file path must be absolute'));
     return;
   }
 
   // log
   debug(`from ${source} to ${dest}`);
 
+  // options
+  const finalOptions = {
+    Bucket: app.config.Bucket,
+    Region: app.config.Region,
+    Key: dest,
+    FilePath: source,
+    SliceSize: options.sliceSize || 1024 * 1024 * 5,
+  };
+  if (options.onTaskReady) finalOptions.onTaskReady = options.onTaskReady;
+  if (options.onProgress) finalOptions.onProgress = options.onProgress;
+  if (options.onFileFinish) finalOptions.onFileFinish = options.onFileFinish;
+  if (options.Headers) finalOptions.Headers = options.Headers;
+  debug('finalOptions', finalOptions);
+
   // upload
-  app.client.sliceUploadFile(
-    {
-      Region: app.config.Region,
-      Bucket: app.config.Bucket,
-      Key: dest,
-      FilePath: source,
-    },
-    (err, data) => {
-      if (cb) cb(err, data);
-    },
-  );
+  app.client.uploadFile(finalOptions, (err, data) => {
+    if (options.callback) options.callback(err, data);
+  });
 };
 
 // progress
