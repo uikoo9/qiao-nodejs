@@ -416,8 +416,8 @@ const init = (config) => {
   };
 
   // upload
-  app.uploadFile = async (dest, source) => {
-    return await uploadFile(app, dest, source);
+  app.uploadFile = async (dest, source, options) => {
+    return await uploadFile(app, dest, source, options);
   };
   app.uploadFolder = async (destFolder, sourceFolder) => {
     return await uploadFolder(app, destFolder, sourceFolder);
