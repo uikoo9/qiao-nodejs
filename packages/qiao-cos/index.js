@@ -220,10 +220,11 @@ const delObject = (app, key) => {
 const debug = Debug('qiao-cos');
 
 /**
- * upload file
+ * uploadFile
  * @param {*} app
  * @param {*} dest
  * @param {*} source
+ * @param {*} options
  * @returns
  */
 const uploadFile = (app, dest, source, options) => {
@@ -324,40 +325,43 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
 
   // upload
   return new Promise((resolve, reject) => {
+    const options = {};
+    options.callback = (err, data) => {
+      allFiles.push(data);
+      if (err || !data || data.statusCode != 200) {
+        failFiles.push(err || data);
+      } else {
+        sucFiles.push(data);
+      }
+
+      bar.tick();
+
+      if (bar.complete) {
+        const obj = {};
+        obj.paths = paths;
+        obj.all = allFiles;
+        obj.suc = sucFiles;
+        obj.fail = failFiles;
+
+        console.log();
+        console.timeEnd('total use');
+        console.log('all files:', allFiles.length);
+        console.log('fail files:', failFiles.length);
+        console.log('success files:', sucFiles.length);
+        console.log();
+
+        if (allFiles.length === sucFiles.length) {
+          resolve(obj);
+        } else {
+          reject(new Error('some files upload failed'));
+        }
+      }
+    };
+
     for (let i = 0; i < files.length; i++) {
       const file = files[i].path;
       const dest = destFolder + file.split(sourceFolder)[1];
-      uploadFileWithCallback(app, dest, file, (err, data) => {
-        allFiles.push(data);
-        if (err || !data || data.statusCode != 200) {
-          failFiles.push(err || data);
-        } else {
-          sucFiles.push(data);
-        }
-
-        bar.tick();
-
-        if (bar.complete) {
-          const obj = {};
-          obj.paths = paths;
-          obj.all = allFiles;
-          obj.suc = sucFiles;
-          obj.fail = failFiles;
-
-          console.log();
-          console.timeEnd('total use');
-          console.log('all files:', allFiles.length);
-          console.log('fail files:', failFiles.length);
-          console.log('success files:', sucFiles.length);
-          console.log();
-
-          if (allFiles.length === sucFiles.length) {
-            resolve(obj);
-          } else {
-            reject(new Error('some files upload failed'));
-          }
-        }
-      });
+      uploadFileWithCallback(app, dest, file, options);
     }
   });
 };

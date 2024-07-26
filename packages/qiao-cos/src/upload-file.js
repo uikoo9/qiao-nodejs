@@ -6,10 +6,11 @@ import Debug from 'debug';
 const debug = Debug('qiao-cos');
 
 /**
- * upload file
+ * uploadFile
  * @param {*} app
  * @param {*} dest
  * @param {*} source
+ * @param {*} options
  * @returns
  */
 export const uploadFile = (app, dest, source, options) => {
