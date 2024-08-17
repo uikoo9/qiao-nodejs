@@ -1,5 +1,5 @@
 // qiao
-import { path, mkdir } from 'qiao-file';
+import { path, mkdir, isExists, writeFile } from 'qiao-file';
 
 // data
 import { get, set, del, clear, all } from './_data.js';
@@ -15,19 +15,19 @@ const db = (dbPath) => {
 
   // clear
   obj.clear = async () => {
-    await initDir(obj.path);
+    await initDirAndFile(obj.path);
     await clear(obj.path);
   };
 
   // all
   obj.all = async () => {
-    await initDir(obj.path);
+    await initDirAndFile(obj.path);
     return await all(obj.path);
   };
 
   // config
   obj.config = async (key, value) => {
-    await initDir(obj.path);
+    await initDirAndFile(obj.path);
     return await configDB(obj.path, key, value);
   };
 
@@ -35,10 +35,16 @@ const db = (dbPath) => {
 };
 
 // init dir
-async function initDir(filePath) {
+async function initDirAndFile(filePath) {
   const dir = path.dirname(filePath);
   const mkdirRes = await mkdir(dir);
-  console.log(`mkdir ${dir} ${mkdirRes}`);
+  console.log(`qiao-config: mkdir ${dir} ${mkdirRes}`);
+
+  const isExistsRes = await isExists(filePath);
+  if (!isExistsRes) {
+    const writeFileRes = await writeFile(filePath, '{}');
+    console.log(`qiao-config: init json ${writeFileRes}`);
+  }
 }
 
 // config db
