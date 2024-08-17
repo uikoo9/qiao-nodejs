@@ -134,7 +134,7 @@ const del = async (filePath, key) => {
   }
 };
 
-// data
+// qiao
 
 /**
  * db
@@ -147,21 +147,31 @@ const db = (dbPath) => {
 
   // clear
   obj.clear = async () => {
+    await initDir(obj.path);
     await clear(obj.path);
   };
 
   // all
   obj.all = async () => {
+    await initDir(obj.path);
     return await all(obj.path);
   };
 
   // config
   obj.config = async (key, value) => {
+    await initDir(obj.path);
     return await configDB(obj.path, key, value);
   };
 
   return obj;
 };
+
+// init dir
+async function initDir(filePath) {
+  const dir = qiaoFile.path.dirname(filePath);
+  const mkdirRes = await qiaoFile.mkdir(dir);
+  console.log(`mkdir ${dir} ${mkdirRes}`);
+}
 
 // config db
 async function configDB(filePath, key, value) {
