@@ -20,7 +20,12 @@ module.exports = function (isDev, postCssConfig) {
         postcssOptions: Object.assign(defaultPostcssConfig, postCssConfig || {}),
       },
     },
-    'sass-loader',
+    {
+      loader: 'sass-loader',
+      options: {
+        api: 'modern',
+      },
+    },
   ];
 
   // return
