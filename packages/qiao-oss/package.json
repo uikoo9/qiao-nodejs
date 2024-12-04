@@ -1,6 +1,6 @@
 {
   "name": "qiao-oss",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "description": "ali oss upload tool on nodejs",
   "keywords": [
     "aliyun",
@@ -37,8 +37,8 @@
   "dependencies": {
     "ali-oss": "^6.22.0",
     "debug": "^4.3.7",
-    "qiao-cli": "^4.5.1",
-    "qiao-file": "^4.7.1"
+    "qiao-cli": "^4.7.2",
+    "qiao-file": "^4.7.2"
   },
   "nx": {
     "namedInputs": {

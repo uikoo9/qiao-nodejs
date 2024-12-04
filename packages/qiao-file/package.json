@@ -1,6 +1,6 @@
 {
   "name": "qiao-file",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "description": "nodejs file tool",
   "keywords": [
     "fs",
@@ -29,7 +29,7 @@
   "dependencies": {
     "debug": "^4.3.7",
     "fs-extra": "^11.2.0",
-    "qiao-encode": "^4.7.1"
+    "qiao-encode": "^4.7.2"
   },
   "nx": {
     "namedInputs": {
