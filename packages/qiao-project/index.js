@@ -482,7 +482,7 @@ const config$1 = [
     notRecommended: ['js-cookie'],
     recommended: {
       npm: 'qiao.cookie.js',
-      doc: 'https://code.insistime.com/#qiao.cookie.js#/',
+      doc: 'https://code.vincentqiao.com/#qiao.cookie.js#/',
     },
   },
 ];

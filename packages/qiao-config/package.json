@@ -10,7 +10,7 @@
     "database"
   ],
   "author": "uikoo9 <uikoo9@qq.com>",
-  "homepage": "https://code.insistime.com/#qiao-config",
+  "homepage": "https://code.vincentqiao.com/#qiao-config",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
