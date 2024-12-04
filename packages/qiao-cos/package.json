@@ -31,13 +31,13 @@
     "test1": "ava"
   },
   "dependencies": {
-    "cos-nodejs-sdk-v5": "^2.13.3",
-    "debug": "^4.3.4",
+    "cos-nodejs-sdk-v5": "^2.14.6",
+    "debug": "^4.3.7",
     "progress": "^2.0.3",
-    "qcloud-cos-sts": "^3.1.0",
+    "qcloud-cos-sts": "^3.1.1",
     "qiao-encode": "^4.5.1",
     "qiao-file": "^4.5.5",
-    "qiao.log.js": "^3.7.1"
+    "qiao.log.js": "^3.7.3"
   },
   "nx": {
     "namedInputs": {
