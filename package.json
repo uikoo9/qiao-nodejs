@@ -29,7 +29,7 @@
     "lerna": "^8.1.9",
     "lint-staged": "^15.2.10",
     "npm-check-updates": "^16.14.15",
-    "nx": "^18.0.7",
-    "qiao-project": "^4.5.1"
+    "nx": "^20.1.4",
+    "qiao-project": "^4.7.2"
   }
 }
