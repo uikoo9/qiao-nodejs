@@ -31,7 +31,7 @@
   "dependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-react": "^7.26.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
@@ -49,7 +49,7 @@
     "qiao-cli": "^4.7.2",
     "react-refresh": "^0.14.2",
     "sass": "^1.82.0",
-    "sass-loader": "^16.0.3",
+    "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
     "template-ejs-loader": "^0.9.4",
     "terser-webpack-plugin": "^5.3.10",
