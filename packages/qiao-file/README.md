@@ -5,8 +5,8 @@
 
 nodejs 下文件相关封装
 
-1. [Node.js-开发实践：高性能 FS](https://blog.insistime.com/nodejs-fs)
-2. [Node.js-开发实践：使用健壮的 FS](https://blog.insistime.com/nodejs-fs-extra)
+1. [Node.js-开发实践：高性能 FS](https://blog.vincentqiao.com/nodejs-fs)
+2. [Node.js-开发实践：使用健壮的 FS](https://blog.vincentqiao.com/nodejs-fs-extra)
 
 ## install
 

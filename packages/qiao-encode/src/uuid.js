@@ -16,7 +16,7 @@ export const uuid = (type) => {
 
   // 3
   if (type == 3) {
-    return uuidv3('insistime.com', uuidv3.DNS);
+    return uuidv3('vincentqiao.com', uuidv3.DNS);
   }
 
   // 4
@@ -26,6 +26,6 @@ export const uuid = (type) => {
 
   // 5
   if (type == 5) {
-    return uuidv5('insistime.com', uuidv5.DNS);
+    return uuidv5('vincentqiao.com', uuidv5.DNS);
   }
 };

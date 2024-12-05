@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-downloader.svg?style=flat-square)](https://www.npmjs.org/package/qiao-downloader)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-downloader.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-downloader)
 
-nodejs 下载文件工具, [Node.js-开发实践：下载文件](https://blog.insistime.com/nodejs-download)
+nodejs 下载文件工具, [Node.js-开发实践：下载文件](https://blog.vincentqiao.com/nodejs-download)
 
 ## install
 

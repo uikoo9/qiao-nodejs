@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/qiao-parallel.svg?style=flat-square)](https://www.npmjs.org/package/qiao-parallel)
 [![npm downloads](https://img.shields.io/npm/dm/qiao-parallel.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-parallel)
 
-nodejs 下并行执行任务，详见：[一篇文章了解 JS 并行任务](https://blog.insistime.com/parallel)
+nodejs 下并行执行任务，详见：[一篇文章了解 JS 并行任务](https://blog.vincentqiao.com/parallel)
 
 ## install
 

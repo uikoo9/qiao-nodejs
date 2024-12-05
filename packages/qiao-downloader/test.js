@@ -6,7 +6,7 @@ const { download } = require('./index.js');
 
 // before
 let config = {
-  url: 'https://static.insistime.com/test/txt.zip',
+  url: 'https://static.vincentqiao.com/test/txt.zip',
 };
 test.before(async (t) => {
   try {

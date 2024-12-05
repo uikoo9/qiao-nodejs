@@ -20,7 +20,7 @@ const uuid = (type) => {
 
   // 3
   if (type == 3) {
-    return uuid$1.v3('insistime.com', uuid$1.v3.DNS);
+    return uuid$1.v3('vincentqiao.com', uuid$1.v3.DNS);
   }
 
   // 4
@@ -30,7 +30,7 @@ const uuid = (type) => {
 
   // 5
   if (type == 5) {
-    return uuid$1.v5('insistime.com', uuid$1.v5.DNS);
+    return uuid$1.v5('vincentqiao.com', uuid$1.v5.DNS);
   }
 };
 
