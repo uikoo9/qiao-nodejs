@@ -1,0 +1,49 @@
+{
+  "name": "qiao-tts",
+  "version": "4.7.2",
+  "description": "nodejs tts tool",
+  "keywords": [
+    "tts"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.vincentqiao.com/#qiao-tts",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/index.js",
+  "sideEffets": false,
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-nodejs/issues"
+  },
+  "scripts": {
+    "build": "qpro rollup ./rollup.config.js"
+  },
+  "dependencies": {
+    "qiao-ajax": "^5.1.9",
+    "qiao-encode": "^4.7.4",
+    "qiao.log.js": "^3.7.3"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}
