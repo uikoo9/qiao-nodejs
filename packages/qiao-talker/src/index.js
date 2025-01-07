@@ -1,5 +1,5 @@
 // qiao
-import { post } from 'qiao-ajax';
+import { get, post } from 'qiao-ajax';
 
 // Logger
 import { Logger } from 'qiao.log.js';
@@ -126,6 +126,56 @@ export const startTalker = async (options) => {
           // 头部动作幅度，可设值为0-1，值越大头部动作幅度越大。默认值为0.7。
           head_move_strength: options.head_move_strength || 0.7,
         },
+      },
+    });
+
+    // check
+    if (res.status !== 200) {
+      logger.error(methodName, `status is ${res.status}`);
+      return;
+    }
+    if (res.data && res.data.code) {
+      logger.error(methodName, 'request failed', res.data);
+      return;
+    }
+
+    // r
+    return res.data;
+  } catch (error) {
+    logger.error(methodName, 'request error', error);
+  }
+};
+
+/**
+ * checkTalker
+ * @param {*} options
+ * @returns
+ */
+export const checkTalker = async (options) => {
+  const methodName = 'checkTalker';
+
+  // const
+  const appKey = options.appKey;
+  const taskId = options.taskId;
+  logger.info(methodName, 'appKey', appKey);
+  logger.info(methodName, 'taskId', taskId);
+
+  // check
+  if (!appKey) {
+    logger.info(methodName, 'need appKey');
+    return;
+  }
+  if (!taskId) {
+    logger.info(methodName, 'need taskId');
+    return;
+  }
+
+  // req
+  try {
+    const url = `https://dashscope.aliyuncs.com/api/v1/tasks/${taskId}`;
+    const res = await get(url, {
+      headers: {
+        Authorization: `Bearer ${appKey}`,
       },
     });
 

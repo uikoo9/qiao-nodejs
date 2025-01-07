@@ -147,5 +147,56 @@ const startTalker = async (options) => {
   }
 };
 
+/**
+ * checkTalker
+ * @param {*} options
+ * @returns
+ */
+const checkTalker = async (options) => {
+  const methodName = 'checkTalker';
+
+  // const
+  const appKey = options.appKey;
+  const taskId = options.taskId;
+  logger.info(methodName, 'appKey', appKey);
+  logger.info(methodName, 'taskId', taskId);
+
+  // check
+  if (!appKey) {
+    logger.info(methodName, 'need appKey');
+    return;
+  }
+  if (!taskId) {
+    logger.info(methodName, 'need taskId');
+    return;
+  }
+
+  // req
+  try {
+    const url = `https://dashscope.aliyuncs.com/api/v1/tasks/${taskId}`;
+    const res = await qiaoAjax.get(url, {
+      headers: {
+        Authorization: `Bearer ${appKey}`,
+      },
+    });
+
+    // check
+    if (res.status !== 200) {
+      logger.error(methodName, `status is ${res.status}`);
+      return;
+    }
+    if (res.data && res.data.code) {
+      logger.error(methodName, 'request failed', res.data);
+      return;
+    }
+
+    // r
+    return res.data;
+  } catch (error) {
+    logger.error(methodName, 'request error', error);
+  }
+};
+
 exports.checkFace = checkFace;
+exports.checkTalker = checkTalker;
 exports.startTalker = startTalker;
