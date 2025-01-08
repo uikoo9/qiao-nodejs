@@ -54,6 +54,12 @@ export const moyinTTS = (options) => {
     appkey: appKey,
     signature: signature,
     timestamp: timestamp,
+    speaker: options.speaker || 'cissy_meet',
+    audio_type: options.audio_type || 'mp3',
+    // 发音人合成的语速，支持小数点后两位
+    // 默认值：1.0
+    // 可选值：0.5-2.0
+    speed: options.speed || 1.0,
   };
   logger.info(methodName, 'config', config);
 
