@@ -1,5 +1,5 @@
 // fs
-import fs from 'fs';
+import { writeFile } from 'qiao-file';
 
 // ffmpeg
 import ffmpeg from 'fluent-ffmpeg';
@@ -18,7 +18,7 @@ export const getVideoMeta = (videoPath) => {
 
   // check
   if (!videoPath) {
-    logger.info(methodName, 'videoPath', videoPath);
+    logger.error(methodName, 'videoPath', videoPath);
     return;
   }
 
@@ -46,19 +46,19 @@ export const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) =
 
   // check
   if (!inputVideoPath) {
-    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    logger.error(methodName, 'inputVideoPath', inputVideoPath);
     return;
   }
   if (!outputVideoPath) {
-    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    logger.error(methodName, 'outputVideoPath', outputVideoPath);
     return;
   }
   if (!startTime) {
-    logger.info(methodName, 'startTime', startTime);
+    logger.error(methodName, 'startTime', startTime);
     return;
   }
   if (!duration) {
-    logger.info(methodName, 'duration', duration);
+    logger.error(methodName, 'duration', duration);
     return;
   }
 
@@ -72,7 +72,7 @@ export const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) =
       .output(outputVideoPath)
       .on('end', function () {
         logger.info(methodName, 'end');
-        resolve();
+        resolve(true);
       })
       .on('error', function (err) {
         logger.error(methodName, 'error', err);
@@ -87,26 +87,34 @@ export const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) =
 /**
  * mergeVideos
  * @param {*} videoFiles
+ * @param {*} fileListPath
  * @param {*} outputPath
  * @returns
  */
-export const mergeVideos = (videoFiles, outputPath) => {
+export const mergeVideos = async (videoFiles, fileListPath, outputPath) => {
   const methodName = 'mergeVideos';
 
   // check
   if (!videoFiles) {
-    logger.info(methodName, 'videoFiles', videoFiles);
+    logger.error(methodName, 'videoFiles', videoFiles);
+    return;
+  }
+  if (!fileListPath) {
+    logger.error(methodName, 'fileListPath', fileListPath);
     return;
   }
   if (!outputPath) {
-    logger.info(methodName, 'outputPath', outputPath);
+    logger.error(methodName, 'outputPath', outputPath);
     return;
   }
 
   // file path
-  const fileListPath = 'fileList.txt';
   const fileListContent = videoFiles.map((file) => `file '${file}'`).join('\n');
-  fs.writeFileSync(fileListPath, fileListContent);
+  const writeFileRes = await writeFile(fileListPath, fileListContent);
+  if (!writeFileRes) {
+    logger.error(methodName, 'writeFileRes', writeFileRes);
+    return;
+  }
 
   // r
   return new Promise((resolve, reject) => {
@@ -123,7 +131,7 @@ export const mergeVideos = (videoFiles, outputPath) => {
       })
       .on('end', () => {
         logger.info(methodName, 'end');
-        resolve();
+        resolve(true);
       })
       .run();
   });
@@ -140,11 +148,11 @@ export const paddingVideo = (inputVideoPath, outputVideoPath) => {
 
   // check
   if (!inputVideoPath) {
-    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    logger.error(methodName, 'inputVideoPath', inputVideoPath);
     return;
   }
   if (!outputVideoPath) {
-    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    logger.error(methodName, 'outputVideoPath', outputVideoPath);
     return;
   }
 
@@ -161,7 +169,7 @@ export const paddingVideo = (inputVideoPath, outputVideoPath) => {
       })
       .on('end', () => {
         logger.info(methodName, 'end');
-        resolve();
+        resolve(true);
       })
       .run();
   });
@@ -179,19 +187,19 @@ export const textVideo = (inputVideoPath, outputVideoPath, options) => {
 
   // check
   if (!inputVideoPath) {
-    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    logger.error(methodName, 'inputVideoPath', inputVideoPath);
     return;
   }
   if (!outputVideoPath) {
-    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    logger.error(methodName, 'outputVideoPath', outputVideoPath);
     return;
   }
   if (!options) {
-    logger.info(methodName, 'options', options);
+    logger.error(methodName, 'options', options);
     return;
   }
   if (!options.txt) {
-    logger.info(methodName, 'options.txt', options.txt);
+    logger.error(methodName, 'options.txt', options.txt);
     return;
   }
 
@@ -222,7 +230,7 @@ export const textVideo = (inputVideoPath, outputVideoPath, options) => {
         reject(err);
       })
       .on('end', () => {
-        resolve();
+        resolve(true);
       })
       .run();
   });
