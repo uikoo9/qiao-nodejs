@@ -215,12 +215,14 @@ const textVideo = (inputVideoPath, outputVideoPath, options) => {
       ])
       .output(outputVideoPath)
       .on('start', () => {
-        console.log('start text');
+        logger.info(methodName, 'start');
       })
       .on('error', (err) => {
+        logger.error(methodName, 'error', err);
         reject(err);
       })
       .on('end', () => {
+        logger.info(methodName, 'end');
         resolve(true);
       })
       .run();
