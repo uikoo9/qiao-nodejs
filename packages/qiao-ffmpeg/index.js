@@ -14,7 +14,12 @@ const logger = qiao_log_js.Logger('qiao-ffmpeg');
  */
 const getVideoMeta = (videoPath) => {
   const methodName = 'getVideoMeta';
-  logger.info(methodName, 'videoPath', videoPath);
+
+  // check
+  if (!videoPath) {
+    logger.info(methodName, 'videoPath', videoPath);
+    return;
+  }
 
   // cmd
   const command = ffmpeg(videoPath);
@@ -37,10 +42,24 @@ const getVideoMeta = (videoPath) => {
  */
 const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) => {
   const methodName = 'cutVideo';
-  logger.info(methodName, 'inputVideoPath', inputVideoPath);
-  logger.info(methodName, 'outputVideoPath', outputVideoPath);
-  logger.info(methodName, 'startTime', startTime);
-  logger.info(methodName, 'duration', duration);
+
+  // check
+  if (!inputVideoPath) {
+    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    return;
+  }
+  if (!outputVideoPath) {
+    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    return;
+  }
+  if (!startTime) {
+    logger.info(methodName, 'startTime', startTime);
+    return;
+  }
+  if (!duration) {
+    logger.info(methodName, 'duration', duration);
+    return;
+  }
 
   // command
   const command = ffmpeg(inputVideoPath);
@@ -72,8 +91,16 @@ const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) => {
  */
 const mergeVideos = (videoFiles, outputPath) => {
   const methodName = 'mergeVideos';
-  logger.info(methodName, 'videoFiles', videoFiles);
-  logger.info(methodName, 'outputPath', outputPath);
+
+  // check
+  if (!videoFiles) {
+    logger.info(methodName, 'videoFiles', videoFiles);
+    return;
+  }
+  if (!outputPath) {
+    logger.info(methodName, 'outputPath', outputPath);
+    return;
+  }
 
   // file path
   const fileListPath = 'fileList.txt';
@@ -109,8 +136,16 @@ const mergeVideos = (videoFiles, outputPath) => {
  */
 const paddingVideo = (inputVideoPath, outputVideoPath) => {
   const methodName = 'paddingVideo';
-  logger.info(methodName, 'inputVideoPath', inputVideoPath);
-  logger.info(methodName, 'outputVideoPath', outputVideoPath);
+
+  // check
+  if (!inputVideoPath) {
+    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    return;
+  }
+  if (!outputVideoPath) {
+    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    return;
+  }
 
   return new Promise((resolve, reject) => {
     ffmpeg(inputVideoPath)
@@ -131,7 +166,69 @@ const paddingVideo = (inputVideoPath, outputVideoPath) => {
   });
 };
 
+/**
+ * textVideo
+ * @param {*} inputVideoPath
+ * @param {*} outputVideoPath
+ * @param {*} options
+ * @returns
+ */
+const textVideo = (inputVideoPath, outputVideoPath, options) => {
+  const methodName = 'textVideo';
+
+  // check
+  if (!inputVideoPath) {
+    logger.info(methodName, 'inputVideoPath', inputVideoPath);
+    return;
+  }
+  if (!outputVideoPath) {
+    logger.info(methodName, 'outputVideoPath', outputVideoPath);
+    return;
+  }
+  if (!options) {
+    logger.info(methodName, 'options', options);
+    return;
+  }
+  if (!options.txt) {
+    logger.info(methodName, 'options.txt', options.txt);
+    return;
+  }
+
+  // final options
+  const finalOptions = {
+    x: options.x || 150,
+    y: options.y || 900,
+    text: options.txt,
+    fontsize: options.fontsize || 26,
+    fontcolor: options.fontcolor || 'white',
+  };
+  if (options.fontfile) finalOptions.fontfile = options.fontfile;
+
+  // r
+  return new Promise((resolve, reject) => {
+    ffmpeg(inputVideoPath)
+      .videoFilters([
+        {
+          filter: 'drawtext',
+          options: finalOptions,
+        },
+      ])
+      .output(outputVideoPath)
+      .on('start', () => {
+        console.log('start text');
+      })
+      .on('error', (err) => {
+        reject(err);
+      })
+      .on('end', () => {
+        resolve();
+      })
+      .run();
+  });
+};
+
 exports.cutVideo = cutVideo;
 exports.getVideoMeta = getVideoMeta;
 exports.mergeVideos = mergeVideos;
 exports.paddingVideo = paddingVideo;
+exports.textVideo = textVideo;
