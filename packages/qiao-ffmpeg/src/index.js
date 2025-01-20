@@ -53,14 +53,6 @@ export const cutVideo = (inputVideoPath, outputVideoPath, startTime, duration) =
     logger.error(methodName, 'outputVideoPath', outputVideoPath);
     return;
   }
-  if (!startTime) {
-    logger.error(methodName, 'startTime', startTime);
-    return;
-  }
-  if (!duration) {
-    logger.error(methodName, 'duration', duration);
-    return;
-  }
 
   // command
   const command = ffmpeg(inputVideoPath);
