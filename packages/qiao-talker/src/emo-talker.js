@@ -42,6 +42,9 @@ export const emoCheckFace = async (options) => {
         input: {
           image_url: imageUrl,
         },
+        parameters: {
+          ratio: '1:1',
+        },
       },
     });
 
