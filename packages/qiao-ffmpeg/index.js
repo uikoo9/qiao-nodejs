@@ -229,8 +229,52 @@ const textVideo = (inputVideoPath, outputVideoPath, options) => {
   });
 };
 
+/**
+ * videoAudio
+ * @param {*} inputVideoPath
+ * @param {*} outputVideoPath
+ * @param {*} audioRate
+ * @returns
+ */
+const videoAudio = (inputVideoPath, outputVideoPath, audioRate) => {
+  const methodName = 'videoAudio';
+
+  // check
+  if (!inputVideoPath) {
+    logger.error(methodName, 'inputVideoPath', inputVideoPath);
+    return;
+  }
+  if (!outputVideoPath) {
+    logger.error(methodName, 'outputVideoPath', outputVideoPath);
+    return;
+  }
+  if (!audioRate) {
+    logger.error(methodName, 'audioRate', audioRate);
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    ffmpeg(inputVideoPath)
+      .outputOptions(['-af', `volume=${audioRate}`])
+      .output(outputVideoPath)
+      .on('start', () => {
+        logger.info(methodName, 'start');
+      })
+      .on('error', (err) => {
+        logger.error(methodName, 'error', err);
+        reject(err);
+      })
+      .on('end', () => {
+        logger.info(methodName, 'end');
+        resolve(true);
+      })
+      .run();
+  });
+};
+
 exports.cutVideo = cutVideo;
 exports.getVideoMeta = getVideoMeta;
 exports.mergeVideos = mergeVideos;
 exports.paddingVideo = paddingVideo;
 exports.textVideo = textVideo;
+exports.videoAudio = videoAudio;
