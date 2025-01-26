@@ -303,7 +303,7 @@ export const videoImage = (imagePath, videoDuration, outputVideoPath) => {
       .inputOptions([`-loop 1`])
       .outputOptions([`-t ${videoDuration}`])
       .outputOptions(['-c:v libx264', '-pix_fmt yuv420p', '-vf fps=25'])
-      .save(outputVideoPath)
+      .output(outputVideoPath)
       .on('start', () => {
         logger.info(methodName, 'start');
       })
