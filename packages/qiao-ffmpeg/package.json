@@ -1,6 +1,6 @@
 {
   "name": "qiao-ffmpeg",
-  "version": "4.9.1",
+  "version": "4.9.2",
   "description": "nodejs ffmpeg tool",
   "keywords": [
     "ffmpeg"
