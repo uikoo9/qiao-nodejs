@@ -274,54 +274,34 @@ const videoAudio = (inputVideoPath, outputVideoPath, audioRate) => {
 
 /**
  * videoImage
- * @param {*} inputVideoPath
- * @param {*} outputVideoPath
  * @param {*} imagePath
- * @param {*} imageDisplayTime
+ * @param {*} videoDuration
+ * @param {*} outputVideoPath
  * @returns
  */
-const videoImage = (inputVideoPath, outputVideoPath, imagePath, imageDisplayTime) => {
+const videoImage = (imagePath, videoDuration, outputVideoPath) => {
   const methodName = 'videoImage';
 
   // check
-  if (!inputVideoPath) {
-    logger.error(methodName, 'inputVideoPath', inputVideoPath);
+  if (!imagePath) {
+    logger.error(methodName, 'imagePath', imagePath);
+    return;
+  }
+  if (!videoDuration) {
+    logger.error(methodName, 'videoDuration', videoDuration);
     return;
   }
   if (!outputVideoPath) {
     logger.error(methodName, 'outputVideoPath', outputVideoPath);
     return;
   }
-  if (!imagePath) {
-    logger.error(methodName, 'imagePath', imagePath);
-    return;
-  }
-  if (!imageDisplayTime) {
-    logger.error(methodName, 'imageDisplayTime', imageDisplayTime);
-    return;
-  }
 
   return new Promise((resolve, reject) => {
     ffmpeg()
-      .input(inputVideoPath)
       .input(imagePath)
-      .inputOptions([`-loop 1`, `-t ${imageDisplayTime}`])
-      .outputOptions(['-c:v libx264', '-c:a aac', '-strict experimental', '-shortest'])
-      .complexFilter(
-        [
-          {
-            filter: 'concat',
-            options: {
-              n: 2,
-              v: 1,
-              a: 0,
-            },
-            inputs: ['0:v', '1:v'],
-            outputs: 'outv',
-          },
-        ],
-        'outv',
-      )
+      .inputOptions([`-loop 1`])
+      .outputOptions([`-t ${videoDuration}`])
+      .outputOptions(['-c:v libx264', '-pix_fmt yuv420p', '-vf fps=25'])
       .save(outputVideoPath)
       .on('start', () => {
         logger.info(methodName, 'start');
