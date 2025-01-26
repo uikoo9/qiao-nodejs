@@ -272,9 +272,64 @@ const videoAudio = (inputVideoPath, outputVideoPath, audioRate) => {
   });
 };
 
+/**
+ * videoImage
+ * @param {*} inputVideoPath
+ * @param {*} outputVideoPath
+ * @param {*} imagePath
+ * @param {*} videoDuration
+ * @param {*} imageDisplayTime
+ * @returns
+ */
+const videoImage = (inputVideoPath, outputVideoPath, imagePath, videoDuration, imageDisplayTime) => {
+  const methodName = 'videoImage';
+
+  // check
+  if (!inputVideoPath) {
+    logger.error(methodName, 'inputVideoPath', inputVideoPath);
+    return;
+  }
+  if (!outputVideoPath) {
+    logger.error(methodName, 'outputVideoPath', outputVideoPath);
+    return;
+  }
+  if (!imagePath) {
+    logger.error(methodName, 'imagePath', imagePath);
+    return;
+  }
+  if (!videoDuration) {
+    logger.error(methodName, 'videoDuration', videoDuration);
+    return;
+  }
+  if (!imageDisplayTime) {
+    logger.error(methodName, 'imageDisplayTime', imageDisplayTime);
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    ffmpeg(inputVideoPath)
+      .input(imagePath)
+      .complexFilter([`[0:v][1:v]overlay=0:0:enable='between(t,${videoDuration},${videoDuration + imageDisplayTime})'`])
+      .output(outputVideoPath)
+      .on('start', () => {
+        logger.info(methodName, 'start');
+      })
+      .on('error', (err) => {
+        logger.error(methodName, 'error', err);
+        reject(err);
+      })
+      .on('end', () => {
+        logger.info(methodName, 'end');
+        resolve(true);
+      })
+      .run();
+  });
+};
+
 exports.cutVideo = cutVideo;
 exports.getVideoMeta = getVideoMeta;
 exports.mergeVideos = mergeVideos;
 exports.paddingVideo = paddingVideo;
 exports.textVideo = textVideo;
 exports.videoAudio = videoAudio;
+exports.videoImage = videoImage;
