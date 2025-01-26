@@ -278,11 +278,10 @@ export const videoAudio = (inputVideoPath, outputVideoPath, audioRate) => {
  * @param {*} inputVideoPath
  * @param {*} outputVideoPath
  * @param {*} imagePath
- * @param {*} videoDuration
  * @param {*} imageDisplayTime
  * @returns
  */
-export const videoImage = (inputVideoPath, outputVideoPath, imagePath, videoDuration, imageDisplayTime) => {
+export const videoImage = (inputVideoPath, outputVideoPath, imagePath, imageDisplayTime) => {
   const methodName = 'videoImage';
 
   // check
@@ -298,20 +297,33 @@ export const videoImage = (inputVideoPath, outputVideoPath, imagePath, videoDura
     logger.error(methodName, 'imagePath', imagePath);
     return;
   }
-  if (!videoDuration) {
-    logger.error(methodName, 'videoDuration', videoDuration);
-    return;
-  }
   if (!imageDisplayTime) {
     logger.error(methodName, 'imageDisplayTime', imageDisplayTime);
     return;
   }
 
   return new Promise((resolve, reject) => {
-    ffmpeg(inputVideoPath)
+    ffmpeg()
+      .input(inputVideoPath)
       .input(imagePath)
-      .complexFilter([`[0:v][1:v]overlay=0:0:enable='between(t,${videoDuration},${videoDuration + imageDisplayTime})'`])
-      .output(outputVideoPath)
+      .inputOptions([`-loop 1`, `-t ${imageDisplayTime}`])
+      .outputOptions(['-c:v libx264', '-c:a aac', '-strict experimental', '-shortest'])
+      .complexFilter(
+        [
+          {
+            filter: 'concat',
+            options: {
+              n: 2,
+              v: 1,
+              a: 0,
+            },
+            inputs: ['0:v', '1:v'],
+            outputs: 'outv',
+          },
+        ],
+        'outv',
+      )
+      .save(outputVideoPath)
       .on('start', () => {
         logger.info(methodName, 'start');
       })
