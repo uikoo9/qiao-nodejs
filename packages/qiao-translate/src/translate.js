@@ -66,7 +66,7 @@ export const translateTxt = async (options, src, target, txt) => {
     }
 
     // r
-    return data.ResponseMetadata.TranslationList;
+    return data.TranslationList;
   } catch (error) {
     logger.error(methodName, 'request error', error);
   }
