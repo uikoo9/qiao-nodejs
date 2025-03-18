@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@volcengine/openapi": "^1.28.0",
-    "qiao-ajax": "^5.1.9",
+    "qiao-ajax": "^5.2.1",
     "qiao.log.js": "^3.7.3"
   },
   "nx": {

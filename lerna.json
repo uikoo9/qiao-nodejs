@@ -1,5 +1,7 @@
 {
   "version": "4.9.3",
+  "npmClient": "npm",
+  "hoist": true,
   "command": {
     "version": {
       "allowBranch": "master"
