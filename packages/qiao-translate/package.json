@@ -1,0 +1,50 @@
+{
+  "name": "qiao-translate",
+  "version": "4.8.1",
+  "description": "火山云翻译服务",
+  "keywords": [
+    "火山云",
+    "翻译"
+  ],
+  "author": "uikoo9 <uikoo9@qq.com>",
+  "homepage": "https://code.vincentqiao.com/#qiao-translate",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "src/index.js",
+  "sideEffets": false,
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uikoo9/qiao-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uikoo9/qiao-nodejs/issues"
+  },
+  "scripts": {
+    "build": "qpro rollup ./rollup.config.js"
+  },
+  "dependencies": {
+    "@volcengine/openapi": "^1.28.0",
+    "qiao-ajax": "^5.1.9",
+    "qiao.log.js": "^3.7.3"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
+  }
+}
