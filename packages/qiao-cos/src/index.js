@@ -17,6 +17,9 @@ import { delObject } from './object.js';
 import { uploadFile } from './upload-file.js';
 import { uploadFolder } from './upload-folder.js';
 
+// review
+import { reviewTxt } from './review.js';
+
 /**
  * init app
  * @param {*} config
@@ -70,6 +73,11 @@ const init = (config) => {
   };
   app.uploadFolder = async (destFolder, sourceFolder) => {
     return await uploadFolder(app, destFolder, sourceFolder);
+  };
+
+  // review
+  app.reviewTxt = async (txt) => {
+    return await reviewTxt(app, txt);
   };
 
   // return
