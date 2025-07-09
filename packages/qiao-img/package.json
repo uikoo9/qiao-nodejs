@@ -28,9 +28,9 @@
     "test": "ava"
   },
   "dependencies": {
-    "debug": "^4.4.0",
+    "debug": "^4.4.1",
     "qiao-file": "^4.9.4",
-    "sharp": "^0.33.5"
+    "sharp": "^0.34.2"
   },
   "nx": {
     "namedInputs": {
