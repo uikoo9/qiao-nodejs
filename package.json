@@ -29,6 +29,6 @@
     "lerna": "^8.2.3",
     "lint-staged": "^16.1.2",
     "nx": "^20.1.4",
-    "qiao-project": "^4.9.4"
+    "qiao-project": "^4.9.8"
   }
 }

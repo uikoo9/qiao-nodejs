@@ -127,6 +127,13 @@ module.exports = {
     priority: -53,
     reuseExistingChunk: true,
   },
+  artalk: {
+    test: /[\\/]node_modules[\\/]artalk[\\/]/,
+    name: 'artalk',
+    chunks: 'all',
+    priority: -54,
+    reuseExistingChunk: true,
+  },
 
   // default
   default: {
