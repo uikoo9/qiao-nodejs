@@ -1,6 +1,6 @@
 {
   "name": "qiao-tts",
-  "version": "4.9.4",
+  "version": "4.9.8",
   "description": "nodejs tts tool",
   "keywords": [
     "tts"
@@ -27,7 +27,7 @@
   "dependencies": {
     "qiao-ajax": "^5.2.1",
     "qiao-encode": "^4.9.4",
-    "qiao-file": "^4.9.4",
+    "qiao-file": "^4.9.8",
     "qiao.log.js": "^3.7.5"
   },
   "nx": {
