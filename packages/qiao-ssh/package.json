@@ -1,6 +1,6 @@
 {
   "name": "qiao-ssh",
-  "version": "4.9.8",
+  "version": "5.0.0",
   "description": "nodejs ssh tool",
   "keywords": [
     "ssh"

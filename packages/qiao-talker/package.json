@@ -1,6 +1,6 @@
 {
   "name": "qiao-talker",
-  "version": "4.9.8",
+  "version": "5.0.0",
   "description": "nodejs tts tool",
   "keywords": [
     "tts"
