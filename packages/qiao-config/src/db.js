@@ -4,6 +4,10 @@ import { path, mkdir, isExists, writeFile } from 'qiao-file';
 // data
 import { get, set, del, clear, all } from './_data.js';
 
+// debug
+import Debug from 'debug';
+const debug = Debug('qiao-config');
+
 /**
  * db
  * @param {*} dbPath
@@ -38,12 +42,12 @@ const db = (dbPath) => {
 async function initDirAndFile(filePath) {
   const dir = path.dirname(filePath);
   const mkdirRes = await mkdir(dir);
-  console.log(`qiao-config: mkdir ${dir} ${mkdirRes}`);
+  debug(`qiao-config: mkdir ${dir} ${mkdirRes}`);
 
   const isExistsRes = await isExists(filePath);
   if (!isExistsRes) {
     const writeFileRes = await writeFile(filePath, '{}');
-    console.log(`qiao-config: init json ${writeFileRes}`);
+    debug(`qiao-config: init json ${writeFileRes}`);
   }
 }
 

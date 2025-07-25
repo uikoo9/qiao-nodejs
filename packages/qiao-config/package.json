@@ -31,6 +31,7 @@
     "test": "ava"
   },
   "dependencies": {
+    "debug": "^4.4.1",
     "qiao-file": "^4.9.8"
   },
   "nx": {

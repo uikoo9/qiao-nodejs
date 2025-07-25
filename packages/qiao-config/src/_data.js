@@ -1,6 +1,10 @@
 // io
 import { writeFile, readFile } from 'qiao-file';
 
+// debug
+import Debug from 'debug';
+const debug = Debug('qiao-config');
+
 /**
  * clear
  * @param {*} filePath
@@ -9,7 +13,7 @@ import { writeFile, readFile } from 'qiao-file';
 export const clear = async (filePath) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:clear, need path');
+    debug('qiao-config:clear, need path');
     return;
   }
 
@@ -17,7 +21,7 @@ export const clear = async (filePath) => {
   try {
     await writeFile(filePath, '');
   } catch (e) {
-    console.log(`qiao-config:clear, write file error ${e.message}`);
+    debug(`qiao-config:clear, write file error ${e.message}`);
   }
 };
 
@@ -29,7 +33,7 @@ export const clear = async (filePath) => {
 export const all = async (filePath) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:all, need path');
+    debug('qiao-config:all, need path');
     return;
   }
 
@@ -54,11 +58,11 @@ export const all = async (filePath) => {
 export const get = async (filePath, key) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:get, need path');
+    debug('qiao-config:get, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:get, need key');
+    debug('qiao-config:get, need key');
     return;
   }
 
@@ -77,11 +81,11 @@ export const get = async (filePath, key) => {
 export const set = async (filePath, key, value) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:set, need path');
+    debug('qiao-config:set, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:set, need key');
+    debug('qiao-config:set, need key');
     return;
   }
 
@@ -93,7 +97,7 @@ export const set = async (filePath, key, value) => {
   try {
     await writeFile(filePath, JSON.stringify(json));
   } catch (e) {
-    console.log(`qiao-config:set, write file error ${e.message}`);
+    debug(`qiao-config:set, write file error ${e.message}`);
   }
 };
 
@@ -106,11 +110,11 @@ export const set = async (filePath, key, value) => {
 export const del = async (filePath, key) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:del, need path');
+    debug('qiao-config:del, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:del, need key');
+    debug('qiao-config:del, need key');
     return;
   }
 
@@ -126,6 +130,6 @@ export const del = async (filePath, key) => {
   try {
     await writeFile(filePath, JSON.stringify(json));
   } catch (e) {
-    console.log(`qiao-config:del, write file error ${e.message}`);
+    debug(`qiao-config:del, write file error ${e.message}`);
   }
 };

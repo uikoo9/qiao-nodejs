@@ -2,8 +2,10 @@
 
 var path = require('path');
 var qiaoFile = require('qiao-file');
+var Debug = require('debug');
 
 // io
+const debug$1 = Debug('qiao-config');
 
 /**
  * clear
@@ -13,7 +15,7 @@ var qiaoFile = require('qiao-file');
 const clear = async (filePath) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:clear, need path');
+    debug$1('qiao-config:clear, need path');
     return;
   }
 
@@ -21,7 +23,7 @@ const clear = async (filePath) => {
   try {
     await qiaoFile.writeFile(filePath, '');
   } catch (e) {
-    console.log(`qiao-config:clear, write file error ${e.message}`);
+    debug$1(`qiao-config:clear, write file error ${e.message}`);
   }
 };
 
@@ -33,7 +35,7 @@ const clear = async (filePath) => {
 const all = async (filePath) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:all, need path');
+    debug$1('qiao-config:all, need path');
     return;
   }
 
@@ -58,11 +60,11 @@ const all = async (filePath) => {
 const get = async (filePath, key) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:get, need path');
+    debug$1('qiao-config:get, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:get, need key');
+    debug$1('qiao-config:get, need key');
     return;
   }
 
@@ -81,11 +83,11 @@ const get = async (filePath, key) => {
 const set = async (filePath, key, value) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:set, need path');
+    debug$1('qiao-config:set, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:set, need key');
+    debug$1('qiao-config:set, need key');
     return;
   }
 
@@ -97,7 +99,7 @@ const set = async (filePath, key, value) => {
   try {
     await qiaoFile.writeFile(filePath, JSON.stringify(json));
   } catch (e) {
-    console.log(`qiao-config:set, write file error ${e.message}`);
+    debug$1(`qiao-config:set, write file error ${e.message}`);
   }
 };
 
@@ -110,11 +112,11 @@ const set = async (filePath, key, value) => {
 const del = async (filePath, key) => {
   // check
   if (!filePath) {
-    console.log('qiao-config:del, need path');
+    debug$1('qiao-config:del, need path');
     return;
   }
   if (typeof key == 'undefined') {
-    console.log('qiao-config:del, need key');
+    debug$1('qiao-config:del, need key');
     return;
   }
 
@@ -130,11 +132,12 @@ const del = async (filePath, key) => {
   try {
     await qiaoFile.writeFile(filePath, JSON.stringify(json));
   } catch (e) {
-    console.log(`qiao-config:del, write file error ${e.message}`);
+    debug$1(`qiao-config:del, write file error ${e.message}`);
   }
 };
 
 // qiao
+const debug = Debug('qiao-config');
 
 /**
  * db
@@ -170,12 +173,12 @@ const db = (dbPath) => {
 async function initDirAndFile(filePath) {
   const dir = qiaoFile.path.dirname(filePath);
   const mkdirRes = await qiaoFile.mkdir(dir);
-  console.log(`qiao-config: mkdir ${dir} ${mkdirRes}`);
+  debug(`qiao-config: mkdir ${dir} ${mkdirRes}`);
 
   const isExistsRes = await qiaoFile.isExists(filePath);
   if (!isExistsRes) {
     const writeFileRes = await qiaoFile.writeFile(filePath, '{}');
-    console.log(`qiao-config: init json ${writeFileRes}`);
+    debug(`qiao-config: init json ${writeFileRes}`);
   }
 }
 
