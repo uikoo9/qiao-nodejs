@@ -1,6 +1,6 @@
 {
   "name": "qiao-config",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "json config to local file",
   "keywords": [
     "json",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
-    "qiao-file": "^5.0.0"
+    "qiao-file": "^5.0.1"
   },
   "nx": {
     "namedInputs": {
