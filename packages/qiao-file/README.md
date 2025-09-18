@@ -209,7 +209,6 @@ const res = await lsdir(dirpath);
   - 类型: string[]
   - 说明：需要过滤的路径
 - return
-
   - 类型: object[]
   - 说明: dirpath 下的文件和文件夹信息，以树的方式
   - ```javascript

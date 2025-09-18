@@ -23,12 +23,12 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "ava": "^6.4.0",
+    "ava": "^6.4.1",
     "husky": "^9.1.7",
-    "jsdom": "^26.1.0",
-    "lerna": "^8.2.3",
-    "lint-staged": "^16.1.2",
+    "jsdom": "^27.0.0",
+    "lerna": "^8.2.4",
+    "lint-staged": "^16.1.6",
     "nx": "^20.1.4",
-    "qiao-project": "^4.9.8"
+    "qiao-project": "^5.0.0"
   }
 }

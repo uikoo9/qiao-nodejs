@@ -31,7 +31,7 @@
   "dependencies": {
     "adm-zip": "^0.5.16",
     "archiver": "^7.0.1",
-    "iconv-lite": "^0.6.3",
+    "iconv-lite": "^0.7.0",
     "qiao-file": "^5.0.0"
   },
   "nx": {

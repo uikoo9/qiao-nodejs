@@ -26,8 +26,8 @@
     "build": "qpro rollup ./rollup.config.js"
   },
   "dependencies": {
-    "@volcengine/openapi": "^1.30.2",
-    "qiao-ajax": "^5.2.1",
+    "@volcengine/openapi": "^1.32.0",
+    "qiao-ajax": "^5.2.4",
     "qiao.log.js": "^3.7.5"
   },
   "nx": {

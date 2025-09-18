@@ -27,8 +27,8 @@
     "test": "ava"
   },
   "dependencies": {
-    "debug": "^4.4.1",
-    "fs-extra": "^11.3.0",
+    "debug": "^4.4.3",
+    "fs-extra": "^11.3.2",
     "qiao-encode": "^5.0.0"
   },
   "nx": {
