@@ -78,9 +78,6 @@ const get = (url, maxRedirects = 5) => {
   });
 };
 
-// data
-let data = 0;
-
 /**
  * on progress
  * @param {*} res
@@ -100,6 +97,9 @@ const onDownloadProgress = (res, onProgress) => {
 
   // total
   const total = parseInt(contentLength, 10);
+
+  // data - 每次下载独立的计数器
+  let data = 0;
 
   // on data
   res.on('data', (chunk) => {
@@ -185,13 +185,14 @@ const clearFile = async (dest) => {
 // fs
 
 /**
- * download go
+ * downloadGo
  * @param {*} res
  * @param {*} dest
  * @param {*} timeout
+ * @param {*} checkFileSize
  * @returns
  */
-const downloadGo = (res, dest, timeout) => {
+const downloadGo = (res, dest, timeout, checkFileSize) => {
   // file
   return new Promise((resolve, reject) => {
     // timeout
@@ -217,14 +218,17 @@ const downloadGo = (res, dest, timeout) => {
       // clear
       clearTimeoutFn(timeoutId, timeout);
 
-      //
-      const fileSizeRes = await checkSize(res, dest);
-      if (!fileSizeRes) {
-        await clearFile(dest);
-        reject(new Error('check file size failed'));
-      } else {
-        resolve(dest);
+      // check file size
+      if (checkFileSize) {
+        const fileSizeRes = await checkSize(res, dest);
+        if (fileSizeRes === false) {
+          await clearFile(dest);
+          return reject(new Error('check file size failed'));
+        }
       }
+
+      // r
+      resolve(dest);
     });
 
     // pipe
@@ -250,7 +254,7 @@ const download = async (url, dest, options) => {
   if (!newDest) return rejectError('dest is not valid');
 
   // options
-  const { timeout, onProgress, maxRedirects } = options || {};
+  const { maxRedirects, onProgress, timeout, checkFileSize } = options || {};
 
   // get
   let res;
@@ -264,7 +268,7 @@ const download = async (url, dest, options) => {
   }
 
   // file
-  return downloadGo(res, newDest, timeout);
+  return downloadGo(res, newDest, timeout, checkFileSize);
 };
 
 exports.download = download;

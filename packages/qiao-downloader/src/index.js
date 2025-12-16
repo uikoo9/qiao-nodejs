@@ -26,7 +26,7 @@ export const download = async (url, dest, options) => {
   if (!newDest) return rejectError('dest is not valid');
 
   // options
-  const { timeout, onProgress, maxRedirects } = options || {};
+  const { maxRedirects, onProgress, timeout, checkFileSize } = options || {};
 
   // get
   let res;
@@ -40,5 +40,5 @@ export const download = async (url, dest, options) => {
   }
 
   // file
-  return downloadGo(res, newDest, timeout);
+  return downloadGo(res, newDest, timeout, checkFileSize);
 };

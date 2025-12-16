@@ -1,6 +1,3 @@
-// data
-let data = 0;
-
 /**
  * on progress
  * @param {*} res
@@ -20,6 +17,9 @@ export const onDownloadProgress = (res, onProgress) => {
 
   // total
   const total = parseInt(contentLength, 10);
+
+  // data - 每次下载独立的计数器
+  let data = 0;
 
   // on data
   res.on('data', (chunk) => {

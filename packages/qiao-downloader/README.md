@@ -36,15 +36,18 @@ import { download } from 'qiao-downloader';
   - 类型: string
   - 说明: 下载文件的目标路径
 - options
-  - options.timeout
-    - 类型: number
-    - 说明: 下载文件的超时时间，单位 ms
   - options.maxRedirects
     - 类型: number
     - 说明: 最大重定向次数，默认 5
   - options.onProgress
     - 类型: function
     - 说明: 下载进度，返回保留 3 位的小数
+  - options.timeout
+    - 类型: number
+    - 说明: 下载文件的超时时间，单位 ms
+  - options.checkFileSize
+    - 类型: boolean
+    - 说明: 是否检查下载的文件大小
 - return
   - 类型: string
   - 说明: 下载成功后返回目标路径

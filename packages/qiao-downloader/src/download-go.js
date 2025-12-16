@@ -8,13 +8,14 @@ import { checkSize } from './check-size.js';
 import { clearFile, clearTimeoutFn } from './util.js';
 
 /**
- * download go
+ * downloadGo
  * @param {*} res
  * @param {*} dest
  * @param {*} timeout
+ * @param {*} checkFileSize
  * @returns
  */
-export const downloadGo = (res, dest, timeout) => {
+export const downloadGo = (res, dest, timeout, checkFileSize) => {
   // file
   return new Promise((resolve, reject) => {
     // timeout
@@ -40,14 +41,17 @@ export const downloadGo = (res, dest, timeout) => {
       // clear
       clearTimeoutFn(timeoutId, timeout);
 
-      //
-      const fileSizeRes = await checkSize(res, dest);
-      if (!fileSizeRes) {
-        await clearFile(dest);
-        reject(new Error('check file size failed'));
-      } else {
-        resolve(dest);
+      // check file size
+      if (checkFileSize) {
+        const fileSizeRes = await checkSize(res, dest);
+        if (fileSizeRes === false) {
+          await clearFile(dest);
+          return reject(new Error('check file size failed'));
+        }
       }
+
+      // r
+      resolve(dest);
     });
 
     // pipe
