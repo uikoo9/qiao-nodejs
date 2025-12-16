@@ -39,6 +39,9 @@ import { download } from 'qiao-downloader';
   - options.timeout
     - 类型: number
     - 说明: 下载文件的超时时间，单位 ms
+  - options.maxRedirects
+    - 类型: number
+    - 说明: 最大重定向次数，默认 5
   - options.onProgress
     - 类型: function
     - 说明: 下载进度，返回保留 3 位的小数
