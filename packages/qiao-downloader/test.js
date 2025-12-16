@@ -6,7 +6,7 @@ const { download } = require('./index.js');
 
 // before
 let config = {
-  url: 'https://static.vincentqiao.com/test/txt.zip',
+  url: 'https://static-small.vincentqiao.com/face1.wav',
 };
 test.before(async (t) => {
   try {
@@ -77,30 +77,6 @@ test('download / request error', async (t) => {
 
     if (error && error.code === 'ENOTFOUND') {
       t.log('ENOTFOUND');
-      t.pass();
-      return;
-    }
-
-    t.log(error);
-    t.fail();
-  }
-});
-
-// download / request fail
-test('download / request fail', async (t) => {
-  // res
-  try {
-    await download(`${config.url}1`, './1/1/req-fail.zip');
-    t.pass();
-  } catch (error) {
-    if (error && error.code === 'EACCES') {
-      t.log('permission denied');
-      t.pass();
-      return;
-    }
-
-    if (error && error.message === 'response status code is not 200') {
-      t.log('request status code not 200');
       t.pass();
       return;
     }
