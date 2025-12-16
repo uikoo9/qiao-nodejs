@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
+    "follow-redirects": "^1.15.9",
     "qiao-file": "^5.0.1"
   },
   "nx": {

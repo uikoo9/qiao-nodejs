@@ -26,12 +26,12 @@ export const download = async (url, dest, options) => {
   if (!newDest) return rejectError('dest is not valid');
 
   // options
-  const { timeout, onProgress } = options || {};
+  const { timeout, onProgress, maxRedirects } = options || {};
 
   // get
   let res;
   try {
-    res = await get(url);
+    res = await get(url, maxRedirects);
 
     // on progress
     onDownloadProgress(res, onProgress);

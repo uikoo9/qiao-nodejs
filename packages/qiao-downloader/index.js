@@ -2,8 +2,7 @@
 
 var url = require('url');
 var qiaoFile = require('qiao-file');
-var http = require('http');
-var https = require('https');
+var followRedirects = require('follow-redirects');
 var Debug = require('debug');
 
 // url
@@ -54,15 +53,21 @@ const checkDest = async (dest) => {
 /**
  * get
  * @param {*} url
+ * @param {*} maxRedirects - 最大重定向次数，默认 5
  * @returns
  */
-const get = (url) => {
+const get = (url, maxRedirects = 5) => {
   return new Promise((resolve, reject) => {
-    const protocol = url.startsWith('https') ? https : http;
+    const protocol = url.startsWith('https') ? followRedirects.https : followRedirects.http;
+    const options = {
+      maxRedirects: maxRedirects,
+    };
+
     protocol
-      .get(url, (res) => {
+      .get(url, options, (res) => {
         // check
-        if (!res || res.statusCode !== 200) return reject(new Error('response status code is not 200'));
+        if (!res || res.statusCode !== 200)
+          return reject(new Error(`response status code is not 200: ${res.statusCode}`));
 
         // r
         resolve(res);
@@ -245,12 +250,12 @@ const download = async (url, dest, options) => {
   if (!newDest) return rejectError('dest is not valid');
 
   // options
-  const { timeout, onProgress } = options || {};
+  const { timeout, onProgress, maxRedirects } = options || {};
 
   // get
   let res;
   try {
-    res = await get(url);
+    res = await get(url, maxRedirects);
 
     // on progress
     onDownloadProgress(res, onProgress);
