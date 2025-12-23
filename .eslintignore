@@ -9,3 +9,4 @@ package-lock.json
 packages/qiao-file/**tests**/1
 packages/qiao-zip/**tests**
 packages/qiao-downloader/1
+packages/qiao-encode/index.js

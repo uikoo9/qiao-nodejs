@@ -80,36 +80,11 @@ function rng() {
 const _state = {};
 function v1(options, buf, offset) {
   let bytes;
-  const isV6 = options?._v6 ?? false;
-  if (options) {
-    const optionsKeys = Object.keys(options);
-    if (optionsKeys.length === 1 && optionsKeys[0] === '_v6') {
-      options = undefined;
-    }
-  }
-  if (options) {
-    bytes = v1Bytes(
-      options.random ?? options.rng?.() ?? rng(),
-      options.msecs,
-      options.nsecs,
-      options.clockseq,
-      options.node,
-      buf,
-      offset,
-    );
-  } else {
+  {
     const now = Date.now();
     const rnds = rng();
     updateV1State(_state, now, rnds);
-    bytes = v1Bytes(
-      rnds,
-      _state.msecs,
-      _state.nsecs,
-      isV6 ? undefined : _state.clockseq,
-      isV6 ? undefined : _state.node,
-      buf,
-      offset,
-    );
+    bytes = v1Bytes(rnds, _state.msecs, _state.nsecs, _state.clockseq, _state.node, buf, offset);
   }
   return buf ?? unsafeStringify(bytes);
 }
@@ -357,23 +332,13 @@ function _v4(options, buf, offset) {
   }
   rnds[6] = (rnds[6] & 0x0f) | 0x40;
   rnds[8] = (rnds[8] & 0x3f) | 0x80;
-  if (buf) {
-    offset = offset || 0;
-    if (offset < 0 || offset + 16 > buf.length) {
-      throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);
-    }
-    for (let i = 0; i < 16; ++i) {
-      buf[offset + i] = rnds[i];
-    }
-    return buf;
-  }
   return unsafeStringify(rnds);
 }
 function v4(options, buf, offset) {
-  if (native.randomUUID && !buf && !options) {
+  if (native.randomUUID && true && !options) {
     return native.randomUUID();
   }
-  return _v4(options, buf, offset);
+  return _v4(options);
 }
 
 function f(s, x, y, z) {
