@@ -1,6 +1,6 @@
 {
   "name": "qiao-ffmpeg",
-  "version": "5.0.1",
+  "version": "5.0.5",
   "description": "nodejs ffmpeg tool",
   "keywords": [
     "ffmpeg"
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "fluent-ffmpeg": "^2.1.3",
-    "qiao-file": "^5.0.1",
+    "qiao-file": "^5.0.5",
     "qiao.log.js": "^3.7.5"
   },
   "nx": {
