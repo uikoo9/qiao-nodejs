@@ -1,6 +1,6 @@
 {
   "name": "qiao-zip",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "nodejs zip and unzip tool",
   "keywords": [
     "zip",
@@ -32,7 +32,7 @@
     "adm-zip": "^0.5.16",
     "archiver": "^7.0.1",
     "iconv-lite": "^0.7.1",
-    "qiao-file": "^5.0.5"
+    "qiao-file": "^5.0.6"
   },
   "nx": {
     "namedInputs": {
