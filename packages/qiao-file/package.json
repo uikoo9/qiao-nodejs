@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "debug": "^4.4.3",
-    "fs-extra": "^11.3.2",
+    "fs-extra": "^11.3.3",
     "qiao-encode": "^5.0.1"
   },
   "nx": {

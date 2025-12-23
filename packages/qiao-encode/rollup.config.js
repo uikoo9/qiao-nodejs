@@ -1,3 +1,9 @@
+// commonjs
+const { rollupPluginCommonjs } = require('qiao-project');
+
+// node
+const { rollupPluginNodeResolve } = require('qiao-project');
+
 /**
  * rollup.config.js
  */
@@ -7,5 +13,6 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['crypto', 'uuid'],
+  external: ['crypto'],
+  plugins: [rollupPluginNodeResolve(), rollupPluginCommonjs()],
 };
